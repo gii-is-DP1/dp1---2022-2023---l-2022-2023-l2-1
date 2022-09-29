@@ -14,18 +14,6 @@
     </parent>
     <name>petclinic</name>
 
-    <developers>
-        <developer>
-            <id>inmmaysal</id>
-            <name>Inma</name>
-            <email>inmamayo00@gmail.com</email>
-             <url>https://github.com/mysInma</url>
-            <roles>
-                <role>developer</role>
-            </roles>
-        </developer>
-    </developers>
-
     <properties>
 
         <!-- Generic properties -->
@@ -43,6 +31,18 @@
         <spring-format.version>0.0.19</spring-format.version>
 
     </properties>
+
+    <developers>
+        <developer>
+            <id>inmmaysal</id>
+            <name>Inma</name>
+            <email>inmamayo00@gmail.com</email>
+             <url>https://github.com/mysInma</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
 
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
