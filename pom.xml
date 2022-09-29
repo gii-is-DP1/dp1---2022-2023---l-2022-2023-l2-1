@@ -42,6 +42,15 @@
                 <role>developer</role>
             </roles>
         </developer>
+        <developer>
+            <id>davgavser</id>
+            <name>David</name>
+            <email>david.gavira.43@gmail.com</email>
+             <url>https://github.com/davidg43</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <dependencies>
