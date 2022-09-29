@@ -42,11 +42,33 @@
                 <role>developer</role>
             </roles>
         </developer>
+
+
+        <developer>
+            <id>juaruamur</id>
+            <name>Juanlu</name>
+            <email>juanluis.ruano.muriedas@gmail.com</email>
+             <url>https://github.com/JuanluRM</url>
+             <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        
         <developer>
             <id>davgavser</id>
             <name>David</name>
             <email>david.gavira.43@gmail.com</email>
              <url>https://github.com/davidg43</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+
+        <developer>
+            <id>aleortpag</id>
+            <name>Alejandro</name>
+            <email>a.ortiz.pagador@gmail.com</email>
+             <url>https://github.com/aleortpag</url>
             <roles>
                 <role>developer</role>
             </roles>
