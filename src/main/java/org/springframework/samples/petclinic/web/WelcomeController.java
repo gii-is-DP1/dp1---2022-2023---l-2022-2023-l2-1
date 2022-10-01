@@ -33,8 +33,10 @@ public class WelcomeController {
 			Ale.setFirstName("Alejandro");
 			Ale.setLastName("Ortiz");
 			persons.add(Ale);
-		Person Juan = new Person();
-
+		Person JuanCa = new Person();
+			JuanCa.setFirstName("JuanCa");
+			JuanCa.setLastName("Lopez");
+			persons.add(JuanCa);
 		model.put("persons", persons);
 		model.put("title", "ElBuscaminas");
 		model.put("group", "L2-1");
