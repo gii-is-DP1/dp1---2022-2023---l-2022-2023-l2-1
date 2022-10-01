@@ -73,6 +73,16 @@
                 <role>developer</role>
             </roles>
         </developer>
+
+        <developer>
+            <id>jualopvei</id>
+            <name>JuanCa</name>
+            <email>juanlopezveiga@gmail.com</email>
+             <url>https://github.com/JCLPV</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <dependencies>
