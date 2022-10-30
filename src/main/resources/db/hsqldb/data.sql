@@ -48,6 +48,11 @@ INSERT INTO types VALUES (5, 'bird');
 INSERT INTO types VALUES (6, 'hamster');
 INSERT INTO types VALUES (7, 'turtle');
 
+INSERT INTO registered_users(id,name,description,email,username) VALUES (1, 'Inma Mayo', 'esto es un ejemplo de descripción', 'inmamayo@gmail.com', 'inmmaysal');
+INSERT INTO registered_users(id,name,description,email,username) VALUES (2, 'Juanluis', 'esto es un ejemplo de descripción', 'juanluis@gmail.com', 'juaruamur');
+INSERT INTO registered_users(id,name,description,email,username) VALUES (3, 'Alejandro', 'esto es un ejemplo de descripción', 'alejandro@gmail.com', 'aleortpag');
+INSERT INTO registered_users(id,name,description,email,username) VALUES (4, 'David', 'esto es un ejemplo de descripción', 'david@gmail.com', 'davgavser');
+
 
 INSERT INTO owners VALUES (1, 'George', 'Franklin', '110 W. Liberty St.', 'Madison', '6085551023', 'owner1');
 INSERT INTO owners VALUES (2, 'Betty', 'Davis', '638 Cardinal Ave.', 'Sun Prairie', '6085551749', 'owner1');
