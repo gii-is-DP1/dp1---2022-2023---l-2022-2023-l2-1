@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.registeredUser;
 
+import java.security.Principal;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -25,10 +26,10 @@ public class RegisteredUserController {
 	}
 
 
-	@GetMapping("/registeredUser/{registeredUserId}")
-	public ModelAndView showRegisteredUser(@PathVariable("registeredUserId") int registeredUserId) {
+	@GetMapping("/registeredUser/myProfile")
+	public ModelAndView showRegisteredUser(Principal principal) {
 		ModelAndView mav = new ModelAndView(VIEWS_REGISTERUSER_DETAILS);
-		mav.addObject(this.registeredUserService.findRegisteredUserById(registeredUserId));
+		mav.addObject(registeredUserService.findRegisteredUserByUsername(principal.getName()));
 		return mav;
 	}
 

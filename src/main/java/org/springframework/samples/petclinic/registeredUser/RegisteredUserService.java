@@ -30,6 +30,11 @@ public class RegisteredUserService {
 		return registeredUserRepository.findById(id).get();
 	}
 
+	@Transactional(readOnly = true)
+	public RegisteredUser findRegisteredUserByUsername(String username) throws DataAccessException {
+		return registeredUserRepository.findByUsername(username);
+	}
+
 
     @Transactional
 	public void saveRegisteredUser(RegisteredUser registeredUser) throws DataAccessException {

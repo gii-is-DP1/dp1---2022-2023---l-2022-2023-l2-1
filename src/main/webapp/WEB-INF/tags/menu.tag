@@ -91,7 +91,7 @@
 										<div class="col-lg-12">
 											<p>
 												
-												<a href="registeredUser/?$registeredUser.id?" class="btn btn-primary btn-block">My Profile</a>
+												<a href="registeredUser/myProfile" class="btn btn-primary btn-block">My Profile</a>
 												<!-- 
 												<a href="#" class="btn btn-danger btn-block">Change
 													Password</a>
