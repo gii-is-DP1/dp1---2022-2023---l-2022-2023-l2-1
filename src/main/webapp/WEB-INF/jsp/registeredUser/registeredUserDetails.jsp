@@ -8,7 +8,7 @@
 
     <h2>
         <th><c:out value="${registeredUser.user.username}"/></th>
-        <a href="/registeredUser/${registeredUser.id}/edit"> 
+        <a href="/registeredUser/myProfile/edit"> 
             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
         </a>
     </h2>

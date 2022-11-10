@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.user.AuthoritiesService;
 import org.springframework.samples.petclinic.user.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class RegisteredUserController {
 
     private static final String VIEWS_REGISTERUSER_DETAILS = "registeredUser/registeredUserDetails";
+
+    private static final String VIEWS_REGISTERUSER_CREATE_EDIT = "registeredUser/createOrUpdateRegisteredUserForm";
+
 
     private final RegisteredUserService registeredUserService;
 
@@ -32,8 +36,22 @@ public class RegisteredUserController {
 		mav.addObject(registeredUserService.findRegisteredUserByUsername(principal.getName()));
 		return mav;
 	}
-
 	//Crear un método Post-Mapping para que me guarde el username y se pueda mostrar
+
+	@GetMapping("/registeredUser/myProfile/edit")
+	public String createInitForm(Principal principal, Model model) {
+		RegisteredUser registeredUser = this.registeredUserService.findRegisteredUserByUsername(principal.getName());
+		model.addAttribute(registeredUser);
+		return VIEWS_REGISTERUSER_CREATE_EDIT;
+	}
+
+	
+	// @GetMapping(value = "/owners/{ownerId}/edit")
+	// public String initUpdateOwnerForm(@PathVariable("ownerId") int ownerId, Model model) {
+	// 	Owner owner = this.ownerService.findOwnerById(ownerId);
+	// 	model.addAttribute(owner);
+	// 	return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+	// }
 
 
 
