@@ -13,20 +13,15 @@
 
     <form:form modelAttribute="registeredUser" class="form-horizontal" id="add-registeredUser-form">
         <div class="form-group has-feedback">
-            <petclinic:inputField label="New Username" name="name"/>
+            <petclinic:inputField label="New Username" name="user.username"/>
             <petclinic:inputField label="Email" name="email"/>
             <petclinic:inputField label="Description" name="description"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <c:choose>
-                    <c:when test="${registeredUser['new']}">
-                        <button class="btn btn-default" type="submit">Guardar cambios</button>
-                    </c:when>
-                    <c:otherwise>
-                        <button class="btn btn-default" type="submit">cambiar contraseña</button>
-                    </c:otherwise>
-                </c:choose>
+    
+                <button class="btn btn-default" type="submit">Guardar cambios</button>
+                
             </div>
         </div>
     </form:form>
