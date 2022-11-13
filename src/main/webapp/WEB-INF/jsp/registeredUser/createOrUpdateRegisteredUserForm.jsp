@@ -13,6 +13,7 @@
 
     <form:form modelAttribute="registeredUser" class="form-horizontal" id="add-registeredUser-form">
         <div class="form-group has-feedback">
+            <petclinic:inputField label="Name" name="name"/>
             <petclinic:inputField label="New Username" name="user.username"/>
             <petclinic:inputField label="Email" name="email"/>
             <petclinic:inputField label="Description" name="description"/>

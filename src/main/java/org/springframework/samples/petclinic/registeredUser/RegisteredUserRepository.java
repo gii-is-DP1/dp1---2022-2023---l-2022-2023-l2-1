@@ -2,6 +2,8 @@ package org.springframework.samples.petclinic.registeredUser;
 
 
 
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -15,9 +17,11 @@ public interface RegisteredUserRepository extends CrudRepository<RegisteredUser,
     @Query("SELECT ru FROM RegisteredUser ru WHERE ru.user = :user")
     public RegisteredUser findByUsername(@Param("user") User user);
  
- 
+    Collection<RegisteredUser> findAll();
 
-    //Coger una id por nombre 
+    @Query("SELECT ru FROM RegisteredUser ru WHERE ru.name LIKE :name%")
+    public Collection<RegisteredUser> findByName(@Param("name") String name);
+
 
 
 }

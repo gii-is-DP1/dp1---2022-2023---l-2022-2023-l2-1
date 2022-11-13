@@ -37,4 +37,6 @@ public class RegisteredUser extends NamedEntity {
 	private User user;
 
     
+
+    
 }

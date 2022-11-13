@@ -1,6 +1,8 @@
 package org.springframework.samples.petclinic.registeredUser;
 
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.user.AuthoritiesService;
@@ -37,6 +39,17 @@ public class RegisteredUserService {
 	}
 
 
+	@Transactional(readOnly = true)
+	public Collection<RegisteredUser> findRegisteredUser() throws DataAccessException {
+		return registeredUserRepository.findAll();
+	}
+
+	@Transactional(readOnly = true)
+	public Collection<RegisteredUser> findRegisteredUserByName(String name) throws DataAccessException {
+		return registeredUserRepository.findByName(name);
+	}
+
+
     @Transactional
 	public void saveRegisteredUser(RegisteredUser registeredUser) throws DataAccessException {
 		//creating registeredUser
@@ -47,4 +60,9 @@ public class RegisteredUserService {
 		authoritiesService.saveAuthorities(registeredUser.getUser().getUsername(), "registeredUser");
 	}	
     
+	@Transactional
+	public void deleteRegisteredUser(int id) throws DataAccessException {
+		registeredUserRepository.deleteById(id);
+	}
+
 }

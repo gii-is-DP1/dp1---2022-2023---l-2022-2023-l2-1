@@ -12,6 +12,7 @@
     </h2>
     <form:form modelAttribute="registeredUser" class="form-horizontal" id="add-registeredUser-form">
         <div class="form-group has-feedback">
+            <petclinic:inputField label="Name" name="name"/>
             <petclinic:inputField label="Username" name="user.username"/>
             <petclinic:inputField label="Email" name="email"/>
             <petclinic:inputField label="Password" name="user.password"/>
