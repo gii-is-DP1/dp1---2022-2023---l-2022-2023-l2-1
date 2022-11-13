@@ -8,9 +8,12 @@
 
     <h2>
         <th><c:out value="${registeredUser.user.username}"/></th>
-        <a href="/registeredUser/myProfile/edit"> 
-            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-        </a>
+        
+        <spring:url value="{registeredUserId}/edit" var="editUrl">
+            <spring:param name="registeredUserId" value="${registeredUser.id}"/>
+        </spring:url>
+        <a href="${fn:escapeXml(editUrl)}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
+
     </h2>
 
     <table class="table table-striped">

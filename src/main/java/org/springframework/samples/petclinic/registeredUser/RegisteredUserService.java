@@ -1,9 +1,12 @@
 package org.springframework.samples.petclinic.registeredUser;
 
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.user.AuthoritiesService;
+import org.springframework.samples.petclinic.user.User;
 import org.springframework.samples.petclinic.user.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,14 +34,25 @@ public class RegisteredUserService {
 	}
 
 	@Transactional(readOnly = true)
-	public RegisteredUser findRegisteredUserByUsername(String username) throws DataAccessException {
-		return registeredUserRepository.findByUsername(username);
+	public RegisteredUser findRegisteredUserByUsername(User user) throws DataAccessException {
+		return registeredUserRepository.findByUsername(user);
+	}
+
+
+	@Transactional(readOnly = true)
+	public Collection<RegisteredUser> findRegisteredUser() throws DataAccessException {
+		return registeredUserRepository.findAll();
+	}
+
+	@Transactional(readOnly = true)
+	public Collection<RegisteredUser> findRegisteredUserByName(String name) throws DataAccessException {
+		return registeredUserRepository.findByName(name);
 	}
 
 
     @Transactional
 	public void saveRegisteredUser(RegisteredUser registeredUser) throws DataAccessException {
-		//creating owner
+		//creating registeredUser
 		registeredUserRepository.save(registeredUser);		
 		//creating user
 		userService.saveUser(registeredUser.getUser());
@@ -46,4 +60,6 @@ public class RegisteredUserService {
 		authoritiesService.saveAuthorities(registeredUser.getUser().getUsername(), "registeredUser");
 	}	
     
+
+
 }

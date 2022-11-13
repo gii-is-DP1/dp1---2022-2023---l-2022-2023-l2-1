@@ -28,11 +28,21 @@
 					<span>Home</span>
 				</petclinic:menuItem>
 
-				<petclinic:menuItem active="${name eq 'owners'}" url="/owners/find"
-					title="find owners">
+
+				<sec:authorize url="/myProfile">
+                <petclinic:menuItem active="${name eq 'registered_users'}" url="/myProfile"
+                    title="myProfile">
+                    <span>My Profile</span>
+                </petclinic:menuItem>
+                </sec:authorize>
+
+				<sec:authorize url="/find">
+				<petclinic:menuItem active="${name eq 'registered_users'}" url="/find"
+					title="find registeredUser">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>Find owners</span>
+					<span>Find registeredUser</span>
 				</petclinic:menuItem>
+				</sec:authorize>
 
 				<petclinic:menuItem active="${name eq 'vets'}" url="/vets"
 					title="veterinarians">
@@ -90,9 +100,9 @@
 									<div class="row">
 										<div class="col-lg-12">
 											<p>
-												
-												<a href="registeredUser/myProfile" class="btn btn-primary btn-block">My Profile</a>
 												<!-- 
+												<a href="#" class="btn btn-primary btn-block">My Profile</a>
+												
 												<a href="#" class="btn btn-danger btn-block">Change
 													Password</a>
 													-->
