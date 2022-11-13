@@ -41,6 +41,8 @@
 
     </table>
 
+    
+
 
 
 </petclinic:layout>

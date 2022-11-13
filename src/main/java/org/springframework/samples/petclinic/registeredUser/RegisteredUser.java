@@ -7,7 +7,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.samples.petclinic.model.NamedEntity;
 import org.springframework.samples.petclinic.user.User;
@@ -22,11 +24,9 @@ import lombok.Setter;
 public class RegisteredUser extends NamedEntity {
 
     @Column(name = "description")
+    @Size(min = 0,max = 250)
     String description;
-
-
-    // boolean isAdmin;
-
+    
     @Column(name = "email")
 	@NotNull
 	@Email
