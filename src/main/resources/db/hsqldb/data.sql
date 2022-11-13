@@ -25,13 +25,13 @@ INSERT INTO authorities(id,username,authority) VALUES (8,'jualopvei','admin');
 
 --creando usuarios
 INSERT INTO users(username,password,enabled) VALUES ('pepito','pepito',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (9,'pepito','registered_user');
+INSERT INTO authorities(id,username,authority) VALUES (9,'pepito','registeredUser');
 
 INSERT INTO users(username,password,enabled) VALUES ('pepita','pepita',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (10,'pepita','registered_user');
+INSERT INTO authorities(id,username,authority) VALUES (10,'pepita','registeredUser');
 
 INSERT INTO users(username,password,enabled) VALUES ('maya','maya',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (11,'maya','registered_user');
+INSERT INTO authorities(id,username,authority) VALUES (11,'maya','registeredUser');
 
 
 INSERT INTO vets(id, first_name,last_name) VALUES (1, 'James', 'Carter');

@@ -19,8 +19,19 @@
     <table class="table table-striped">
 
         <tr>
-            <th>Name</th>
-            <td><c:out value="${registeredUser.name}"/></td>
+            <td>
+                <button class="btn btn-default" type="submit">Logros</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="btn btn-default" type="submit">Estadisticas</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="btn btn-default" type="submit">Historial de partidas</button>
+            </td>
         </tr>
         
         <tr>
@@ -29,6 +40,7 @@
         </tr>
 
     </table>
+
 
 
 </petclinic:layout>
