@@ -11,7 +11,6 @@ INSERT INTO authorities(id,username,authority) VALUES (3,'vet1','veterinarian');
 INSERT INTO users(username,password,enabled) VALUES ('inmmaysal','1nm4',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (4,'inmmaysal','admin');
 
-
 INSERT INTO users(username,password,enabled) VALUES ('juaruamur','jlrm',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (7,'juaruamur','owner');
 
@@ -22,8 +21,17 @@ INSERT INTO users(username,password,enabled) VALUES ('davgavser','1234',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (6,'davgavser','owner');
 
 INSERT INTO users(username,password,enabled) VALUES ('jualopvei','1234',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (8,'jualopvei','owner');
+INSERT INTO authorities(id,username,authority) VALUES (8,'jualopvei','admin');
 
+--creando usuarios
+INSERT INTO users(username,password,enabled) VALUES ('pepito','pepito',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (9,'pepito','registered_user');
+
+INSERT INTO users(username,password,enabled) VALUES ('pepita','pepita',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (10,'pepita','registered_user');
+
+INSERT INTO users(username,password,enabled) VALUES ('maya','maya',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (11,'maya','registered_user');
 
 
 INSERT INTO vets(id, first_name,last_name) VALUES (1, 'James', 'Carter');
@@ -51,10 +59,9 @@ INSERT INTO types VALUES (5, 'bird');
 INSERT INTO types VALUES (6, 'hamster');
 INSERT INTO types VALUES (7, 'turtle');
 
-INSERT INTO registered_users(id,name,description,email,username) VALUES (1, 'Inma Mayo', 'esto es un ejemplo de descripción', 'inmamayo@gmail.com', 'inmmaysal');
-INSERT INTO registered_users(id,name,description,email,username) VALUES (2, 'Juanluis', 'esto es un ejemplo de descripción', 'juanluis@gmail.com', 'juaruamur');
-INSERT INTO registered_users(id,name,description,email,username) VALUES (3, 'Alejandro', 'esto es un ejemplo de descripción', 'alejandro@gmail.com', 'aleortpag');
-INSERT INTO registered_users(id,name,description,email,username) VALUES (4, 'David', 'esto es un ejemplo de descripción', 'david@gmail.com', 'davgavser');
+INSERT INTO registered_users(id,name,description,email,username) VALUES (1, 'Pepito', 'esto es un ejemplo de descripción', 'manu@gmail.com', 'pepito');
+INSERT INTO registered_users(id,name,description,email,username) VALUES (2, 'Pepita', 'esto es un ejemplo de descripción', 'manu2@gmail.com', 'pepita');
+INSERT INTO registered_users(id,name,description,email,username) VALUES (3, 'Maya', 'esto es un ejemplo de descripción', 'maya@gmail.com', 'maya');
 
 
 INSERT INTO owners VALUES (1, 'George', 'Franklin', '110 W. Liberty St.', 'Madison', '6085551023', 'owner1');

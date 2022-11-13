@@ -6,12 +6,14 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.samples.petclinic.user.AuthoritiesService;
 import org.springframework.samples.petclinic.user.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -135,6 +137,28 @@ public class RegisteredUserController {
 		}
 	}
 
+	/*@GetMapping("/registeredUser/{registeredUserId}/delete")
+    public String removeUser(@PathVariable("registeredUserId") Integer registeredUserId,ModelMap model){
+        String message;
+        try{
+            this.registeredUserService.removeUser(registeredUserId);;
+            message="user"+registeredUserId+" removed succesfuly";
+        }
+        catch(EmptyResultDataAccessException e){
+            message="User "+registeredUserId+" does not exist";
+        }
+        
+        model.put("message", message);
+        model.put("messageType", "info");
+        return "redirect:/registeredUser";
+    }*/
 
+
+	@GetMapping(value = "/registeredUser/{registeredUserId}/delete")
+    public String deletePlayerAdmin(@PathVariable("registeredUserId") int registeredUserId) {
+        RegisteredUser user = registeredUserService.findRegisteredUserById(registeredUserId);
+        registeredUserService.deleteUser(user);;
+        return "redirect:/registeredUser";
+    }
 
 }
