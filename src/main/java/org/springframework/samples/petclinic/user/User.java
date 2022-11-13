@@ -19,7 +19,7 @@ public class User{
 	@Id
 	String username;
 	
-	@ValidPassword
+	
 	String password;
 	
 	boolean enabled;

@@ -199,11 +199,6 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.passay</groupId>
-            <artifactId>passay</artifactId>
-            <version>1.6.1</version>
-        </dependency>
     </dependencies>
 
     <build>
