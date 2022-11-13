@@ -7,7 +7,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -21,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "registered_users")
-public class RegisteredUser extends NamedEntity {
+public class RegisteredUser extends NamedEntity implements Comparable<RegisteredUser> {
 
     @Column(name = "description")
     @Size(min = 0,max = 250)
@@ -35,6 +34,11 @@ public class RegisteredUser extends NamedEntity {
     @OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "username", referencedColumnName = "username")
 	private User user;
+
+    @Override
+	public int compareTo(RegisteredUser objectRegisteredUser) {
+		return this.getUser().getUsername().compareTo(objectRegisteredUser.getUser().getUsername());
+	}
 
     
 
