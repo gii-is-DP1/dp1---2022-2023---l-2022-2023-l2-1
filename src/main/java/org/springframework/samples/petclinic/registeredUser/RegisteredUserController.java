@@ -81,22 +81,11 @@ public class RegisteredUserController {
 	}
 
 	// Hacer listado para que el admin pueda ver todos los usurios
-	@GetMapping(value = "/registeredUser/find")
+	@GetMapping(value = "/find")
 	public String initFindForm(Map<String, Object> model) {
 		model.put("registeredUser", new RegisteredUser());
 		return "registeredUser/findRegisteredUser";
 	}
-
-	// @GetMapping(value = "/registeredUser")
-	// public String processFindForm(RegisteredUser registeredUser, BindingResult
-	// result, Map<String, Object> model) {
-
-	// Collection<RegisteredUser> results =
-	// this.registeredUserService.findRegisteredUser();
-	// model.put("registeredUser", new RegisteredUser());
-	// model.put("selections", results);
-	// return "registeredUser/registeredUserList";
-	// }
 
 	@GetMapping(value = "/registeredUser")
 	public String processFindForm(RegisteredUser registeredUser, BindingResult result, Map<String, Object> model) {
@@ -147,18 +136,5 @@ public class RegisteredUserController {
 	}
 
 
-	// //Eliminar RegisteredUser
-	// @GetMapping(value = "/registeredUser/{registeredUserId}/delete")
-	// public String deleteRegisteredUserAdmin(@PathVariable("registeredUserId") int registeredUserId) {
-	// 	RegisteredUser registeredUser = this.registeredUserService.findRegisteredUserById(registeredUserId);
-	// 	this.registeredUserService.deleteRegisteredUser(registeredUser);
-	// 	return "redirect:/registeredUser";
-	// }
-
-	@GetMapping("/registeredUser/{registeredUserId}/delete")
-    public String deleteRegisteredUser(@PathVariable int id){
-		registeredUserService.deleteRegisteredUser(id);      
-        return "redirect:/registeredUser/{registeredUserId}";
-    }
 
 }

@@ -60,9 +60,6 @@ public class RegisteredUserService {
 		authoritiesService.saveAuthorities(registeredUser.getUser().getUsername(), "registeredUser");
 	}	
     
-	@Transactional
-	public void deleteRegisteredUser(int id) throws DataAccessException {
-		registeredUserRepository.deleteById(id);
-	}
+
 
 }
