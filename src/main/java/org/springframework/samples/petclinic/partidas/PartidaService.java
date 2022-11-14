@@ -28,7 +28,11 @@ public class PartidaService {
     public Partida savePartida(Partida partida){
         return partidaRepository.save(partida);
     }
-
+    @Transactional
+    public List<Dificultad> getAllDifs(){
+        return partidaRepository.findDificultades();
+    }
+    
 
 
     
