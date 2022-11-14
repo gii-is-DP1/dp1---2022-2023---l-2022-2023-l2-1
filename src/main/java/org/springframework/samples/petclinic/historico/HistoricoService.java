@@ -18,12 +18,12 @@ public class HistoricoService {
     }
 
     @Transactional(readOnly = true)
-    public List<Historico> getAllHistoricos() throws DataAccessException {
+    public List<Historico> findAll() throws DataAccessException {
         return historicoRepository.findAll();
     }
 
     @Transactional(readOnly = true)
-    public Historico getHistoricoById(Integer id) throws DataAccessException {
+    public Historico findHistoricoByUserId(Integer id) throws DataAccessException {
         return historicoRepository.findHistoricoByUserId(id);
     }
 
