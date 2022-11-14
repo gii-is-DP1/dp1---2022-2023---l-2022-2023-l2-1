@@ -7,7 +7,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.samples.petclinic.model.NamedEntity;
+import org.springframework.samples.petclinic.model.BaseEntity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "partida")
-public class Partida extends NamedEntity {
+public class Partida extends BaseEntity {
     @NotNull
     @JoinColumn(name = "user_id")
     private Integer userId; 
@@ -31,9 +31,9 @@ public class Partida extends NamedEntity {
     @JoinColumn(name = "dificultad_id")
     private Dificultad dificultad; 
 
-    @NotNull
-    @JoinColumn(name = "tipo_partida_id")
-    private Integer tipo;
+    //@NotNull
+    //@JoinColumn(name = "tipo_partida_id")
+    //private Integer tipo;
 
     @JoinColumn(name = "id_invitado", nullable = true)
     private Integer idInvitado;

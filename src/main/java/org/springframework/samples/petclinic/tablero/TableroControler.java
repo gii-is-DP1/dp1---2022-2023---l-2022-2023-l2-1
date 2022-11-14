@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "/partidas/{partida_id}") // "/{user_id}/{partida_id}"
 public class TableroControler {
 
         private final TableroService boardService;
@@ -40,11 +39,13 @@ public class TableroControler {
             return this.partidaService.getAllDifs();
         }
 
-        @GetMapping(value = "/partidas/{partida_id}/{tablero_id}")
-        public ModelAndView showTablero(@PathVariable("tablero_id") int id){
-            ModelAndView mav = new ModelAndView("/tableroEnJuego");
+        @GetMapping(value = {"/partidas/{partida_id}/{tablero_id}"})
+        public ModelAndView showTablero(@PathVariable("tablero_id") int id, @PathVariable("partida_id") int idp){
+            ModelAndView mav = new ModelAndView("tableros/tab");
+            Partida part = this.partidaService.getById(idp);
             Tablero tab = this.boardService.getBoardById(id);
             mav.addObject(tab);
+            mav.addObject(part);
             return mav;
         }
         //Post mapping para cuando termine la partida?

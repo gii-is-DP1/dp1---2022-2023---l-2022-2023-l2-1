@@ -9,7 +9,7 @@
     <h2><fmt:message key="Buscaminas"/></h2>
     <div class="row">
         <h2>tablero ${tablero.id}</h2>
-        <p><h2>partida ${tablero.partida_id}</h2></p>
+        <p><h2>partida ${partida.id}</h2></p>
         <p><ul>
                 <li>${tablero.filas},  ${tablero.columnas}</li>
         </ul></p>
