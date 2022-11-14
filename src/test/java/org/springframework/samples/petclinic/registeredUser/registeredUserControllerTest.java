@@ -34,7 +34,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(controllers = RegisteredUserController.class, 
 	excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class), 
 	excludeAutoConfiguration = SecurityConfiguration.class)
-class PlayerControllerTests {
+class registeredUserControllerTest {
 
 	private static final int TEST_REGISTERED_USER_ID = 1;
 
@@ -84,9 +84,8 @@ class PlayerControllerTests {
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessCreationFormHasErrors() throws Exception {
-		mockMvc.perform(post("/registeredUser/new").with(csrf()).param("name", "Joe"))//.param("username", "CottonEyeJoe"))
+		mockMvc.perform(post("/registeredUser/new").with(csrf()).param("name", "Joe"))
 				.andExpect(status().isOk()).andExpect(model().attributeHasErrors("registeredUser"))
-				.andExpect(model().attributeHasFieldErrors("registeredUser", "username"))
 				.andExpect(model().attributeHasFieldErrors("registeredUser", "email"))
 				.andExpect(view().name("registeredUser/createOrUpdateRegisteredUserForm"));
 	}
@@ -108,36 +107,35 @@ class PlayerControllerTests {
 
 	@WithMockUser(value = "spring")
 	@Test
-	void testProcessFindFormByLastName() throws Exception {
+	void testProcessFindFormByName() throws Exception {
 		given(this.registeredUserService.findRegisteredUserByName(pepito.getName())).willReturn(Lists.newArrayList(pepito));
 
-		mockMvc.perform(get("/registeredUser").param("name", "Maya")).andExpect(status().is3xxRedirection())
+		mockMvc.perform(get("/registeredUser").param("name", "pepito")).andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/registeredUser/" + TEST_REGISTERED_USER_ID));
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
-	void testProcessFindFormNoPlayersFound() throws Exception {
+	void testProcessFindFormNoRegisteredUsersFound() throws Exception {
 		mockMvc.perform(get("/registeredUser").param("name", "Unknown Name")).andExpect(status().isOk())
 				.andExpect(model().attributeHasFieldErrors("registeredUser", "name"))
 				.andExpect(model().attributeHasFieldErrorCode("registeredUser", "name", "notFound"))
-				.andExpect(view().name("registeredUser/find/registeredUser"));
+				.andExpect(view().name("registeredUser/findRegisteredUser"));
 	}
 
 	@WithMockUser(value = "spring")
 	@Test
-	void testInitUpdatePlayerForm() throws Exception {
+	void testInitUpdateRegisteredUserForm() throws Exception {
 		mockMvc.perform(get("/registeredUser/{registeredUserId}/edit", TEST_REGISTERED_USER_ID)).andExpect(status().isOk())
 				.andExpect(model().attributeExists("registeredUser"))
-				.andExpect(model().attribute("registeredUser", hasProperty("name", is("Maya"))))
-				.andExpect(model().attribute("registeredUser", hasProperty("username", is("LaAbejita"))))
+				.andExpect(model().attribute("registeredUser", hasProperty("name", is("pepito"))))
 				.andExpect(view().name("registeredUser/createOrUpdateRegisteredUserForm"));
 	}
 
 	
 	@WithMockUser(value = "spring")
 	@Test
-	void testProcessUpdatePlayerFormSuccess() throws Exception {
+	void testProcessUpdateRegisteredUserFormSuccess() throws Exception {
 		mockMvc.perform(post("/registeredUser/{registeredUserId}/edit", TEST_REGISTERED_USER_ID).with(csrf()).param("firstName", "Joe")
 				.param("name", "Pepito").param("username", "pepito").param("email", "pepito@gmail.com"))
 				.andExpect(status().is3xxRedirection())
@@ -146,7 +144,7 @@ class PlayerControllerTests {
 
 	@WithMockUser(value = "spring")
 	@Test
-	void testProcessUpdatePlayerFormHasErrors() throws Exception {
+	void testProcessUpdateRegisteredUserFormHasErrors() throws Exception {
 		mockMvc.perform(post("/registeredUser/{registeredUserId}/edit", TEST_REGISTERED_USER_ID).with(csrf()).param("name", "Joe")
 				.param("username", "CottonEyeJoe")).andExpect(status().isOk())
 				.andExpect(model().attributeHasErrors("registeredUser"))
@@ -155,10 +153,9 @@ class PlayerControllerTests {
 
 	@WithMockUser(value = "spring")
 	@Test
-	void testShowPlayer() throws Exception {
+	void testShowRegisteredUser() throws Exception {
 		mockMvc.perform(get("/registeredUser/{registeredUserId}", TEST_REGISTERED_USER_ID)).andExpect(status().isOk())
-				.andExpect(model().attribute("registeredUser", hasProperty("name", is("Maya"))))
-				.andExpect(model().attribute("registeredUser", hasProperty("username", is("LaAbejita"))))
+				.andExpect(model().attribute("registeredUser", hasProperty("name", is("pepito"))))
 				.andExpect(view().name("registeredUser/registeredUserDetails"));
 	}
 }

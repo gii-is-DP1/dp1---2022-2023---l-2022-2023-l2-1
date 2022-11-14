@@ -137,23 +137,7 @@ public class RegisteredUserController {
 		}
 	}
 
-	/*@GetMapping("/registeredUser/{registeredUserId}/delete")
-    public String removeUser(@PathVariable("registeredUserId") Integer registeredUserId,ModelMap model){
-        String message;
-        try{
-            this.registeredUserService.removeUser(registeredUserId);;
-            message="user"+registeredUserId+" removed succesfuly";
-        }
-        catch(EmptyResultDataAccessException e){
-            message="User "+registeredUserId+" does not exist";
-        }
-        
-        model.put("message", message);
-        model.put("messageType", "info");
-        return "redirect:/registeredUser";
-    }*/
-
-
+	
 	@GetMapping(value = "/registeredUser/{registeredUserId}/delete")
     public String deletePlayerAdmin(@PathVariable("registeredUserId") int registeredUserId) {
         RegisteredUser user = registeredUserService.findRegisteredUserById(registeredUserId);
