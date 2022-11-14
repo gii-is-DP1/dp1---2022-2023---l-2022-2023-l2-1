@@ -8,7 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+<<<<<<< HEAD
 import javax.validation.constraints.NotEmpty;
+=======
+>>>>>>> inmmaysal
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
