@@ -18,4 +18,6 @@ public interface PartidaRepository extends CrudRepository<Partida, Integer> {
     @Query("SELECT diff FROM Dificultad diff ORDER BY diff.id")
     List<Dificultad> findDificultades() throws DataAccessException;
 
+    @Query("FROM Partida WHERE tiempo_de_juego IS NULL")
+    List<Partida> findPartidasActuales() throws DataAccessException;
 }
