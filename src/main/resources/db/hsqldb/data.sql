@@ -106,3 +106,10 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02',
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
+INSERT INTO dificultad VALUES (1, 'Facil');
+INSERT INTO dificultad VALUES (2, 'Intermedio');
+INSERT INTO dificultad VALUES (3, 'Dificil');
+
+INSERT INTO partida(id,user_id,tiempo_de_juego,dificultad_id,id_invitado,privada,contrasenia) VALUES (1, 1, 0, 1, 2, FALSE, null);
+
+INSERT INTO tablero(id,columnas,filas,partida_id) VALUES (1, 10, 8, 1);
