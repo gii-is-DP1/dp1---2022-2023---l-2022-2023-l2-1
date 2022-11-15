@@ -18,12 +18,14 @@ import lombok.Setter;
 @Table(name = "partida")
 public class Partida extends BaseEntity {
     @NotNull
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "username")
     private Integer userId; 
 
-    @NotNull
+    
     @Column(name = "tiempo_de_juego")
-    /*Hora final - Hora inicio */
+    /*Si tiempo_de_juego == null; la partida sigue en curso.
+    Cuando finalice:
+    Hora final - Hora inicio */
     private Integer tiempoDeJuego;
 
     @OneToOne
@@ -36,7 +38,7 @@ public class Partida extends BaseEntity {
     //private Integer tipo;
 
     @JoinColumn(name = "id_invitado", nullable = true)
-    private Integer idInvitado;
+    private String idInvitado;
 
     @Column(name = "privada")
     @NotNull
