@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/{user_id}/partidas")
+@RequestMapping("/partidas")
 public class PartidaControler {
     @GetMapping()
     public ModelAndView showAllPartidas(){
-        ModelAndView res = new ModelAndView("Partidas") ;
+        ModelAndView res = new ModelAndView("partida/partidas");
         return res;
     }
 }
