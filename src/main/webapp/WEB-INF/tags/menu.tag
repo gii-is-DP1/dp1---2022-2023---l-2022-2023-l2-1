@@ -28,11 +28,21 @@
 					<span>Home</span>
 				</petclinic:menuItem>
 
-				<petclinic:menuItem active="${name eq 'owners'}" url="/owners/find"
-					title="find owners">
+
+				<sec:authorize url="/myProfile">
+                <petclinic:menuItem active="${name eq 'registered_users'}" url="/myProfile"
+                    title="myProfile">
+                    <span>My Profile</span>
+                </petclinic:menuItem>
+                </sec:authorize>
+
+				<sec:authorize url="/find">
+				<petclinic:menuItem active="${name eq 'registered_users'}" url="/find"
+					title="find registeredUser">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>Find owners</span>
+					<span>Find registeredUser</span>
 				</petclinic:menuItem>
+				</sec:authorize>
 
 				<petclinic:menuItem active="${name eq 'vets'}" url="/vets"
 					title="veterinarians">
@@ -58,7 +68,11 @@
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
+<<<<<<< HEAD
 						data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span>�
+=======
+						data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span>
+>>>>>>> master
 							<strong><sec:authentication property="name" /></strong> <span
 							class="glyphicon glyphicon-chevron-down"></span>
 					</a>
@@ -84,22 +98,25 @@
 								</div>
 							</li>
 							<li class="divider"></li>
-<!-- 							
+							
                             <li> 
 								<div class="navbar-login navbar-login-session">
 									<div class="row">
 										<div class="col-lg-12">
 											<p>
+												<!-- 
 												<a href="#" class="btn btn-primary btn-block">My Profile</a>
+												
 												<a href="#" class="btn btn-danger btn-block">Change
 													Password</a>
+													-->
+	
 											</p>
 										</div>
 									</div>
 								</div>
 							</li>
--->
-						</ul></li>
+					</ul></li>
 				</sec:authorize>
 			</ul>
 		</div>
