@@ -44,10 +44,10 @@
 				</petclinic:menuItem>
 				</sec:authorize>
 
-				<petclinic:menuItem active="${name eq 'vets'}" url="/vets"
-					title="veterinarians">
+				<petclinic:menuItem active="${name eq 'Partidas'}" url="/partidas"
+					title="Partidas">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-					<span>Veterinarians</span>
+					<span>Partidas</span>
 				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"

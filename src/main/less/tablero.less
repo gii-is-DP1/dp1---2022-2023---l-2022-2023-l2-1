@@ -1,0 +1,21 @@
+:root{
+  --num-columnas: 10;
+  --num-filas: 10;
+  --size: 32px;
+}
+ 
+#tablero{
+  display:grid;
+  grid-template-columns: repeat(var(--num-columnas), var(--size));
+  grid-template-rows: repeat(var(--num-filas), var(--size));
+}
+ 
+#tablero div{
+  background-color: #BBBBBB;
+  border-left: 2px solid #D3D3D3;
+  border-top: 2px solid #D3D3D3;
+  border-right: 2px solid #A9A9A9;
+  border-bottom: 2px solid #A9A9A9;
+  text-align: center;
+  line-height: var(--size);
+}
