@@ -12,4 +12,6 @@ public interface HistoricoRepository extends CrudRepository<Historico, Integer> 
 
     Historico findHistoricoByUserId(Integer id);
 
+    
+
 }
