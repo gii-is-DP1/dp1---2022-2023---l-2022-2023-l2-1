@@ -31,6 +31,7 @@ public class HistoricoService {
     public void saveHistorico(Historico hist) throws DataAccessException {
         historicoRepository.save(hist);
     }
+    
 
     @Transactional
     public Historico getHistoricoByRegisteredUserId(Integer id) {

@@ -12,37 +12,37 @@ tagdir="/WEB-INF/tags" %>
     <tbody>
       <tr>
         <th>
-          Partidas totales: <c:out value="${estadistica.partidasTotales}" />
+          Partidas totales: <c:out value="${historico.partidasTotales}" />
         </th>
       </tr>
       <tr>
         <th>
-          Partidas Ganadas: <c:out value="${estadistica.partidasGanadas}" />
+          Partidas Ganadas: <c:out value="${historico.partidasGanadas}" />
         </th>
       </tr>
       <tr>
-        <th>Minas: <c:out value="${estadistica.minasEncontradas}" /></th>
+        <th>Minas: <c:out value="${historico.minasEncontradas}" /></th>
       </tr>
       <tr>
-        <th>Puntuacion: <c:out value="${estadistica.puntuacion}" /></th>
+        <th>Puntuacion: <c:out value="${historico.puntuacion}" /></th>
       </tr>
       <tr>
         <th>
           Tiempo Total de Juego:
-          <c:out value="${estadistica.tiempoTotalJuego}" />
+          <c:out value="${historico.tiempoTotalJuego}" />
         </th>
       </tr>
       <tr>
         <th>
           Tiempo medio de partida:
-          <c:out value="${estadistica.tiempoMedioPartida}" />
+          <c:out value="${historico.tiempoMedioPartida}" />
         </th>
       </tr>
       <tr>
-        <th>Tiempo minimo: <c:out value="${estadistica.tiempoMinimo}" /></th>
+        <th>Tiempo minimo: <c:out value="${historico.tiempoMinimo}" /></th>
       </tr>
       <tr>
-        <th>Tiempo maximo: <c:out value="${estadistica.tiempoMaximo}" /></th>
+        <th>Tiempo maximo: <c:out value="${historico.tiempoMaximo}" /></th>
       </tr>
     </tbody>
   </table>

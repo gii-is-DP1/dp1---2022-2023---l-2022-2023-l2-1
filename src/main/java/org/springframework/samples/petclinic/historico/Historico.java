@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.historico;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -7,6 +8,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.samples.petclinic.model.BaseEntity;
+
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,11 +22,9 @@ public class Historico extends BaseEntity {
     @NotNull
     @JoinColumn(name = "user_id")
     private Integer userId;
-
     @NotNull
     @Column(name = "partidas_totales")
     private Integer partidasTotales;
-
     @NotNull
     @Column(name = "partidas_ganadas")
     private Integer partidasGanadas;

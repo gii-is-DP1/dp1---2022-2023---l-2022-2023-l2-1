@@ -43,7 +43,7 @@ prefix="petclinic" tagdir="/WEB-INF/tags" %> <%@page contentType="text/html"%>
         <a
           class="btn btn-default"
           type="submit"
-          href="/registeredUser/${registeredUser.id}/partidas"
+          href="/registeredUser/${registeredUser.id}/partidasJugadas"
           >Historial de partidas</a
         >
       </td>

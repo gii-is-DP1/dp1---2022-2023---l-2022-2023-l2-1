@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.partidas.PartidaService;
+
 import org.springframework.samples.petclinic.user.AuthoritiesService;
 import org.springframework.samples.petclinic.user.UserService;
 import org.springframework.security.core.Authentication;
@@ -31,11 +33,14 @@ public class RegisteredUserController {
 
 	private final UserService userService;
 
+	private final PartidaService partidaService;
+
 	@Autowired
 	public RegisteredUserController(RegisteredUserService registeredUserService, UserService userService,
-			AuthoritiesService authoritiesService) {
+			AuthoritiesService authoritiesService, PartidaService partidaService ) {
 		this.registeredUserService = registeredUserService;
 		this.userService = userService;
+		this.partidaService = partidaService;
 	}
 
 	@InitBinder
@@ -140,5 +145,15 @@ public class RegisteredUserController {
 		;
 		return "redirect:/registeredUser";
 	}
+
+
+
+	@GetMapping(value = "/registeredUser/{registeredUserId}/partidas")
+    public ModelAndView showPartidasByUserId(@PathVariable("registeredUserId") int id){
+        ModelAndView res = new ModelAndView("partida/listaDePartidas");
+        res.addObject("historicoPartidas", partidaService.getAllByRegistredUserId(id));
+
+        return res;
+    } 
 
 }

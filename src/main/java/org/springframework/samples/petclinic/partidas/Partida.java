@@ -17,6 +17,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "partida")
 public class Partida extends BaseEntity {
+
     @NotNull
     @JoinColumn(name = "registered_user_id")
     private Integer registeredUserId; 
@@ -33,9 +34,10 @@ public class Partida extends BaseEntity {
     @JoinColumn(name = "dificultad_id")
     private Dificultad dificultad; 
 
-    //@NotNull
-    //@JoinColumn(name = "tipo_partida_id")
-    //private Integer tipo;
+   /*  @OneToOne
+    @NotNull
+    @JoinColumn(name = "tipo_de_partida_id")
+    private TipoDePartida tipo;*/
 
     @JoinColumn(name = "id_invitado", nullable = true)
     private String idInvitado;

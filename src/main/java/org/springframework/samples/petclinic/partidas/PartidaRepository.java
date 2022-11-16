@@ -13,11 +13,14 @@ public interface PartidaRepository extends CrudRepository<Partida, Integer> {
     List<Partida> findAllByRegisteredUserId(Integer Id);
     Partida findPartidaByRegisteredUserId(Integer Id);
     Partida findPartidaById(Integer Id);
-    Partida save(Partida partida) throws DataAccessException;
+
            
     @Query("SELECT diff FROM Dificultad diff ORDER BY diff.id")
     List<Dificultad> findDificultades() throws DataAccessException;
 
     @Query("FROM Partida WHERE tiempo_de_juego IS NULL")
     List<Partida> findPartidasActuales() throws DataAccessException;
+  
+   // @Query("SELECT tipo FROM TipoDePartida tipo ORDER BY tipo.id")
+    //List<TipoDePartida> findTipos() throws DataAccessException;
 }

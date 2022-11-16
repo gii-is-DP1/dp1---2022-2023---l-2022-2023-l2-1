@@ -1,6 +1,8 @@
 package org.springframework.samples.petclinic.partidas;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.samples.petclinic.registeredUser.RegisteredUser;
 import org.springframework.samples.petclinic.registeredUser.RegisteredUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,8 +67,9 @@ public class PartidaControler {
     @GetMapping(value = "/registeredUser/{registeredUserId}/partidas")
     public ModelAndView showPartidasByUserId(@PathVariable("registeredUserId") int id) {
         ModelAndView res = new ModelAndView("partida/listaDePartidas");
-        res.addObject("historicoPartidas", partidaService.getAllById(id));
+        res.addObject("partidas", partidaService.getAllById(id));
         return res;
     }
 
 }
+

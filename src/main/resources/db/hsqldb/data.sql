@@ -114,6 +114,7 @@ INSERT INTO condiciones VALUES (1, 'Tiempo minimo medio');
 INSERT INTO condiciones VALUES (2, 'Partidas ganadas');
 INSERT INTO condiciones VALUES (3, 'Minas liberadas');
 
+
 INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,id_invitado,privada,contrasenia) VALUES (1, 1, null, 1, 2, FALSE, null);
 INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,id_invitado,privada,contrasenia) VALUES (2, 2, null, 1, 2, FALSE, null);
 INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,id_invitado,privada,contrasenia) VALUES (3, 1, null, 1, 2, FALSE, null);
@@ -132,3 +133,4 @@ INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES
 INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (4,2,'Partidas ganadas','Texto de ejemplo', 2);
 INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (5,2,'Partidas ganadas','Texto de ejemplo', 2);
 INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (6,3,'Minas liberadas','Texto de ejemplo', 3);
+
