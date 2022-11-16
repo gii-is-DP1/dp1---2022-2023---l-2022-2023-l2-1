@@ -25,10 +25,26 @@ public class PartidaService {
         return partidaRepository.findAllByUserId(id);
     }
     @Transactional
+    public Partida getById(Integer id){
+        return partidaRepository.findPartidaById(id);
+    }
+    @Transactional
     public Partida savePartida(Partida partida){
         return partidaRepository.save(partida);
     }
+    @Transactional
+    public List<Dificultad> getAllDifs(){
+        return partidaRepository.findDificultades();
+    }
 
+    public List<Partida> getAllPartidasActuales(){
+        return partidaRepository.findPartidasActuales();
+    }
+
+    
+
+    
+    
 
 
     

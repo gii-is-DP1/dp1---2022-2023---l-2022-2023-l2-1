@@ -3,13 +3,11 @@ package org.springframework.samples.petclinic.partidas;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.samples.petclinic.model.NamedEntity;
+import org.springframework.samples.petclinic.model.BaseEntity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,33 +15,35 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "partidas")
-
-public class Partida extends NamedEntity {
+@Table(name = "partida")
+public class Partida extends BaseEntity {
     @NotNull
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "username")
     private Integer userId; 
 
-    @NotNull
+    
     @Column(name = "tiempo_de_juego")
-    /*Hora final - Hora inicio */
+    /*Si tiempo_de_juego == null; la partida sigue en curso.
+    Cuando finalice:
+    Hora final - Hora inicio */
     private Integer tiempoDeJuego;
 
+    @OneToOne
     @NotNull
     @JoinColumn(name = "dificultad_id")
-    private String dificultad; 
+    private Dificultad dificultad; 
 
-    @NotNull
-    @JoinColumn(name = "tipo_partida_id")
-    private Integer tipo;
+    //@NotNull
+    //@JoinColumn(name = "tipo_partida_id")
+    //private Integer tipo;
 
-    @JoinColumn(name = "user_id")
-    private Integer idInvitado;
+    @JoinColumn(name = "id_invitado", nullable = true)
+    private String idInvitado;
 
     @Column(name = "privada")
     @NotNull
     private Boolean privada;
 
-    @NotNull
-    private String contraseña;
+    @Column(name = "contrasenia")
+    private String contrasenia;
 }
