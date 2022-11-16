@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.partidas.PartidaService;
+
 import org.springframework.samples.petclinic.user.AuthoritiesService;
 import org.springframework.samples.petclinic.user.UserService;
 import org.springframework.security.core.Authentication;
@@ -117,9 +118,8 @@ public class RegisteredUserController {
 		}
 
 	}
-	
 
-	//En la pestaña Find RegisteredUSers que funcione el add registeresUser 
+	// En la pestaña Find RegisteredUSers que funcione el add registeresUser
 	@GetMapping(value = "/registeredUser/new")
 	public String initCreationForm(Map<String, Object> model) {
 		RegisteredUser registeredUser = new RegisteredUser();
@@ -131,21 +131,20 @@ public class RegisteredUserController {
 	public String processCreationForm(@Valid RegisteredUser registeredUser, BindingResult result) {
 		if (result.hasErrors()) {
 			return VIEWS_REGISTERUSER_CREATE_EDIT;
-		}
-		else {
-			//creating owner, user and authorities
+		} else {
+			// creating owner, user and authorities
 			this.registeredUserService.saveRegisteredUser(registeredUser);
 			return "redirect:/registeredUser/" + registeredUser.getId();
 		}
 	}
 
-	
 	@GetMapping(value = "/registeredUser/{registeredUserId}/delete")
-    public String deletePlayerAdmin(@PathVariable("registeredUserId") int registeredUserId) {
-        RegisteredUser user = registeredUserService.findRegisteredUserById(registeredUserId);
-        registeredUserService.deleteUser(user);;
-        return "redirect:/registeredUser";
-    }
+	public String deletePlayerAdmin(@PathVariable("registeredUserId") int registeredUserId) {
+		RegisteredUser user = registeredUserService.findRegisteredUserById(registeredUserId);
+		registeredUserService.deleteUser(user);
+		;
+		return "redirect:/registeredUser";
+	}
 
 
 

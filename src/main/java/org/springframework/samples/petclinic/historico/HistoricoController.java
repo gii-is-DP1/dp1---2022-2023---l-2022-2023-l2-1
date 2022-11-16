@@ -3,7 +3,7 @@ package org.springframework.samples.petclinic.historico;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.samples.petclinic.registeredUser.RegisteredUserService;
 import org.springframework.samples.petclinic.partidas.PartidaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -36,6 +36,7 @@ public class HistoricoController {
     public ModelAndView muestraPartidasDeUsuario(@PathVariable("registeredUserId") Integer id) {
         ModelAndView result = new ModelAndView("partida/partidas");
         result.addObject("partidas", partidaService.getAllByRegistredUserId(id));
+
         return result;
     }
 

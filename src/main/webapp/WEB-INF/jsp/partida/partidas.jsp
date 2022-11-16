@@ -17,6 +17,7 @@
                             <tbody>
                                 <td>
                             <c:forEach items="${partidas}" var="partida">
+
                                 <tr>
                                     <td>
                                         <c:out value="${partida.id}"/>

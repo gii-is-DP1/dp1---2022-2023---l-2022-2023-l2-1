@@ -30,7 +30,4 @@
         </tbody>
     </table>
 
-
-
-
 </petclinic:layout>
