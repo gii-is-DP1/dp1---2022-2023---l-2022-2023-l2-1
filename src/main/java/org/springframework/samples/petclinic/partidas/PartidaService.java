@@ -36,7 +36,11 @@ public class PartidaService {
     public List<Dificultad> getAllDifs(){
         return partidaRepository.findDificultades();
     }
-
+    @Transactional
+    public List<TipoDePartida> getAllTipos(){
+        return partidaRepository.findTipos();
+    }
+    @Transactional
     public List<Partida> getAllPartidasActuales(){
         return partidaRepository.findPartidasActuales();
     }

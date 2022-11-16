@@ -20,4 +20,7 @@ public interface PartidaRepository extends CrudRepository<Partida, Integer> {
 
     @Query("FROM Partida WHERE tiempo_de_juego IS NULL")
     List<Partida> findPartidasActuales() throws DataAccessException;
+  
+    @Query("SELECT tipo FROM tipo_de_partida tipo ORDER BY tipo.id")
+    List<TipoDePartida> findTipos();
 }
