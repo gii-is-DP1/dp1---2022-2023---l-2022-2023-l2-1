@@ -22,7 +22,7 @@ public class PartidaService {
     }
     @Transactional
     public List<Partida> getAllById(Integer id){
-        return partidaRepository.findAllByUserId(id);
+        return partidaRepository.findAllByRegisteredUserId(id);
     }
     @Transactional
     public Partida getById(Integer id){

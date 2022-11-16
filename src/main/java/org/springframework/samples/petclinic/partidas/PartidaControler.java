@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.imageio.spi.RegisterableService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.registeredUser.RegisteredUser;
 import org.springframework.samples.petclinic.registeredUser.RegisteredUserService;
 import org.springframework.samples.petclinic.user.UserController;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/partidas")
 public class PartidaControler {
     private PartidaService partidaService;
     private RegisteredUserService registerableService;
@@ -65,7 +65,7 @@ public class PartidaControler {
  
 
 
-    @GetMapping()
+    @GetMapping(value = "/partidas")
     public ModelAndView showAllPartidas(){
         ModelAndView res = new ModelAndView("partida/partidas");
         res.addObject("partidas", partidaService.getAllPartidasActuales());

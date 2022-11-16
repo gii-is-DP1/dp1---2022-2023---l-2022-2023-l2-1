@@ -23,20 +23,16 @@ public class Historico extends BaseEntity {
     @NotNull
     @JoinColumn(name = "user_id")
     private Integer userId;
-
     @NotNull
     @Column(name = "partidas_totales")
     private Integer partidasTotales;
-
     @NotNull
     @Column(name = "partidas_ganadas")
     private Integer partidasGanadas;
 
-    /* HISTORIAL DE PARTIDAS: DA PROBLEMAS EL TIPO List<Partida> */
-
     @NotNull
     @Column(name = "minas_encontradas")
-    private Integer minasEncontrads;
+    private Integer minasEncontradas;
 
     @NotNull
     @Column(name = "puntuacion")

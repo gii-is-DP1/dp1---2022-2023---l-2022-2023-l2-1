@@ -27,12 +27,12 @@
         </tr>
         <tr>
             <td>
-                <button class="btn btn-default" type="submit">Estadisticas</button>
+                <a class="btn btn-default" type="submit" href="/registeredUser/${registeredUser.id}/estadisticas">Estadisticas</a>
             </td>
         </tr>
         <tr>
             <td>
-                <button class="btn btn-default" type="submit">Historial de partidas</button>
+                <a class="btn btn-default" type="submit" href="/registeredUser/${registeredUser.id}/partidas">Historial de partidas</a>
             </td>
         </tr>
         
