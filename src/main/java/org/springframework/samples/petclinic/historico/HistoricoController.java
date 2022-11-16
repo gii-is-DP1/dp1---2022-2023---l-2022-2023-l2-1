@@ -1,40 +1,32 @@
 package org.springframework.samples.petclinic.historico;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.registeredUser.RegisteredUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-<<<<<<< HEAD
-@RequestMapping("/historicos")
-=======
-@RequestMapping(value = "/registeredUser/{registeredUserId}/estadisticas")
->>>>>>> davgavser
 public class HistoricoController {
 
-    private HistoricoService historicoService;
+    private final HistoricoService historicoService;
+    private final RegisteredUserService registeredUserService;
 
     @Autowired
-    public HistoricoController(HistoricoService historicoService) {
+    public HistoricoController(HistoricoService historicoService, RegisteredUserService registeredUserService) {
         this.historicoService = historicoService;
+        this.registeredUserService = registeredUserService;
     }
 
-    @GetMapping()
-<<<<<<< HEAD
-    public ModelAndView muestraHistoricoDeUsuario(@PathVariable("id") Integer id) {
-        ModelAndView result = new ModelAndView("HistoricoDeUsuario");
-        result.addObject("historico", historicoService.findHistoricoByUserId(id));
-=======
-    public ModelAndView muestraHistoricoDeUsuario(@PathVariable("registeredUserId") Integer id) {
-        ModelAndView result = new ModelAndView("estadisticas/estadisticasDeUsuario");
-        result.addObject("historico", historicoService.getHistoricoById(id));
->>>>>>> davgavser
-        return result;
+    @GetMapping(value = "/registeredUser/{registeredUserId}/estadisticas")
+    public ModelAndView showEstadisticasByUserId(@PathVariable("registeredUserId") int id) {
+        ModelAndView res = new ModelAndView("estadisticas/estadisticasDeUsuario");
+        res.addObject("estadistica", historicoService.getHistoricoByRegisteredUserId(id));
+        res.addObject("user", registeredUserService.findRegisteredUserById(id));
+        return res;
     }
 
     @PostMapping("/edit/{id}")
@@ -43,9 +35,4 @@ public class HistoricoController {
 
         return result;
     }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> davgavser
 }

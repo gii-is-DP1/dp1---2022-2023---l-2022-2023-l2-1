@@ -23,7 +23,7 @@ public class HistoricoService {
     }
 
     @Transactional(readOnly = true)
-    public Historico findHistoricoByUserId(Integer id) throws DataAccessException {
+    public Historico getHistoricoById(Integer id) throws DataAccessException {
         return historicoRepository.findHistoricoByUserId(id);
     }
 
@@ -31,6 +31,10 @@ public class HistoricoService {
     public void saveHistorico(Historico hist) throws DataAccessException {
         historicoRepository.save(hist);
     }
-    
+
+    @Transactional
+    public Historico getHistoricoByRegisteredUserId(Integer id) {
+        return historicoRepository.findHistoricoByUserId(id);
+    }
 
 }

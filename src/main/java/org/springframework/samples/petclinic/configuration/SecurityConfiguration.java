@@ -37,21 +37,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/", "/oups").permitAll()
 				.antMatchers(HttpMethod.GET, "/tablero/**").permitAll()
 				.antMatchers("/users/new").permitAll()
-				.antMatchers("/partidas/**").hasAnyAuthority("registeredUser","admin")
+				.antMatchers("/partidas/**").hasAnyAuthority("registeredUser", "admin")
 				.antMatchers("/session/**").permitAll()
 				.antMatchers("/admin/**").hasAnyAuthority("admin")
-<<<<<<< HEAD
 				.antMatchers("/owners/**").hasAnyAuthority("owner", "admin")
-=======
-				.antMatchers("/owners/**").hasAnyAuthority("owner","admin")
-				.antMatchers("/{user_id}/partidas").hasAnyAuthority("registeredUser","admin")					
->>>>>>> davgavser
+				.antMatchers("/{user_id}/partidas").hasAnyAuthority("registeredUser", "admin")
 				.antMatchers("/vets/**").authenticated()
-				.antMatchers("/registeredUser/**").hasAnyAuthority("registeredUser","admin")
+				.antMatchers("/registeredUser/**").hasAnyAuthority("registeredUser", "admin")
 				.antMatchers("/find").hasAnyAuthority("admin")
 				.antMatchers("/myProfile").hasAnyAuthority("registeredUser")
-
-				
 
 				.anyRequest().denyAll()
 				.and()
