@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+<<<<<<< HEAD
 @RequestMapping("/historicos")
+=======
+@RequestMapping(value = "/registeredUser/{registeredUserId}/estadisticas")
+>>>>>>> davgavser
 public class HistoricoController {
 
     private HistoricoService historicoService;
@@ -21,9 +25,15 @@ public class HistoricoController {
     }
 
     @GetMapping()
+<<<<<<< HEAD
     public ModelAndView muestraHistoricoDeUsuario(@PathVariable("id") Integer id) {
         ModelAndView result = new ModelAndView("HistoricoDeUsuario");
         result.addObject("historico", historicoService.findHistoricoByUserId(id));
+=======
+    public ModelAndView muestraHistoricoDeUsuario(@PathVariable("registeredUserId") Integer id) {
+        ModelAndView result = new ModelAndView("estadisticas/estadisticasDeUsuario");
+        result.addObject("historico", historicoService.getHistoricoById(id));
+>>>>>>> davgavser
         return result;
     }
 
@@ -33,4 +43,9 @@ public class HistoricoController {
 
         return result;
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> davgavser
 }

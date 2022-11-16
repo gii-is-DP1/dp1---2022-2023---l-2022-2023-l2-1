@@ -18,8 +18,8 @@ import lombok.Setter;
 @Table(name = "partida")
 public class Partida extends BaseEntity {
     @NotNull
-    @JoinColumn(name = "username")
-    private Integer userId; 
+    @JoinColumn(name = "registered_user_id")
+    private Integer registeredUserId; 
 
     
     @Column(name = "tiempo_de_juego")

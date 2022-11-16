@@ -11,7 +11,7 @@
 
                             <c:forEach items="${partidas}" var="partida">
                                 <br>
-                                <c:out value="${partida}" />
+                                <c:out value="${partida.id} ${partida.registeredUserId} ${partida.dificultad}" />
                             </c:forEach>
 
                         </h2>
