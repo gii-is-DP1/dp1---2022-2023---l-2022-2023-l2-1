@@ -24,7 +24,6 @@ public class PartidaService {
     
     @Transactional
     public List<Partida> getAllById(Integer id) throws DataAccessException{
-
         return partidaRepository.findAllByRegisteredUserId(id);
     }
     @Transactional
