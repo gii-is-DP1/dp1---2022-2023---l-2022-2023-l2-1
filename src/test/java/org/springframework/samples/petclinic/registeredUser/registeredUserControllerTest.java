@@ -28,7 +28,7 @@ import org.springframework.test.web.servlet.MockMvc;
 /**
  * Test class for {@link GameRoomController}
  *
- * @author Minus pocus
+ * 
  */
 
 @WebMvcTest(controllers = RegisteredUserController.class, 

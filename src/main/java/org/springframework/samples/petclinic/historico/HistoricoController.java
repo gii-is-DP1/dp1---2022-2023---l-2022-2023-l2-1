@@ -19,23 +19,26 @@ public class HistoricoController {
 
     private final HistoricoService historicoService;
     private final PartidaService partidaService;
+    private final RegisteredUserService registeredService;
 
     @Autowired
-    public HistoricoController(HistoricoService historicoService, PartidaService partidaService) {
+    public HistoricoController(HistoricoService historicoService, PartidaService partidaService, RegisteredUserService registeredService) {
         this.historicoService = historicoService;
         this.partidaService = partidaService;
+        this.registeredService = registeredService;
     }
 
     @GetMapping(value = "/estadisticas")
     public ModelAndView muestraHistoricoDeUsuario(@PathVariable("registeredUserId") Integer id) {
         ModelAndView result = new ModelAndView("estadisticas/estadisticasDeUsuario");
         result.addObject("historico", historicoService.getHistoricoById(id));
+        result.addObject("user", registeredService.findRegisteredUserById(id));
         return result;
     }
     @GetMapping(value = "/partidasJugadas")
     public ModelAndView muestraPartidasDeUsuario(@PathVariable("registeredUserId") Integer id) {
         ModelAndView result = new ModelAndView("partida/partidas");
-        result.addObject("partidas", partidaService.getAllByRegistredUserId(id));
+        result.addObject("partidas", partidaService.getAllById(id));
 
         return result;
     }

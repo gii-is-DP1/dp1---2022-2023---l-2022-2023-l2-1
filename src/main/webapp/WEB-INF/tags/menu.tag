@@ -68,11 +68,7 @@
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-<<<<<<< HEAD
-						data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span>�
-=======
 						data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span>
->>>>>>> master
 							<strong><sec:authentication property="name" /></strong> <span
 							class="glyphicon glyphicon-chevron-down"></span>
 					</a>

@@ -148,12 +148,4 @@ public class RegisteredUserController {
 
 
 
-	@GetMapping(value = "/registeredUser/{registeredUserId}/partidas")
-    public ModelAndView showPartidasByUserId(@PathVariable("registeredUserId") int id){
-        ModelAndView res = new ModelAndView("partida/listaDePartidas");
-        res.addObject("historicoPartidas", partidaService.getAllByRegistredUserId(id));
-
-        return res;
-    } 
-
 }
