@@ -1,12 +1,19 @@
 package org.springframework.samples.petclinic.partidas;
 
+import java.util.Map;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.samples.petclinic.registeredUser.RegisteredUser;
+
 import org.springframework.samples.petclinic.registeredUser.RegisteredUserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -20,6 +27,12 @@ public class PartidaControler {
         this.registerableService = registerableService;
     }
 
+
+    @InitBinder("partida")
+    public void initOwnerBinder(WebDataBinder dataBinder){
+        dataBinder.setDisallowedFields("tiempo_de_juego");
+    
+    }
     /*
      * @GetMapping(value ={ "/partidas"})
      * public String showPartidas(Map<String, Object> model) {
@@ -63,6 +76,29 @@ public class PartidaControler {
 
         return res;
     }
+
+    @GetMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
+    public String crearNuevaPartida(@PathVariable("registeredUserId") int id, Map<String, Object> model) {
+       
+        Partida partida = new Partida();
+        partida.setRegisteredUserId(id);
+        
+		model.put("partida", partida);
+    
+		return "partida/nuevaPartida";
+    }
+
+    @PostMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
+	public String processCreationForm(@Valid Partida partida, BindingResult result) {
+		if (result.hasErrors()) {
+			return "partida/nuevaPartida";
+		} else {        
+            
+			//"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/new"
+			return "redirect:/partidas" ;
+		}
+	}
+
 
     @GetMapping(value = "/registeredUser/{registeredUserId}/partidas")
     public ModelAndView showPartidasByUserId(@PathVariable("registeredUserId") int id) {

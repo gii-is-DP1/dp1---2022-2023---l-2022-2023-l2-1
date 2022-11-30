@@ -50,10 +50,11 @@ public class TableroControler {
         //Post mapping para cuando termine la partida?
 
         //A partir de partida se crean los tableros
+        
         public Tablero createNewBoard(Partida partida) {
             Tablero tablero = new Tablero();
             Dificultad dif =  partida.getDificultad();
-
+            //Facil = 1
             if(dif.getId()==1){
                 tablero.setColumnas(10);
                 tablero.setFilas(8);

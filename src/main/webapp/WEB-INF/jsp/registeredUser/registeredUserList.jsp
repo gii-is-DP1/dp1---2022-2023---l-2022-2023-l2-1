@@ -38,6 +38,9 @@
                 </td>
 
                 <td> 
+                    <a href="/registeredUser/${registeredUser.id}">Ver perfil
+                           
+                    </a>
                     <a href="/registeredUser/${registeredUser.id}/edit"> 
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>                            
                     </a>       
