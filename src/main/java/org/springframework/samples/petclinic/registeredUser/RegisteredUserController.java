@@ -81,7 +81,7 @@ public class RegisteredUserController {
 		} else {
 			registeredUser.setId(registeredUserId);
 			this.registeredUserService.saveRegisteredUser(registeredUser);
-			return "redirect:/registeredUser/{registeredUserId}";
+			return "redirect:/registeredUser";
 		}
 	}
 
@@ -119,7 +119,7 @@ public class RegisteredUserController {
 
 	}
 
-	// En la pestaña Find RegisteredUSers que funcione el add registeresUser
+	// En la pestaña Find RegisteredUSers que funcione el add registeredUser
 	@GetMapping(value = "/registeredUser/new")
 	public String initCreationForm(Map<String, Object> model) {
 		RegisteredUser registeredUser = new RegisteredUser();
@@ -134,7 +134,7 @@ public class RegisteredUserController {
 		} else {
 			// creating owner, user and authorities
 			this.registeredUserService.saveRegisteredUser(registeredUser);
-			return "redirect:/registeredUser/" + registeredUser.getId();
+			return "redirect:/registeredUser";
 		}
 	}
 

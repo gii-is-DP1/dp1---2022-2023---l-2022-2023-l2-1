@@ -30,22 +30,19 @@ public class Partida extends BaseEntity {
     private Integer tiempoDeJuego;
 
     @OneToOne
-    @NotNull
     @JoinColumn(name = "dificultad_id")
     private Dificultad dificultad; 
 
-   /*  @OneToOne
-    @NotNull
+    @OneToOne
     @JoinColumn(name = "tipo_de_partida_id")
-    private TipoDePartida tipo;*/
+    private TipoDePartida tipo;
 
     @JoinColumn(name = "id_invitado", nullable = true)
     private String idInvitado;
 
     @Column(name = "privada")
-    @NotNull
     private Boolean privada;
 
-    @Column(name = "contrasenia")
+    @Column(name = "contrasenia", nullable = true)
     private String contrasenia;
 }
