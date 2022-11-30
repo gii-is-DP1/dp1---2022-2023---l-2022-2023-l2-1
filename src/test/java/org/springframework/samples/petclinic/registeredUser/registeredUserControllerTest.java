@@ -2,7 +2,9 @@ package org.springframework.samples.petclinic.registeredUser;
 
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -11,6 +13,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.assertj.core.util.Lists;
+
+import java.util.ArrayList;
+import java.util.Collection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +33,7 @@ import org.springframework.test.web.servlet.MockMvc;
 /**
  * Test class for {@link GameRoomController}
  *
- * @author Minus pocus
+ * 
  */
 
 @WebMvcTest(controllers = RegisteredUserController.class, 
@@ -36,7 +41,6 @@ import org.springframework.test.web.servlet.MockMvc;
 	excludeAutoConfiguration = SecurityConfiguration.class)
 class registeredUserControllerTest {
 
-	private static final int TEST_REGISTERED_USER_ID = 1;
 
 	@Autowired
 	private RegisteredUserController registeredUserController;
@@ -59,10 +63,9 @@ class registeredUserControllerTest {
 	void setup() {
 
 		pepito = new RegisteredUser();
-		pepito.setId(TEST_REGISTERED_USER_ID);
-		pepito.setName("pepito");
-		given(this.registeredUserService.findRegisteredUserById(TEST_REGISTERED_USER_ID)).willReturn(pepito);
 
+		pepito.setName("pepito");
+		when(this.registeredUserService.findRegisteredUserById(1)).thenReturn(pepito);
 	}
 
 	@WithMockUser(value = "spring")
@@ -108,10 +111,13 @@ class registeredUserControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessFindFormByName() throws Exception {
-		given(this.registeredUserService.findRegisteredUserByName(pepito.getName())).willReturn(Lists.newArrayList(pepito));
+		Collection<RegisteredUser> users=new ArrayList();
+		users.add(pepito);
+		
+		when(this.registeredUserService.findRegisteredUserByName("pepito")).thenReturn(users);
 
 		mockMvc.perform(get("/registeredUser").param("name", "pepito")).andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/registeredUser/" + TEST_REGISTERED_USER_ID));
+				.andExpect(view().name("redirect:/registeredUser/" + 1));
 	}
 
 	@WithMockUser(value = "spring")
@@ -126,7 +132,7 @@ class registeredUserControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testInitUpdateRegisteredUserForm() throws Exception {
-		mockMvc.perform(get("/registeredUser/{registeredUserId}/edit", TEST_REGISTERED_USER_ID)).andExpect(status().isOk())
+		mockMvc.perform(get("/registeredUser/{registeredUserId}/edit", 1)).andExpect(status().isOk())
 				.andExpect(model().attributeExists("registeredUser"))
 				.andExpect(model().attribute("registeredUser", hasProperty("name", is("pepito"))))
 				.andExpect(view().name("registeredUser/createOrUpdateRegisteredUserForm"));
@@ -136,7 +142,7 @@ class registeredUserControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessUpdateRegisteredUserFormSuccess() throws Exception {
-		mockMvc.perform(post("/registeredUser/{registeredUserId}/edit", TEST_REGISTERED_USER_ID).with(csrf()).param("firstName", "Joe")
+		mockMvc.perform(post("/registeredUser/{registeredUserId}/edit", any(Integer.class)).with(csrf()).param("firstName", "Joe")
 				.param("name", "Pepito").param("username", "pepito").param("email", "pepito@gmail.com"))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/registeredUser/{registeredUserId}"));
@@ -145,7 +151,7 @@ class registeredUserControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testProcessUpdateRegisteredUserFormHasErrors() throws Exception {
-		mockMvc.perform(post("/registeredUser/{registeredUserId}/edit", TEST_REGISTERED_USER_ID).with(csrf()).param("name", "Joe")
+		mockMvc.perform(post("/registeredUser/{registeredUserId}/edit", 1).with(csrf()).param("name", "Joe")
 				.param("username", "CottonEyeJoe")).andExpect(status().isOk())
 				.andExpect(model().attributeHasErrors("registeredUser"))
 				.andExpect(view().name("registeredUser/createOrUpdateRegisteredUserForm"));
@@ -154,7 +160,7 @@ class registeredUserControllerTest {
 	@WithMockUser(value = "spring")
 	@Test
 	void testShowRegisteredUser() throws Exception {
-		mockMvc.perform(get("/registeredUser/{registeredUserId}", TEST_REGISTERED_USER_ID)).andExpect(status().isOk())
+		mockMvc.perform(get("/registeredUser/{registeredUserId}", 1)).andExpect(status().isOk())
 				.andExpect(model().attribute("registeredUser", hasProperty("name", is("pepito"))))
 				.andExpect(view().name("registeredUser/registeredUserDetails"));
 	}

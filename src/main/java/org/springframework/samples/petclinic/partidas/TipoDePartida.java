@@ -5,8 +5,13 @@ import javax.persistence.Table;
 
 import org.springframework.samples.petclinic.model.NamedEntity;
 
+
+/*
+INSERT INTO tipos VALUES (1, 'Individual');
+INSERT INTO tipos VALUES (2, 'Competitivo');
+*/
 @Entity
-@Table(name = "dificultad")
-public class Dificultad extends NamedEntity {
+@Table(name= "tipos")
+public class TipoDePartida extends NamedEntity{
 
 }

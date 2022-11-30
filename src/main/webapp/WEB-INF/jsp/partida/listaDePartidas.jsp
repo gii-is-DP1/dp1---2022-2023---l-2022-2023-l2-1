@@ -5,20 +5,20 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="partidas">
-    <h2>Veterinarians</h2>
+    <h2>Lista de Partidas</h2>
 
     <table id="partidasTable" class="table table-striped">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Dificultad</th>
+         <th>Id</th>
+         <th>Dificultad</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${historicoPartidas}" var="partida">
+        <c:forEach items="${partidas}" var="partida">
             <tr>
                 <td>
-                    <c:out value="Id: ${partida.id}"/>
+                    <c:out value="${partida.id}"/>
                 </td>
                 <td>
                     <c:out value=" ${partida.dificultad}">
@@ -29,4 +29,5 @@
         </c:forEach>
         </tbody>
     </table>
+
 </petclinic:layout>

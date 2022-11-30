@@ -31,7 +31,9 @@ public class pruebasController {
 		  Ale.setFirstName("Alejandro");
 		  Ale.setLastName("Ortiz");
 		  persons.add(Ale);
+
 	  Person Juan = new Person();
+
 
 	  model.put("persons", persons);
 	  model.put("title", "ElBuscaminas");
