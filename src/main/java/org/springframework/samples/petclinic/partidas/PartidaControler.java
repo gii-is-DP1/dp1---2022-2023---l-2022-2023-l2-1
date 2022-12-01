@@ -5,7 +5,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.samples.petclinic.registeredUser.RegisteredUser;
 import org.springframework.samples.petclinic.registeredUser.RegisteredUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -27,11 +27,10 @@ public class PartidaControler {
         this.registerableService = registerableService;
     }
 
-
     @InitBinder("partida")
-    public void initOwnerBinder(WebDataBinder dataBinder){
+    public void initOwnerBinder(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("tiempo_de_juego");
-    
+
     }
     /*
      * @GetMapping(value ={ "/partidas"})
@@ -77,28 +76,37 @@ public class PartidaControler {
         return res;
     }
 
-    @GetMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
-    public String crearNuevaPartida(@PathVariable("registeredUserId") int id, Map<String, Object> model) {
-       
+    @GetMapping(value = "/partida/new")
+    public String nuevaPartida(RegisteredUser registeredUser, Map<String, Object> model) {
+        Integer id = registeredUser.getId();
+
         Partida partida = new Partida();
         partida.setRegisteredUserId(id);
-        
-		model.put("partida", partida);
-    
-		return "partida/nuevaPartida";
+        model.put("partida", partida);
+        return "partida/nuevaPartida";
+    }
+
+    @GetMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
+    public String crearNuevaPartida(@PathVariable("registeredUserId") int id, Map<String, Object> model) {
+
+        Partida partida = new Partida();
+        partida.setRegisteredUserId(id);
+
+        model.put("partida", partida);
+
+        return "partida/nuevaPartida";
     }
 
     @PostMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
-	public String processCreationForm(@Valid Partida partida, BindingResult result) {
-		if (result.hasErrors()) {
-			return "partida/nuevaPartida";
-		} else {        
-            
-			//"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/new"
-			return "redirect:/partidas" ;
-		}
-	}
+    public String processCreationForm(@Valid Partida partida, BindingResult result) {
+        if (result.hasErrors()) {
+            return "partida/nuevaPartida";
+        } else {
 
+            // "/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/new"
+            return "redirect:/partidas";
+        }
+    }
 
     @GetMapping(value = "/registeredUser/{registeredUserId}/partidas")
     public ModelAndView showPartidasByUserId(@PathVariable("registeredUserId") int id) {
@@ -108,4 +116,3 @@ public class PartidaControler {
     }
 
 }
-
