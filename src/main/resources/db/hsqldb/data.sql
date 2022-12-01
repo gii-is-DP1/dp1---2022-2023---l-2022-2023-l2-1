@@ -110,15 +110,18 @@ INSERT INTO dificultad VALUES (1, 'Facil');
 INSERT INTO dificultad VALUES (2, 'Intermedio');
 INSERT INTO dificultad VALUES (3, 'Dificil');
 
+INSERT INTO tipos VALUES (1, 'Individual');
+INSERT INTO tipos VALUES (2, 'Competitivo');
+
 INSERT INTO condiciones VALUES (1, 'Tiempo minimo medio');
 INSERT INTO condiciones VALUES (2, 'Partidas ganadas');
 INSERT INTO condiciones VALUES (3, 'Minas liberadas');
 
 
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,id_invitado,privada,contrasenia) VALUES (1, 1, null, 1, 2, FALSE, null);
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,id_invitado,privada,contrasenia) VALUES (2, 2, null, 1, 2, FALSE, null);
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,id_invitado,privada,contrasenia) VALUES (3, 1, null, 1, 2, FALSE, null);
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,id_invitado,privada,contrasenia) VALUES (4, 1, null, 1, 2, FALSE, null);
+INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia) VALUES (1, 1, null, 1, 2, 2, FALSE, null);
+INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia) VALUES (2, 2, null, 1, 2, 2, FALSE, null);
+INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia) VALUES (3, 1, null, 1, 2, 2, FALSE, null);
+INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia) VALUES (4, 1, null, 1, 2, 2, FALSE, null);
 
 INSERT INTO historicos(user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida, tiempo_minimo, tiempo_maximo) VALUES (1,20,2,4,5,6,7,8,5);
 INSERT INTO historicos(user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida, tiempo_minimo, tiempo_maximo) VALUES (2,20,2,4,5,6,7,8,5);
