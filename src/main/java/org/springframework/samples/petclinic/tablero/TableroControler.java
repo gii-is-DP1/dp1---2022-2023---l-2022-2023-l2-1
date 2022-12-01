@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.tablero;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.partidas.Dificultad;
 import org.springframework.samples.petclinic.partidas.Partida;
 import org.springframework.samples.petclinic.partidas.PartidaService;
@@ -38,7 +39,7 @@ public class TableroControler {
             return this.partidaService.getAllDifs();
         }
 
-        @GetMapping(value = {"/partidas/{partida_id}/{tablero_id}"})
+        /* @GetMapping(value = {"/partidas/{partida_id}/{tablero_id}"})
         public ModelAndView showTablero(@PathVariable("tablero_id") int id, @PathVariable("partida_id") int idp){
             ModelAndView mav = new ModelAndView("tableros/tab");
             Partida part = this.partidaService.getById(idp);
@@ -46,7 +47,7 @@ public class TableroControler {
             mav.addObject(tab);
             mav.addObject(part);
             return mav;
-        }
+        } */
         //Post mapping para cuando termine la partida?
 
         //A partir de partida se crean los tableros
@@ -69,6 +70,21 @@ public class TableroControler {
             boardService.saveBoard(tablero);
          
             return tablero;
+        }
+
+
+        @GetMapping("/partidas/{partida_id}/{tablero_id}")
+        public ModelAndView pintarTablero(@PathVariable("tablero_id") Integer p){
+            Tablero t = boardService.getBoardById(p);
+
+            Integer col = t.getColumnas();
+            Integer fil = t.getFilas();
+
+            ModelAndView res = new ModelAndView("tablero/tablero");
+            res.addObject("col",col);
+            res.addObject("fil",fil);
+
+            return res;
         }
 
 
