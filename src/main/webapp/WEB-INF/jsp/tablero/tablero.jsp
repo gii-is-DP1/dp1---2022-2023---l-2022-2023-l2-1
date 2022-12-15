@@ -1,79 +1,178 @@
-<%@ page session="false" trimDirectiveWhitespaces="true" %>
-  <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-      <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-          <!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->
+<%@ page session="false" trimDirectiveWhitespaces="true" %> <%@ taglib
+prefix="spring" uri="http://www.springframework.org/tags" %> <%@ taglib
+prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%@ taglib
+prefix="petclinic" tagdir="/WEB-INF/tags" %> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->
+<style>
 
-<<<<<<< Updated upstream
-          <petclinic:layout pageName="tablero">
-            <h2>
-              <fmt:message key="welcome" />
-            </h2>
-            <div class="row">
-              <h2>Project ${title}</h2>
-              <p>
-              <h2>Group ${group}</h2>
-              </p>
-              <div style="border: 2px solid black; margin: auto; width: max-content; padding: 10px;">
-                <c:forEach begin="1" step="1" end="${fil}">
-                  <div style="display: flex; margin: 2px;">
+  #cabecera_tablero{
+    padding: 10px;
+    width: 99%;
+    margin: auto;
+    height: 50px;
+    background-color: rgb(255, 208, 122);
+    margin-bottom: 10px;
+  }
 
-                    <c:forEach begin="1" step="1" end="${col}">
+  #img_bandera, #img_mina{
+    width: 30px;
+    height: 30px;
+  }
 
-                      <div id="casilla"  style=" border:1px solid black ; width: 30px; height: 30px;  margin: 2px;"></div>
+  #num_bandera, #num_mina{
+    font-size: 25px;
+    color: rgb(8, 3, 83);
+  }
 
-                    </c:forEach>
+  #img_bandera{
+    float: left;
+  }
 
-                  </div>
-                </c:forEach>
+  #num_bandera{
+    float: left;
+    margin-left: 10px;
+  }
 
-              </div>
-              <div class="col-md-12;" style="margin-top: 50px; margin-left: 30% ;">
-                <spring:url value="/resources/images/minesweeper.png" htmlEscape="true" var="image" />
-                <img class="img-responsive" src="${image}" />
-              </div>
-            </div>
-          </petclinic:layout>
-=======
+  #img_mina{
+    float: right;
+  }
+
+  #num_mina{
+    float: right;
+    margin-right: 10px;
+  }
+
+  #tablero {
+    border: 2px solid black;
+    max-width: fit-content;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    margin: auto;
+    background-color: rgb(255, 208, 122);
+  }
+  #fila {
+    display: flex;
+  }
+  #casilla {
+    border: 1px solid black;
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+    background-color: rgb(130, 130, 228);
+  }
+  h1{
+    text-align: center;
+  }
+
+</style>
+
 <petclinic:layout pageName="tablero">
-  <h2><fmt:message key="welcome" /></h2>
-  
-    <h2>Project ${title}</h2>
-    <p><h2>Group ${group}</h2></p>
-      <ul>
-        <c:forEach items="${persons}" var="person">
-          <li>${person.firstName}, ${person.lastName}</li>
-        </c:forEach>
-      </ul>
+  <c:url value="/resources/images/bandera.png" var="img_bandera"/>
+  <c:url value="/resources/images/minesweeper.png" var="img_mina"/>
 
-      <div id="tablero" style="border: 2px solid black; margin: auto; width: fit-content;">
-      <c:forEach begin="1" step="1" end="${filas}">
-        <div id="fila" style="display: grid;">
-        <c:forEach begin="1" step="1" end="${columnas}">
-          <div
-            id="casilla"
-            style="
-              border: 1px solid black;
-              background-color: brown;
-              width: 30px;
-              height: 30px;
-              margin: 5px;
-            "
-          </div>
+  <h1>Tablero JS</h1>
+  <div id="tablero">
+    <div id="cabecera_tablero">
+    <img id="img_bandera" src="${img_bandera}"/>
+    <span id="num_bandera"></span>
+    <img id="img_mina" src="${img_mina}"/>
+    <span id="num_mina"></span>
+</div>
+</div>
+
+<br>
+<br>
+
+<h1>Tablero inicial</h1>
+    <div
+      class="tablero"
+      style="
+        border: 2px solid black;
+        margin: auto;
+        width: max-content;
+        padding: 10px;
+      "
+    >
+      <c:forEach begin="1" step="1" end="${tablero.filas}">
+        <div class="fila" style="display: flex; margin: 1px">
+          <c:forEach begin="1" step="1" end="${tablero.columnas}">
+            <div
+              class="casilla"
+              style="
+                border: 1px solid black;
+                width: 40px;
+                height: 40px;
+                margin: 2px;
+                background-color: rgb(130, 130, 228);
+              "
+            ></div>
           </c:forEach>
         </div>
       </c:forEach>
     </div>
-   
-    <div class="col-md-12">
-      <spring:url
-        value="/resources/images/minesweeper.png"
-        htmlEscape="true"
-        var="image"
-      />
-      <img class="img-responsive" src="${image}" />
-    </div>
-  </div>
+
+
+  <script type="text/javascript">
+    
+    const tablero = {
+      numMinasTotales : 30,
+      numMinasEncontradas : 0,
+      numBanderas: 15,
+      numFilas:"${tablero.filas}",
+      numColumnas:"${tablero.columnas}",
+      aCampoMinas:[]
+    }
+
+    buscaminas();
+
+    function buscaminas(){
+      pintaCabecera();
+      pintaTablero();
+      creaCampoMinasVacio();
+    }
+    
+    function pintaCabecera(){
+      document.getElementById("num_mina").innerHTML = tablero.numMinasTotales;
+      document.getElementById("num_bandera").innerHTML = tablero.numBanderas;
+    }    
+    function pintaTablero() {
+      var divTablero = document.getElementById("tablero");
+      for (var f = 0; f < tablero.numFilas; f++) {
+        // Filas
+        var divFila = document.createElement("div");
+        divFila.setAttribute("id", "fila");
+        divTablero.appendChild(divFila);
+      for (var c = 0; c < tablero.numColumnas; c++) {
+        // Casillas
+        var divCasilla = document.createElement("div");
+        divCasilla.setAttribute("id", "casilla");
+        divCasilla.setAttribute("fila", f);
+        divCasilla.setAttribute("columna", c);
+        //Eventos de casilla
+        divCasilla.addEventListener("contextmenu", marcar);
+        divCasilla.addEventListener("click", destapar);
+        divFila.appendChild(divCasilla);
+      }
+      }
+    }
+
+    function marcar(evento){
+      tablero.numBanderas = tablero.numBanderas - 1;
+      pintaCabecera();
+    }
+
+    function destapar(){
+      tablero.numMinasTotales = tablero.numMinasTotales - 1;
+      tablero.numMinasEncontradas = tablero.numMinasEncontradas + 1;
+      pintaCabecera();  
+    }
+
+    function creaCampoMinasVacio(){
+      tablero.aCampoMinas = new Array(tablero.numFilas);
+    }
+
+  </script>
+
 </petclinic:layout>
->>>>>>> Stashed changes

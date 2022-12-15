@@ -34,10 +34,17 @@ public class PartidaService {
     public Partida savePartida(Partida partida) throws DataAccessException{
         return partidaRepository.save(partida);
     }
+
+    @Transactional
+    public Dificultad getDiffById(Integer id) throws DataAccessException{
+        return partidaRepository.finDificultadById(id);
+    }
+
     @Transactional
     public List<Dificultad> getAllDifs() throws DataAccessException{
         return partidaRepository.findDificultades();
-    }
+    }        
+
     @Transactional
     public List<TipoDePartida> getAllTipos(){
         return partidaRepository.findTiposDePartida();

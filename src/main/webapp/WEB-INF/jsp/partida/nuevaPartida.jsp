@@ -11,12 +11,12 @@
 <petclinic:layout pageName="nuevaPartida">
     <h2> Crear nueva partida </h2>
 
-    <form:form modelAttribute="partida" action = "submitForm" class="form-horizontal" id="add-partida-form">
+    <form:form modelAttribute="partida" action = "tablero/${partida_id}}" class="form-horizontal" id="add-partida-form">
         <div class="form-group has-feedback">
        
         </select>        
         <body>Modo de juego</body>
-        <form:select path="tipo_de_partida_id">
+        <form:select path="tipo">
                 <form:option value="1">Individual</form:option>
                 <form:option value="2">Competitivo</form:option>
         </form:select>
@@ -27,7 +27,7 @@
         <form:input label="contrasenia" path="contrasenia"/>
         <br />
         <body>Seleccione dificultad:</body>
-        <form:select path="dificultad_id" name="dificultad_id">
+        <form:select path="dificultad" name="dificultad_id">
                 <form:option value="1">Facil</form:option>
                 <form:option value="2">Intermedio</form:option>
                 <form:option value="3">Dificil</form:option>
