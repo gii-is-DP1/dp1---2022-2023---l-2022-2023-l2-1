@@ -38,10 +38,10 @@ public class PartidaService {
     public List<Dificultad> getAllDifs() throws DataAccessException{
         return partidaRepository.findDificultades();
     }
-   /*  @Transactional
+    @Transactional
     public List<TipoDePartida> getAllTipos(){
-        return partidaRepository.findTipos();
-    }*/
+        return partidaRepository.findTiposDePartida();
+    }
     @Transactional
     public List<Partida> getAllPartidasActuales() throws DataAccessException{
         return partidaRepository.findPartidasActuales();

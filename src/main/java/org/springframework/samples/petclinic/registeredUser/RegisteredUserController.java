@@ -33,14 +33,22 @@ public class RegisteredUserController {
 
 	private final UserService userService;
 
-	private final PartidaService partidaService;
-
+	//private final PartidaService partidaService;
+/* 
 	@Autowired
 	public RegisteredUserController(RegisteredUserService registeredUserService, UserService userService,
 			AuthoritiesService authoritiesService, PartidaService partidaService ) {
 		this.registeredUserService = registeredUserService;
 		this.userService = userService;
 		this.partidaService = partidaService;
+	}
+*/
+	@Autowired
+		public RegisteredUserController(RegisteredUserService registeredUserService, UserService userService,
+				AuthoritiesService authoritiesService) {
+			this.registeredUserService = registeredUserService;
+			this.userService = userService;
+			
 	}
 
 	@InitBinder
@@ -81,7 +89,7 @@ public class RegisteredUserController {
 		} else {
 			registeredUser.setId(registeredUserId);
 			this.registeredUserService.saveRegisteredUser(registeredUser);
-			return "redirect:/registeredUser/{registeredUserId}";
+			return "redirect:/registeredUser";
 		}
 	}
 
@@ -109,7 +117,7 @@ public class RegisteredUserController {
 			return "registeredUser/findRegisteredUser";
 		} else if (results.size() == 1) {
 			// 1 owner found
-			registeredUser = results.iterator().next();
+			//registeredUser = results.iterator().next();
 			return "redirect:/registeredUser/" + registeredUser.getId();
 		} else {
 			// multiple owners found
@@ -119,7 +127,7 @@ public class RegisteredUserController {
 
 	}
 
-	// En la pestaña Find RegisteredUSers que funcione el add registeresUser
+	// En la pestaña Find RegisteredUSers que funcione el add registeredUser
 	@GetMapping(value = "/registeredUser/new")
 	public String initCreationForm(Map<String, Object> model) {
 		RegisteredUser registeredUser = new RegisteredUser();
@@ -134,7 +142,7 @@ public class RegisteredUserController {
 		} else {
 			// creating owner, user and authorities
 			this.registeredUserService.saveRegisteredUser(registeredUser);
-			return "redirect:/registeredUser/" + registeredUser.getId();
+			return "redirect:/registeredUser";
 		}
 	}
 
