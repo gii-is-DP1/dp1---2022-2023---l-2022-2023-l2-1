@@ -28,7 +28,13 @@
 					<span>Home</span>
 				</petclinic:menuItem>
 
-
+		
+				<petclinic:menuItem active="${name eq 'registered_users'}" url="/partida/new"
+                    title="Nueva Partida">
+                    <span>Nueva Partida</span>
+                </petclinic:menuItem>
+	
+			
 				<sec:authorize url="/myProfile">
                 <petclinic:menuItem active="${name eq 'registered_users'}" url="/myProfile"
                     title="myProfile">

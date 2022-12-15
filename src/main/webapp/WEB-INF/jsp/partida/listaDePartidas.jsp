@@ -12,6 +12,8 @@
         <tr>
          <th>Id</th>
          <th>Dificultad</th>
+         <th>Tiempo de juego</th>
+         <th>Resultado</th>
         </tr>
         </thead>
         <tbody>
@@ -21,9 +23,13 @@
                     <c:out value="${partida.id}"/>
                 </td>
                 <td>
-                    <c:out value=" ${partida.dificultad}">
-
-                    </c:out>
+                    <c:out value=" ${partida.dificultad}"/>
+                </td>
+                <td>
+                    <c:out value=" ${partida.tiempoDeJuego}"/>
+                </td>
+                <td> En curso
+                    
                 </td>
             </tr>
         </c:forEach>

@@ -140,6 +140,7 @@ public class RegisteredUserController {
 		if (result.hasErrors()) {
 			return VIEWS_REGISTERUSER_CREATE_EDIT;
 		} else {
+		
 			// creating owner, user and authorities
 			this.registeredUserService.saveRegisteredUser(registeredUser);
 			return "redirect:/registeredUser";
