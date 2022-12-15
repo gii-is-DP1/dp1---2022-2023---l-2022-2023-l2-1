@@ -28,16 +28,26 @@ public class PartidaService {
         return partidaRepository.findAllByRegisteredUserId(id);
     }
     @Transactional
-    public Partida getById(Integer id) throws DataAccessException{
+    public  Partida getById(Integer id) throws DataAccessException{
         return partidaRepository.findPartidaById(id);
     }
     @Transactional
     public Partida savePartida(Partida partida) throws DataAccessException{
         return partidaRepository.save(partida);
     }
+
+    @Transactional
+    public Dificultad getDiffById(Integer id) throws DataAccessException{
+        return partidaRepository.finDificultadById(id);
+    }
+
     @Transactional
     public List<Dificultad> getAllDifs() throws DataAccessException{
         return partidaRepository.findDificultades();
+
+    }        
+
+  
     }
     @Transactional(readOnly = true)
     public List<TipoDePartida> getAllTiposDePartidas(){
