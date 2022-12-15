@@ -1,9 +1,10 @@
 package org.springframework.samples.petclinic.partidas;
 
+
 import java.util.List;
 
-import javax.transaction.Transactional;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -43,10 +44,13 @@ public class PartidaService {
     @Transactional
     public List<Dificultad> getAllDifs() throws DataAccessException{
         return partidaRepository.findDificultades();
+
     }        
 
-    @Transactional
-    public List<TipoDePartida> getAllTipos(){
+  
+    }
+    @Transactional(readOnly = true)
+    public List<TipoDePartida> getAllTiposDePartidas(){
         return partidaRepository.findTiposDePartida();
     }
     @Transactional

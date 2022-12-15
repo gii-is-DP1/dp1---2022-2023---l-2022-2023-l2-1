@@ -12,7 +12,7 @@ INSERT INTO users(username,password,enabled) VALUES ('inmmaysal','1nm4',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (4,'inmmaysal','admin');
 
 INSERT INTO users(username,password,enabled) VALUES ('juaruamur','jlrm',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (7,'juaruamur','owner');
+INSERT INTO authorities(id,username,authority) VALUES (7,'juaruamur','registeredUser');
 
 INSERT INTO users(username,password,enabled) VALUES ('aleortpag','1234',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (5,'aleortpag','owner');

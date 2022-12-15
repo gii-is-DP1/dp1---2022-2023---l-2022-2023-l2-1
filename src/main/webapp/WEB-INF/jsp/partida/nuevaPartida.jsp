@@ -11,27 +11,18 @@
 <petclinic:layout pageName="nuevaPartida">
     <h2> Crear nueva partida </h2>
 
-    <form:form modelAttribute="partida" action = "tablero/${partida_id}}" class="form-horizontal" id="add-partida-form">
-        <div class="form-group has-feedback">
-       
-        </select>        
-        <body>Modo de juego</body>
-        <form:select path="tipo">
-                <form:option value="1">Individual</form:option>
-                <form:option value="2">Competitivo</form:option>
-        </form:select>
+
+    <form:form modelAttribute="partida" action = "submitForm" class="form-horizontal" id="add-partida-form">
+        <div class="form-group has-feedback">       
+            
+        <petclinic:selectField name="tipo" label="Modo de juego" names="${tipoDePartidas}" size="2"/>
         <br />
-        <input type="checkbox" name="privada" path="privada"/>  Sala privada
+        <input type="checkbox" name="privada" value="${partida.privada}"/> Sala privada
         <br />
-        <body>Contraseña</body>
-        <form:input label="contrasenia" path="contrasenia"/>
+        <petclinic:inputField label="Contraseña" name="contrasenia"/>
         <br />
-        <body>Seleccione dificultad:</body>
-        <form:select path="dificultad" name="dificultad_id">
-                <form:option value="1">Facil</form:option>
-                <form:option value="2">Intermedio</form:option>
-                <form:option value="3">Dificil</form:option>
-        </form:select>
+        <petclinic:selectField name="dificultad" label="Dificultad" names="${dificultades}" size="3"/>
+
 
         </div>
         <div class="col-sm-offset-2 col-sm-10">

@@ -33,35 +33,39 @@ public class TableroControler {
 
     }
 
-    /*
-     * @GetMapping(value = {"/partidas/{partida_id}/{tablero_id}"})
-     * public ModelAndView showTablero(@PathVariable("tablero_id") int
-     * id, @PathVariable("partida_id") int idp){
-     * ModelAndView mav = new ModelAndView("tableros/tab");
-     * Partida part = this.partidaService.getById(idp);
-     * Tablero tab = this.boardService.getBoardById(id);
-     * mav.addObject(tab);
-     * mav.addObject(part);
-     * return mav;
-     * }
-     */
-    // Post mapping para cuando termine la partida?
 
-    // A partir de partida se crean los tableros
+        @GetMapping(value = {"/partidas/{partida_id}/{tablero_id}"})
+        public ModelAndView showTablero(@PathVariable("tablero_id") int id, @PathVariable("partida_id") int idp){
+            ModelAndView mav = new ModelAndView("tableros/tab");
+            Partida part = this.partidaService.getById(idp);
+            Tablero tab = this.boardService.getBoardById(id);
+            mav.addObject(tab);
+            mav.addObject(part);
+            return mav;
+        }
+        //Post mapping para cuando termine la partida?
 
-    public Tablero createNewBoard(Partida partida) {
-        Tablero tablero = new Tablero();
-        Dificultad dif = partida.getDificultad();
-        // Facil = 1
-        if (dif.getId() == 1) {
-            tablero.setColumnas(10);
-            tablero.setFilas(8);
-        } else if (dif.getId() == 2) {
-            tablero.setColumnas(18);
-            tablero.setFilas(14);
-        } else {
-            tablero.setColumnas(24);
-            tablero.setFilas(20);
+        //A partir de partida se crean los tableros
+        
+        public Tablero createNewBoard(Partida partida) {
+            Tablero tablero = new Tablero();
+            Dificultad dif =  partida.getDificultad();
+            //Facil = 1
+            if(dif.getId()==1){
+                tablero.setColumnas(10);
+                tablero.setFilas(8);
+            }else if(dif.getId()==2){
+                tablero.setColumnas(18);
+                tablero.setFilas(14);
+            }else{
+                tablero.setColumnas(24);
+                tablero.setFilas(20);
+            }
+            
+            boardService.saveBoard(tablero);
+         
+            return tablero;
+
         }
 
         boardService.saveBoard(tablero);
