@@ -14,8 +14,6 @@ public interface PartidaRepository extends CrudRepository<Partida, Integer> {
     Partida findPartidaByRegisteredUserId(Integer Id);
     Partida findPartidaById(Integer Id);
 
-    @Query("SELECT diff FROM Dificultad diff WHERE diff.id=:id")
-    Dificultad finDificultadById(Integer id) throws DataAccessException;
            
     @Query("SELECT diff FROM Dificultad diff ORDER BY diff.id")
     List<Dificultad> findDificultades() throws DataAccessException;

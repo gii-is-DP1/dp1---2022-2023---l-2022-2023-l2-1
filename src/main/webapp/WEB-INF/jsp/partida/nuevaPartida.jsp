@@ -10,8 +10,7 @@
 
 <petclinic:layout pageName="nuevaPartida">
     <h2> Crear nueva partida </h2>
-    
-    
+
     <form:form modelAttribute="partida" class="form-horizontal" id="add-partida-form">
         <div class="form-group has-feedback">       
          

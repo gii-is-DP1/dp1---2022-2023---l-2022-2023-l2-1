@@ -17,26 +17,25 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class TableroControler {
 
-    private final TableroService boardService;
+        private final TableroService boardService;
 
-    private final PartidaService partidaService;
+        private final PartidaService partidaService;
 
-    @Autowired
-    public TableroControler(TableroService boardService, PartidaService partidaService) {
-        this.boardService = boardService;
-        this.partidaService = partidaService;
-    }
 
-    @InitBinder
-    public void initBoardBinder(WebDataBinder dataBinder) {
-        dataBinder.setDisallowedFields("id");
-    }
+        @Autowired
+        public TableroControler(TableroService boardService, PartidaService partidaService){
+            this.boardService = boardService;
+            this.partidaService = partidaService;
+        }
 
-    @ModelAttribute("dificultades")
-    public List<Dificultad> dificultades() {
-        return this.partidaService.getAllDifs();
-    }
-
+        @InitBinder
+        public void initBoardBinder(WebDataBinder dataBinder){
+                dataBinder.setDisallowedFields("id");        
+        }
+        @ModelAttribute("dificultades")
+        public List<Dificultad> getDifs(){
+            return this.partidaService.getAllDifs();
+        }
 
 
         @GetMapping(value = {"/partidas/{partida_id}/{tablero_id}"})
@@ -70,6 +69,6 @@ public class TableroControler {
             boardService.saveBoard(tablero);
          
             return tablero;
-
         } 
+
 }

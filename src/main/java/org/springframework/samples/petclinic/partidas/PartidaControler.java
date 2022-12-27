@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.partidas;
 
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -11,20 +10,15 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.registeredUser.RegisteredUser;
 import org.springframework.samples.petclinic.registeredUser.RegisteredUserService;
-
-
 import org.springframework.samples.petclinic.user.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -50,6 +44,7 @@ public class PartidaControler {
         dataBinder.setDisallowedFields("resultado");
         dataBinder.setAllowedFields("id_invitado");
 
+
     }
     @ModelAttribute("tipoDePartidas")
 	public List<TipoDePartida> tiposDePartida() {
@@ -69,7 +64,6 @@ public class PartidaControler {
         res.addObject("usuarios", usuarios);
         return res;
     }
-
 
     
     @GetMapping(value = "/partida/new")
@@ -125,3 +119,4 @@ public class PartidaControler {
     }
 
 }
+
