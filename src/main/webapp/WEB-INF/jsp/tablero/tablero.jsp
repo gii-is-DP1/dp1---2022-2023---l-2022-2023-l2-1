@@ -71,6 +71,12 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 <petclinic:layout pageName="tablero">
   <c:url value="/resources/images/bandera.png" var="img_bandera"/>
   <c:url value="/resources/images/minesweeper.png" var="img_mina"/>
+  <c:url value="/js/algTablero.js" var="algTablero"/>
+  
+  <!-- Datos del tablero para el js -->
+  <input type="hidden" id="numFilas" value="${tablero.filas}"/>
+  <input type="hidden" id="numColumnas" value="${tablero.columnas}"/>
+  <!--  -->
 
   <h1>Tablero JS</h1>
   <div id="tablero">
@@ -113,66 +119,5 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       </c:forEach>
     </div>
 
-
-  <script type="text/javascript">
-    
-    const tablero = {
-      numMinasTotales : 30,
-      numMinasEncontradas : 0,
-      numBanderas: 15,
-      numFilas:"${tablero.filas}",
-      numColumnas:"${tablero.columnas}",
-      aCampoMinas:[]
-    }
-
-    buscaminas();
-
-    function buscaminas(){
-      pintaCabecera();
-      pintaTablero();
-      creaCampoMinasVacio();
-    }
-    
-    function pintaCabecera(){
-      document.getElementById("num_mina").innerHTML = tablero.numMinasTotales;
-      document.getElementById("num_bandera").innerHTML = tablero.numBanderas;
-    }    
-    function pintaTablero() {
-      var divTablero = document.getElementById("tablero");
-      for (var f = 0; f < tablero.numFilas; f++) {
-        // Filas
-        var divFila = document.createElement("div");
-        divFila.setAttribute("id", "fila");
-        divTablero.appendChild(divFila);
-      for (var c = 0; c < tablero.numColumnas; c++) {
-        // Casillas
-        var divCasilla = document.createElement("div");
-        divCasilla.setAttribute("id", "casilla");
-        divCasilla.setAttribute("fila", f);
-        divCasilla.setAttribute("columna", c);
-        //Eventos de casilla
-        divCasilla.addEventListener("contextmenu", marcar);
-        divCasilla.addEventListener("click", destapar);
-        divFila.appendChild(divCasilla);
-      }
-      }
-    }
-
-    function marcar(evento){
-      tablero.numBanderas = tablero.numBanderas - 1;
-      pintaCabecera();
-    }
-
-    function destapar(){
-      tablero.numMinasTotales = tablero.numMinasTotales - 1;
-      tablero.numMinasEncontradas = tablero.numMinasEncontradas + 1;
-      pintaCabecera();  
-    }
-
-    function creaCampoMinasVacio(){
-      tablero.aCampoMinas = new Array(tablero.numFilas);
-    }
-
-  </script>
-
+<script type="text/javascript" src="${algTablero}"></script>
 </petclinic:layout>

@@ -47,8 +47,6 @@ public class PartidaService {
 
     }        
 
-  
-    }
     @Transactional(readOnly = true)
     public List<TipoDePartida> getAllTiposDePartidas(){
         return partidaRepository.findTiposDePartida();
