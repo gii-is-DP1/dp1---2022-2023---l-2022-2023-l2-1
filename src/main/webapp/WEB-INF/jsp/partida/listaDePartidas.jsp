@@ -12,6 +12,8 @@
         <tr>
          <th>Id</th>
          <th>Dificultad</th>
+         <th>Modo de Juego</th>
+         <th>Jugador Invitado</th>
          <th>Tiempo de juego</th>
          <th>Resultado</th>
         </tr>
@@ -26,10 +28,23 @@
                     <c:out value=" ${partida.dificultad}"/>
                 </td>
                 <td>
+                    <c:out value=" ${partida.tipo}"/>
+                </td>
+                <td>
+                    <c:forEach items="${compis}" var="user">
+                    <c:if test="${user.id==partida.idInvitado}">
+                    <c:out value="${user.user.username}"/>
+                    </c:if>
+                    </c:forEach>
+                                        
+                </td>
+                <td>
                     <c:out value=" ${partida.tiempoDeJuego}"/>
                 </td>
-                <td> En curso
-                    
+                <td> 
+                    <c:if test="${partida.resultado==null}">En Curso</c:if>
+                    <c:if test="${partida.resultado==true}">Victoria</c:if>
+                    <c:if test="${partida.resultado==false}">Derrota</c:if>
                 </td>
             </tr>
         </c:forEach>

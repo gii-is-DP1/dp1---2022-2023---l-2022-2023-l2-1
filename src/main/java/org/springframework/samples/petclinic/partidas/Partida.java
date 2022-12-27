@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.samples.petclinic.model.BaseEntity;
 
@@ -18,7 +17,7 @@ import lombok.Setter;
 @Table(name = "partida")
 public class Partida extends BaseEntity {
 
-    @NotNull
+
     @JoinColumn(name = "registered_user_id")
     private Integer registeredUserId; 
 
@@ -45,4 +44,7 @@ public class Partida extends BaseEntity {
 
     @Column(name = "contrasenia", nullable = true)
     private String contrasenia;
+
+    @Column(name = "resultado", nullable = true)
+    private Boolean resultado;
 }
