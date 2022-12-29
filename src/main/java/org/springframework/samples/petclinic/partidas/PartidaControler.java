@@ -90,21 +90,38 @@ public class PartidaControler {
     }
    
     @GetMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
-    public String crearNuevaPartida(@PathVariable("registeredUserId") int id, Map<String, Object> model) {
+    public ModelAndView crearNuevaPartida() {
        
+        ModelAndView res = new ModelAndView("partida/nuevaPartida"); 
         Partida partida = new Partida();
-        partida.setRegisteredUserId(id);
-        
-		model.put("partida", partida);
+     
+
+		res.addObject("partida", partida);
  
     
-		return "partida/nuevaPartida";
+		return res;
     }
 
 
     @PostMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
-	public String processCreationFormPartida(@Valid Partida partida, BindingResult result) {
+	public String processCreationFormPartida(@ModelAttribute Partida partida, @PathVariable("registeredUserId") int id, BindingResult result) {
 		 if (result.hasErrors()) {
+            
+			return "partida/nuevaPartida";
+		} else {    
+             
+            partida.setRegisteredUserId(id);
+            partida.setId(partidaService.getAll().size()+1);
+            partidaService.savePartida(partida);
+        
+			//"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/new"
+			return "partida/nuevaPartida" ;
+		}
+    }
+    @PostMapping(value = "/partida/new")
+    public String nuevaPartidaSinRegistrar(@Valid Partida partida, BindingResult result) {
+        
+        if (result.hasErrors()) {
 
 			return "partida/nuevaPartida";
 		} else {    
