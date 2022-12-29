@@ -21,6 +21,7 @@ public class TableroControler {
 
         private final PartidaService partidaService;
 
+
         @Autowired
         public TableroControler(TableroService boardService, PartidaService partidaService){
             this.boardService = boardService;
@@ -29,14 +30,13 @@ public class TableroControler {
 
         @InitBinder
         public void initBoardBinder(WebDataBinder dataBinder){
-                dataBinder.setDisallowedFields("id");
-
-        
+                dataBinder.setDisallowedFields("id");        
         }
         @ModelAttribute("dificultades")
         public List<Dificultad> getDifs(){
             return this.partidaService.getAllDifs();
         }
+
 
         @GetMapping(value = {"/partidas/{partida_id}/{tablero_id}"})
         public ModelAndView showTablero(@PathVariable("tablero_id") int id, @PathVariable("partida_id") int idp){
@@ -69,10 +69,6 @@ public class TableroControler {
             boardService.saveBoard(tablero);
          
             return tablero;
-        }
+        } 
 
-
-
-
-    
 }

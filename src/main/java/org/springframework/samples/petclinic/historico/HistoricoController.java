@@ -1,8 +1,11 @@
 package org.springframework.samples.petclinic.historico;
 
 
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.registeredUser.RegisteredUser;
 import org.springframework.samples.petclinic.registeredUser.RegisteredUserService;
 import org.springframework.samples.petclinic.partidas.PartidaService;
 import org.springframework.stereotype.Controller;
@@ -38,7 +41,10 @@ public class HistoricoController {
     @GetMapping(value = "/partidasJugadas")
     public ModelAndView muestraPartidasDeUsuario(@PathVariable("registeredUserId") Integer id) {
         ModelAndView result = new ModelAndView("partida/listaDePartidas");
+        Set<RegisteredUser> compis = partidaService.getAllById(id).stream().map(c->c.getIdInvitado()).filter(c->c!=null).map(c->registeredService.findRegisteredUserById(Integer.valueOf(c))).collect(Collectors.toSet());
+
         result.addObject("partidas", partidaService.getAllById(id));
+        result.addObject("compis", compis);
 
         return result;
     }

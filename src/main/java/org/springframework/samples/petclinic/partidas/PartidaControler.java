@@ -38,9 +38,13 @@ public class PartidaControler {
 
 
     @InitBinder("partida")
-    public void initOwnerBinder(WebDataBinder dataBinder){
+    public void initPartidaBinder(WebDataBinder dataBinder) {
+        dataBinder.setAllowedFields("registered_user_id");
         dataBinder.setDisallowedFields("tiempo_de_juego");
-    
+        dataBinder.setDisallowedFields("resultado");
+        dataBinder.setAllowedFields("id_invitado");
+
+
     }
     @ModelAttribute("tipoDePartidas")
 	public List<TipoDePartida> tiposDePartida() {
@@ -91,6 +95,7 @@ public class PartidaControler {
 
 
     @PostMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
+
 	public String processCreationFormPartida(@ModelAttribute("partida") Partida partida,@PathVariable("registeredUserId") int id, BindingResult result) {
 		if (result.hasErrors()) {
 
@@ -99,10 +104,11 @@ public class PartidaControler {
             partida.setRegisteredUserId(id);
             partida.setId(partidaService.getAll().size());
             partidaService.savePartida(partida);
+        
 			//"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/new"
 			return "redirect:/partidas" ;
 		}
-	}
+    }
 
 
     @GetMapping(value = "/registeredUser/{registeredUserId}/partidas")

@@ -38,7 +38,8 @@ public class PartidaService {
     @Transactional
     public List<Dificultad> getAllDifs() throws DataAccessException{
         return partidaRepository.findDificultades();
-    }
+    }        
+
     @Transactional(readOnly = true)
     public List<TipoDePartida> getAllTiposDePartidas(){
         return partidaRepository.findTiposDePartida();
