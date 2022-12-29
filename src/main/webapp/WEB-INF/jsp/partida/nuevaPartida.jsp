@@ -13,23 +13,20 @@
 
     <form:form modelAttribute="partida" class="form-horizontal" id="add-partida-form">
         <div class="form-group has-feedback">       
-         
-        <petclinic:inputField label="Usuario" name="registeredUserId"/>
-        <br />
-        <petclinic:selectField name="tipo" label="Modo de juego" names="${tipoDePartidas}" size="2"/>
-        <br />
-        <form:checkbox path="privada"/> Sala privada
-        <br />
-        <petclinic:inputField label="Contraseña" name="contrasenia"/>
-        <br />
-        <petclinic:selectField name="dificultad" label="Dificultad" names="${dificultades}" size="3"/>
+ 
+            <petclinic:selectField name="tipo" label="Modo de juego" names="${tipoDePartidas}" size="2"/>
+            <br />
+            <input type="checkbox" name="privada" value="${partida.privada}"/> Sala privada
+            <br />
+            <petclinic:inputField label="Contraseña" name="contrasenia"/>
+            <br />
+            <petclinic:selectField name="dificultad" label="Dificultad" names="${dificultades}" size="3"/>
 
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-default" type="submit">Crear partida</button>
+            </div>
         </div>
-        <div class="col-sm-offset-2 col-sm-10">
-    
-            <button class="btn btn-default" type="submit">Crear partida</button>
-          
-        </div>
+        
     </form:form>
 
 </petclinic:layout>
