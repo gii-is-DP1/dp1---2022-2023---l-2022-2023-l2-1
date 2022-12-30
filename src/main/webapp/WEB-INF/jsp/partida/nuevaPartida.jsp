@@ -5,27 +5,31 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 
 <petclinic:layout pageName="nuevaPartida">
     <h2> Crear nueva partida </h2>
 
-    <form:form modelAttribute="partida" class="form-horizontal" id="add-partida-form">
+    
+    <form:form modelAttribute="partida" class="form-horizontal" method="post" action="/registeredUser/${registeredUserId}/partidas/new" 
+    id="add-partida-form">
         <div class="form-group has-feedback">       
- 
-            <petclinic:selectField name="tipo" label="Modo de juego" names="${tipoDePartidas}" size="2"/>
+            <input type="hidden" name="registeredUserId" value="${registeredUserId}"/>
+            <petclinic:selectField name="tipo" label="Modo de juego" names="${tipoDePartidas}" size="1"/>
             <br />
-            <input type="checkbox" name="privada" value="${partida.privada}"/> Sala privada
+            <input type="checkbox" name="privada"/> Sala privada
             <br />
             <petclinic:inputField label="Contraseña" name="contrasenia"/>
             <br />
-            <petclinic:selectField name="dificultad" label="Dificultad" names="${dificultades}" size="3"/>
+            <petclinic:selectField name="dificultad" label="Dificultad" names="${dificultades}" size="1"/>
+           
 
             <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-default" type="submit">Crear partida</button>
             </div>
+
         </div>
         
     </form:form>
-
 </petclinic:layout>

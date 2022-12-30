@@ -16,7 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -57,6 +57,15 @@ public class PartidaControler {
 	public List<Dificultad> dificultades() {
 		return this.partidaService.getAllDifs();
 	}
+  /* @ModelAttribute("partida")
+	 public Partida findPartida(@PathVariable("partida") Integer partidaId) {
+	 Partida result=null;
+	  if(partidaId!=null)
+	 result=this.partidaService.getById(partidaId);
+	  else
+	  result=new Partida();
+	  return result;
+	  }*/
   
     @GetMapping(value = "/partidas")
     public ModelAndView showAllPartidas() {
@@ -68,8 +77,6 @@ public class PartidaControler {
         return res;
     }
 
-
-    
     @GetMapping(value = "/partida/new")
     public String nuevaPartida(Map<String, Object> model) {
         
@@ -88,34 +95,32 @@ public class PartidaControler {
     }
    
     @GetMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
-    public ModelAndView crearNuevaPartida() {
-       
-        ModelAndView res = new ModelAndView("partida/nuevaPartida"); 
+    public String newPartida(@PathVariable("registeredUserId") int id,Map<String, Object> model){
         Partida partida = new Partida();
-     
-
-		res.addObject("partida", partida);
- 
-    
-		return res;
+        model.put("partida", partida);
+        return "partida/nuevaPartida";
     }
-
 
     @PostMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
-	public String processCreationFormPartida(@ModelAttribute Partida partida, @PathVariable("registeredUserId") int id, BindingResult result) {
-		 if (result.hasErrors()) {
-            
-			return "partida/nuevaPartida";
-		} else {    
-             
-            partida.setRegisteredUserId(id);
-            partida.setId(partidaService.getAll().size()+1);
-            partidaService.savePartida(partida);
-        
-			//"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/new"
-			return "partida/nuevaPartida" ;
-		}
+    public String postPartida(@ModelAttribute Partida partida, Map<String, Object> model){
+        partidaService.savePartida(partida);
+        if(partida.getPrivada() == null){
+            partida.setPrivada(false);
+        }if(partida.getContrasenia() == ""){
+            partida.setContrasenia(null);
+        }
+        partidaService.savePartida(partida);
+        return "redirect:/partidas";
     }
+
+    
+
+    }
+    
+    
+    
+    /* 
+   
     @PostMapping(value = "/partida/new")
     public String nuevaPartidaSinRegistrar(@Valid Partida partida, BindingResult result) {
         
@@ -132,11 +137,5 @@ public class PartidaControler {
     }
 
 
-    @GetMapping(value = "/registeredUser/{registeredUserId}/partidas")
-    public ModelAndView showPartidasByUserId(@PathVariable("registeredUserId") int id) {
-        ModelAndView res = new ModelAndView("partida/listaDePartidas");
-        res.addObject("partidas", partidaService.getAllById(id));
-        return res;
-    }
+*/
 
-}
