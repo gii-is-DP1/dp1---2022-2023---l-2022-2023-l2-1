@@ -90,8 +90,9 @@ public class PartidaControler {
     }
 
     @PostMapping(value = "/registeredUser/{registeredUserId}/partidas/new" )
-    public void postPartida(@PathVariable("registeredUserId") int id, @ModelAttribute Partida partida, Map<String, Object> model){
+    public String postPartida(@PathVariable("registeredUserId") int id, @ModelAttribute Partida partida, Map<String, Object> model){
         partidaService.savePartida(partida);
+        return "redirect:/partidas";
     }
 
     
@@ -113,7 +114,7 @@ public class PartidaControler {
 
 	// 		return "partida/nuevaPartida";
 	// 	} else {    
-    //         partida.setRegisteredUserId(id);
+    //         partida.setRegisteredUserId(id);image.png
     //         partida.setId(partidaService.getAll().size());
     //         partidaService.savePartida(partida);
 	// 		//"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/new"
