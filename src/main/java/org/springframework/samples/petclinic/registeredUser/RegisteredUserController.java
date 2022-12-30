@@ -78,7 +78,7 @@ public class RegisteredUserController {
 		} else {
 			registeredUser.setId(registeredUserId);
 			this.registeredUserService.saveRegisteredUser(registeredUser);
-			return "redirect:/registeredUser";
+			return "redirect:/registeredUser/{registeredUserId}";
 		}
 	}
 
