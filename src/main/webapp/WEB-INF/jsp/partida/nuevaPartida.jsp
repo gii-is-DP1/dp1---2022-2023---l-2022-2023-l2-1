@@ -11,8 +11,9 @@
 <petclinic:layout pageName="nuevaPartida">
     <h2> Crear nueva partida </h2>
 
-    <form:form modelAttribute="partida" class="form-horizontal" id="add-partida-form">
-        <div class="form-group has-feedback">       
+    <form:form modelAttribute="partida" method="post" action="/registeredUser/${registeredUserId}/partidas/new"
+     class="form-horizontal" id="add-partida-form">
+        <div class="form has-feedback">       
  
             <petclinic:selectField name="tipo" label="Modo de juego" names="${tipoDePartidas}" size="2"/>
             <br />
@@ -22,11 +23,11 @@
             <br />
             <petclinic:selectField name="dificultad" label="Dificultad" names="${dificultades}" size="3"/>
 
-            <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-default" type="submit">Crear partida</button>
-            </div>
+            
         </div>
-        
+        <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-default" type="submit">Crear partida</button>
+        </div>
     </form:form>
 
 </petclinic:layout>

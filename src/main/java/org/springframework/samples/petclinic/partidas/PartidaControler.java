@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -38,13 +39,9 @@ public class PartidaControler {
 
 
     @InitBinder("partida")
-    public void initPartidaBinder(WebDataBinder dataBinder) {
-        dataBinder.setAllowedFields("registered_user_id");
+    public void initOwnerBinder(WebDataBinder dataBinder){
         dataBinder.setDisallowedFields("tiempo_de_juego");
-        dataBinder.setDisallowedFields("resultado");
-        dataBinder.setAllowedFields("id_invitado");
-
-
+    
     }
     @ModelAttribute("tipoDePartidas")
 	public List<TipoDePartida> tiposDePartida() {
@@ -82,33 +79,47 @@ public class PartidaControler {
         return "partida/nuevaPartida"; 
         }
     }
-   
+
+
+
     @GetMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
-    public String crearNuevaPartida(@PathVariable("registeredUserId") int id, Map<String, Object> model) {
-       
+    public String newPartida(@PathVariable("registeredUserId") int id,Map<String, Object> model){
         Partida partida = new Partida();
+        model.put("partida", partida);
+        return "partida/nuevaPartida";
+    }
+
+    @PostMapping(value = "/registeredUser/{registeredUserId}/partidas/new" )
+    public void postPartida(@PathVariable("registeredUserId") int id, @ModelAttribute Partida partida, Map<String, Object> model){
+        partidaService.savePartida(partida);
+    }
+
+    
+   
+    // @GetMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
+    // public String crearNuevaPartida(@PathVariable("registeredUserId") int id, Map<String, Object> model) {
+       
+    //     Partida partida = new Partida();
       
-		model.put("partida", partida);
+	// 	model.put("partida", partida);
  
-		return "partida/nuevaPartida";
-    }
+	// 	return "partida/nuevaPartida";
+    // }
 
 
-    @PostMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
+    // @PostMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
+	// public String processCreationFormPartida(@ModelAttribute("partida") Partida partida,@PathVariable("registeredUserId") int id, BindingResult result) {
+	// 	if (result.hasErrors()) {
 
-	public String processCreationFormPartida(@ModelAttribute("partida") Partida partida,@PathVariable("registeredUserId") int id, BindingResult result) {
-		if (result.hasErrors()) {
-
-			return "partida/nuevaPartida";
-		} else {    
-            partida.setRegisteredUserId(id);
-            partida.setId(partidaService.getAll().size());
-            partidaService.savePartida(partida);
-        
-			//"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/new"
-			return "redirect:/partidas" ;
-		}
-    }
+	// 		return "partida/nuevaPartida";
+	// 	} else {    
+    //         partida.setRegisteredUserId(id);
+    //         partida.setId(partidaService.getAll().size());
+    //         partidaService.savePartida(partida);
+	// 		//"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/new"
+	// 		return "redirect:/partidas" ;
+	// 	}
+	// }
 
 
     @GetMapping(value = "/registeredUser/{registeredUserId}/partidas")
