@@ -90,7 +90,13 @@ public class PartidaControler {
     }
 
     @PostMapping(value = "/registeredUser/{registeredUserId}/partidas/new" )
-    public String postPartida(@PathVariable("registeredUserId") int id, @ModelAttribute Partida partida, Map<String, Object> model){
+    public String postPartida(@ModelAttribute Partida partida, Map<String, Object> model){
+        partidaService.savePartida(partida);
+        if(partida.getPrivada() == null){
+            partida.setPrivada(false);
+        }if(partida.getContrasenia() == ""){
+            partida.setContrasenia(null);
+        }
         partidaService.savePartida(partida);
         return "redirect:/partidas";
     }
