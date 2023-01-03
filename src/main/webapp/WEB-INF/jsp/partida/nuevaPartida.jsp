@@ -17,12 +17,11 @@
  
             <petclinic:selectField name="tipo" label="Modo de juego" names="${tipoDePartidas}" size="2"/>
             <br />
-            <input type="checkbox" name="privada"/> Sala privada
+            <input type="checkbox" name="privada" value="${partida.privada}"/> Sala privada
             <br />
             <petclinic:inputField label="Contraseña" name="contrasenia"/>
             <br />
-            <petclinic:selectField name="dificultad" label="Dificultad" names="${dificultades}" size="1"/>
-           
+            <petclinic:selectField name="dificultad" label="Dificultad" names="${dificultades}" size="3"/>
 
             
         </div>
@@ -30,4 +29,5 @@
             <button class="btn btn-default" type="submit">Crear partida</button>
         </div>
     </form:form>
+
 </petclinic:layout>
