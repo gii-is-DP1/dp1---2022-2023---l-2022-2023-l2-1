@@ -17,21 +17,25 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class TableroControler {
 
-    private final TableroService boardService;
+        private final TableroService boardService;
 
-    private final PartidaService partidaService;
+        private final PartidaService partidaService;
 
-    @Autowired
-    public TableroControler(TableroService boardService, PartidaService partidaService) {
-        this.boardService = boardService;
-        this.partidaService = partidaService;
-    }
 
-    @InitBinder
-    public void initBoardBinder(WebDataBinder dataBinder) {
-        dataBinder.setDisallowedFields("id");
+        @Autowired
+        public TableroControler(TableroService boardService, PartidaService partidaService){
+            this.boardService = boardService;
+            this.partidaService = partidaService;
+        }
 
-    }
+        @InitBinder
+        public void initBoardBinder(WebDataBinder dataBinder){
+                dataBinder.setDisallowedFields("id");        
+        }
+        @ModelAttribute("dificultades")
+        public List<Dificultad> getDifs(){
+            return this.partidaService.getAllDifs();
+        }
 
 
        // @GetMapping(value = {"/partidas/{partida_id}/{tablero_id}"})
@@ -73,34 +77,6 @@ public class TableroControler {
         return this.partidaService.getAllDifs();
     }
 
-    // @GetMapping(value = {"/partidas/{partida_id}/{tablero_id}"})
-    // public ModelAndView showTablero(@PathVariable("tablero_id") int id,
-    // @PathVariable("partida_id") int idp){
-    // ModelAndView mav = new ModelAndView("tableros/tab");
-    // Partida part = this.partidaService.getById(idp);
-    // Tablero tab = this.boardService.getBoardById(id);
-    // mav.addObject(tab);
-    // mav.addObject(part);
-    // return mav;
-    // }
-    // Post mapping para cuando termine la partida?
-
-    // A partir de partida se crean los tableros
-
-    // @GetMapping("/partidas/{partida_id}/{tablero_id}")
-    // public ModelAndView pintarTablero(@PathVariable("tablero_id") Integer p) {
-    // Tablero t = boardService.getBoardById(p);
-
-    // Integer col = t.getColumnas();
-    // Integer fil = t.getFilas();
-
-    // ModelAndView res = new ModelAndView("tablero/tablero");
-    // res.addObject("col", col);
-    // res.addObject("fil", fil);
-
-    // return res;
-    // }
-
     @GetMapping(value = { "/partidas/{partida_id}/{tablero_id}" })
     public ModelAndView tableroView(@PathVariable("tablero_id") Integer id) {
         ModelAndView res = new ModelAndView("tablero/tablero");
@@ -118,5 +94,4 @@ public class TableroControler {
         res.addObject("partida", partida);
         return res;
     }
-
 }

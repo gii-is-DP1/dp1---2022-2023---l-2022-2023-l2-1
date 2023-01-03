@@ -8,10 +8,6 @@ import org.springframework.samples.petclinic.model.NamedEntity;
 import lombok.Getter;
 
 
-/*
-INSERT INTO tipos VALUES (1, 'Individual');
-INSERT INTO tipos VALUES (2, 'Competitivo');
-*/
 @Getter
 
 @Entity

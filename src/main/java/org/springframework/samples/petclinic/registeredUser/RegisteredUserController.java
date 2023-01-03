@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.partidas.PartidaService;
 
 import org.springframework.samples.petclinic.user.AuthoritiesService;
 import org.springframework.samples.petclinic.user.UserService;
@@ -33,16 +32,6 @@ public class RegisteredUserController {
 
 	private final UserService userService;
 
-	//private final PartidaService partidaService;
-/* 
-	@Autowired
-	public RegisteredUserController(RegisteredUserService registeredUserService, UserService userService,
-			AuthoritiesService authoritiesService, PartidaService partidaService ) {
-		this.registeredUserService = registeredUserService;
-		this.userService = userService;
-		this.partidaService = partidaService;
-	}
-*/
 	@Autowired
 		public RegisteredUserController(RegisteredUserService registeredUserService, UserService userService,
 				AuthoritiesService authoritiesService) {
@@ -89,7 +78,7 @@ public class RegisteredUserController {
 		} else {
 			registeredUser.setId(registeredUserId);
 			this.registeredUserService.saveRegisteredUser(registeredUser);
-			return "redirect:/registeredUser";
+			return "redirect:/registeredUser/{registeredUserId}";
 		}
 	}
 

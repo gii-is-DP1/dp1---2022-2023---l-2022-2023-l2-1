@@ -38,18 +38,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/", "/oups").permitAll()
 				.antMatchers(HttpMethod.GET, "/tablero/**").permitAll()
 				.antMatchers("/users/new").permitAll()
-				.antMatchers("/partida/**").permitAll()
 				.antMatchers("/partidas/**").hasAnyAuthority("registeredUser", "admin")
 				.antMatchers("/session/**").permitAll()
 				.antMatchers("/admin/**").hasAnyAuthority("admin")
 				.antMatchers("/owners/**").hasAnyAuthority("owner", "admin")
 				.antMatchers("/{user_id}/partidas").hasAnyAuthority("registeredUser", "admin")
 				.antMatchers("/vets/**").authenticated()
+				.antMatchers("/registeredUser").hasAnyAuthority("admin")
 				.antMatchers("/registeredUser/**").hasAnyAuthority("registeredUser", "admin")
 				.antMatchers("/find").hasAnyAuthority("admin")
 				.antMatchers("/myProfile").hasAnyAuthority("registeredUser")
 				.antMatchers("/nuevaPartida").hasAnyAuthority("registeredUser")
-				.antMatchers("/partida/**").permitAll()
 
 
 				.anyRequest().denyAll()
@@ -64,7 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// de la BD H2 (deshabilitar las cabeceras de protección contra
 		// ataques de tipo csrf y habilitar los framesets si su contenido
 		// se sirve desde esta misma página.
-		http.csrf().ignoringAntMatchers("/h2-console/**");
+		http.csrf().ignoringAntMatchers("/h2-console/**").ignoringAntMatchers("/partida/**");
 		http.headers().frameOptions().sameOrigin();
 	}
 

@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.samples.petclinic.model.BaseEntity;
 
@@ -18,7 +17,7 @@ import lombok.Setter;
 @Table(name = "partida")
 public class Partida extends BaseEntity {
 
-    @NotNull
+
     @JoinColumn(name = "registered_user_id")
     private Integer registeredUserId; 
 
@@ -38,11 +37,15 @@ public class Partida extends BaseEntity {
     private TipoDePartida tipo;
 
     @JoinColumn(name = "id_invitado", nullable = true)
-    private String idInvitado;
+    private Integer idInvitado;
 
     @Column(name = "privada")
     private Boolean privada;
 
     @Column(name = "contrasenia", nullable = true)
     private String contrasenia;
+    
+    //True si gana el jugador que creo la sala y false si pierde/gana el jugador invitado
+    @Column(name = "resultado", nullable = true)
+    private Boolean resultado;
 }
