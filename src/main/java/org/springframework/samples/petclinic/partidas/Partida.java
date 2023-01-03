@@ -37,14 +37,15 @@ public class Partida extends BaseEntity {
     private TipoDePartida tipo;
 
     @JoinColumn(name = "id_invitado", nullable = true)
-    private String idInvitado;
+    private Integer idInvitado;
 
     @Column(name = "privada")
     private Boolean privada;
 
     @Column(name = "contrasenia", nullable = true)
     private String contrasenia;
-
+    
+    //True si gana el jugador que creo la sala y false si pierde/gana el jugador invitado
     @Column(name = "resultado", nullable = true)
     private Boolean resultado;
 }

@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@page pageEncoding="UTF-8"%>
 
 <petclinic:layout pageName="partidas">
     <h2>Lista de Partidas</h2>
@@ -39,7 +40,7 @@
                                         
                 </td>
                 <td>
-                    <c:out value=" ${partida.tiempoDeJuego}"/>
+                    <c:out value="${partida.tiempoDeJuego}"/>
                 </td>
                 <td> 
                     <c:if test="${partida.resultado==null}">En Curso</c:if>
