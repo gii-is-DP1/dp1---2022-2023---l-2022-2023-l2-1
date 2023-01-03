@@ -15,13 +15,13 @@
      class="form-horizontal" id="add-partida-form">
         <div class="form has-feedback">       
  
-            <petclinic:selectField name="tipo" label="Modo de juego" names="${tipoDePartidas}" size="2"/>
+            <petclinic:selectField name="tipo" label="Modo de juego" names="${tipoDePartidas}" size="1"/>
             <br />
             <input type="checkbox" name="privada" value="${partida.privada}"/> Sala privada
             <br />
             <petclinic:inputField label="Contraseña" name="contrasenia"/>
             <br />
-            <petclinic:selectField name="dificultad" label="Dificultad" names="${dificultades}" size="3"/>
+            <petclinic:selectField name="dificultad" label="Dificultad" names="${dificultades}" size="1"/>
 
             
         </div>
