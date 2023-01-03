@@ -14,6 +14,7 @@ import org.springframework.samples.petclinic.user.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -51,7 +51,7 @@ public class PartidaControler {
 	public List<Dificultad> dificultades() {
 		return this.partidaService.getAllDifs();
 	}
-  
+
     @GetMapping(value = "/partidas")
     public ModelAndView showAllPartidas() {
         ModelAndView res = new ModelAndView("partida/partidas");
@@ -61,8 +61,65 @@ public class PartidaControler {
         res.addObject("usuarios", usuarios);
         return res;
     }
-
     
+    @PostMapping(value = "/partidas")
+    public String entrarPartidaPrivada(@ModelAttribute Partida partida, Map<String, Object> model) {
+        Partida part = partidaService.getById(partida.getId());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        RegisteredUser ru = this.registerableService
+                .findRegisteredUserByUsername(this.userService.findUser(username).orElse(null));
+         if(ru==null || part.getIdInvitado()!=null || part.getContrasenia() != partida.getContrasenia()){
+             return "redirect:/exception";
+         }else{
+       part.setIdInvitado(ru.getId());
+       partidaService.savePartida(part);
+ 
+       //"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/join"
+       return "redirect:/partidas";
+       
+    }
+}
+
+    @GetMapping(value= "/partida/{partidaId}/join")
+    public String joinPartida(@PathVariable("partidaId") int id){
+       Partida part = partidaService.getById(id);
+       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+       String username = authentication.getName();
+       RegisteredUser ru = this.registerableService
+               .findRegisteredUserByUsername(this.userService.findUser(username).orElse(null));
+        if(ru==null || part.getIdInvitado()!=null){
+            return "redirect:/exception";
+        }else{
+      part.setIdInvitado(ru.getId());
+      partidaService.savePartida(part);
+
+      //"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/join"
+      return "redirect:/partidas";
+        }
+    }
+    /*
+    @PostMapping(value = "/partida/{partidaId}/joinPrivate")
+    public String joinPartidaPrivada(@PathVariable("partidaId") int id,Partida partida, BindingResult result, RedirectAttributes redirectAttributes, Map<String, Object> model){
+        Partida part = partidaService.getById(id);
+        String contraInput = partida.getContrasenia();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        RegisteredUser ru = this.registerableService
+                .findRegisteredUserByUsername(this.userService.findUser(username).orElse(null));
+         if(ru==null || part.getIdInvitado()!=null || part.getContrasenia()!=contraInput){
+             return "redirect:/exception";
+         }else{
+       part.setIdInvitado(ru.getId());
+       partidaService.savePartida(part);
+ 
+       //"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/join"
+       return "redirect:/partidas";
+         }
+
+    }
+ */
+
     @GetMapping(value = "/partida/new")
     public String nuevaPartida(Map<String, Object> model) {
         
@@ -80,8 +137,6 @@ public class PartidaControler {
         }
     }
 
-
-
     @GetMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
     public String newPartida(@PathVariable("registeredUserId") int id,Map<String, Object> model){
         Partida partida = new Partida();
@@ -94,20 +149,15 @@ public class PartidaControler {
         partidaService.savePartida(partida);
         if(partida.getPrivada() == null){
             partida.setPrivada(false);
+            partida.setContrasenia(null);
         }if(partida.getContrasenia() == ""){
             partida.setContrasenia(null);
         }
         partidaService.savePartida(partida);
+        //"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/new"
         return "redirect:/partidas";
     }
 
-
-    @GetMapping(value = "/registeredUser/{registeredUserId}/partidas")
-    public ModelAndView showPartidasByUserId(@PathVariable("registeredUserId") int id) {
-        ModelAndView res = new ModelAndView("partida/listaDePartidas");
-        res.addObject("partidas", partidaService.getAllById(id));
-        return res;
-    }
 
 }
 
