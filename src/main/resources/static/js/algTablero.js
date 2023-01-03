@@ -1,9 +1,9 @@
 const tablero = {
-  numMinasTotales: 1,
+  numMinasTotales: document.getElementById("numMinas").value,
+  numFilas: document.getElementById("numFilas").value,
+  numColumnas: document.getElementById("numColumnas").value,
   numMinasEncontradas: 0,
   numBanderas: 0,
-  numFilas: 4, //document.getElementById("numFilas").value,
-  numColumnas: 4, //document.getElementById("numColumnas").value,
   campoMinas: [],
 };
 
@@ -217,7 +217,7 @@ function finDePartida(msg) {
   } else {
     if (todasDestapadas()) {
       let estado = resolverTablero();
-      if ((estado == "banderas_erroneas")) {
+      if (estado == "banderas_erroneas") {
         alert(s + "Hay banderas incorrectas");
       } else if (estado == "minas_sin_destapar") {
         alert(s + "Hay minas sin destapar");
@@ -241,7 +241,7 @@ function resolverTablero() {
     let columna = parseInt(casillas[i].dataset.columna, 10);
 
     if (casillas[i].classList.contains("icon-bandera")) {
-      casillas[i].classList.remove("icon-bandera"); 
+      casillas[i].classList.remove("icon-bandera");
       casillas[i].classList.add("destapada");
       if (tablero.campoMinas[fila][columna] == "mina") {
         casillas[i].classList.add("bandera-correcta");

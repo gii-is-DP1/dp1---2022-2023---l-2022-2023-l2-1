@@ -137,6 +137,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <!-- Datos del tablero para el js -->
   <input type="hidden" id="numFilas" value="${tablero.filas}" />
   <input type="hidden" id="numColumnas" value="${tablero.columnas}" />
+  <input type="hidden" id="numMinas" value="${tablero.minas}" />
   <!--  -->
 
   <div id="tablero">

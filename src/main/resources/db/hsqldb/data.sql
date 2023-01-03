@@ -128,7 +128,7 @@ INSERT INTO historicos(user_id,partidas_totales,partidas_ganadas,minas_encontrad
 INSERT INTO historicos(user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida, tiempo_minimo, tiempo_maximo) VALUES (3,20,2,4,5,6,7,8,5);
 INSERT INTO historicos(user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida, tiempo_minimo, tiempo_maximo) VALUES (4,20,2,4,5,6,7,8,5);
 
-INSERT INTO tablero(id,columnas,filas,partida_id) VALUES (1, 10, 8, 1);
+INSERT INTO tablero(id,columnas,filas,num_minas,partida_id) VALUES (1, 10, 8, 10, 1);
 
 INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (1,1,'Tiempo minimo','Texto de ejemplo', 1);
 INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (2,1,'Tiempo minimo','Texto de ejemplo', 1);
