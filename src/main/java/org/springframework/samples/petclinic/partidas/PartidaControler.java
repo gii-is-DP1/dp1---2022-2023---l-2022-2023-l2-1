@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -42,12 +43,9 @@ public class PartidaControler {
 
 
     @InitBinder("partida")
-    public void initPartidaBinder(WebDataBinder dataBinder) {
-        dataBinder.setAllowedFields("registered_user_id");
+    public void initOwnerBinder(WebDataBinder dataBinder){
         dataBinder.setDisallowedFields("tiempo_de_juego");
-        dataBinder.setDisallowedFields("resultado");
-        dataBinder.setAllowedFields("id_invitado");
-
+    
     }
     @ModelAttribute("tipoDePartidas")
 	public List<TipoDePartida> tiposDePartida() {
@@ -93,7 +91,9 @@ public class PartidaControler {
         return "partida/nuevaPartida"; 
         }
     }
-   
+
+
+
     @GetMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
     public String newPartida(@PathVariable("registeredUserId") int id,Map<String, Object> model){
         Partida partida = new Partida();
@@ -101,7 +101,7 @@ public class PartidaControler {
         return "partida/nuevaPartida";
     }
 
-    @PostMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
+    @PostMapping(value = "/registeredUser/{registeredUserId}/partidas/new" )
     public String postPartida(@ModelAttribute Partida partida, Map<String, Object> model){
         partidaService.savePartida(partida);
         if(partida.getPrivada() == null){
@@ -111,29 +111,6 @@ public class PartidaControler {
         }
         partidaService.savePartida(partida);
         return "redirect:/partidas";
-    }
-
-    
-
-    }
-    
-    
-    
-    /* 
-   
-    @PostMapping(value = "/partida/new")
-    public String nuevaPartidaSinRegistrar(@Valid Partida partida, BindingResult result) {
-        
-        if (result.hasErrors()) {
-
-			return "partida/nuevaPartida";
-		} else {    
-             
-            partidaService.savePartida(partida);
-        
-			//"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/new"
-			return "redirect:/partidas" ;
-		}
     }
 
 
