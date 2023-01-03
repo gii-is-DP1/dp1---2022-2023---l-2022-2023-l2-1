@@ -38,7 +38,7 @@ public class TableroControler {
         }
 
 
-        @GetMapping(value = {"/partidas/{partida_id}/{tablero_id}"})
+       // @GetMapping(value = {"/partidas/{partida_id}/{tablero_id}"})
         public ModelAndView showTablero(@PathVariable("tablero_id") int id, @PathVariable("partida_id") int idp){
             ModelAndView mav = new ModelAndView("tableros/tab");
             Partida part = this.partidaService.getById(idp);
@@ -69,6 +69,29 @@ public class TableroControler {
             boardService.saveBoard(tablero);
          
             return tablero;
-        } 
 
+        }
+
+    @ModelAttribute("dificultades")
+    public List<Dificultad> getDifs() {
+        return this.partidaService.getAllDifs();
+    }
+
+    @GetMapping(value = { "/partidas/{partida_id}/{tablero_id}" })
+    public ModelAndView tableroView(@PathVariable("tablero_id") Integer id) {
+        ModelAndView res = new ModelAndView("tablero/tablero");
+        Tablero tablero = boardService.getBoardById(id);
+        res.addObject("tablero", tablero);
+        return res;
+    }
+
+    @GetMapping(value = { "/tablero/{partida_id}" })
+    public ModelAndView tableroView2(@PathVariable("partida_id") Integer id) {
+        ModelAndView res = new ModelAndView("tablero/tablero");
+        Partida partida = partidaService.getById(id);
+        Tablero tablero = new Tablero();
+        res.addObject("tablero", tablero);
+        res.addObject("partida", partida);
+        return res;
+    }
 }
