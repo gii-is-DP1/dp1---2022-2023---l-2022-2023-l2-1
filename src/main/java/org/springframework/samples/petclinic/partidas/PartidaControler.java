@@ -153,8 +153,13 @@ public class PartidaControler {
             partida.setContrasenia(null);
         }
         partidaService.savePartida(partida);
-        //"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/new"
-        return "redirect:/partidas";
+
+        if(partida.getTipo().getId() == 1){
+            String res =  "redirect:/partidas/"+partida.getId()+"/"+partida.getDificultad().getId();
+            return res;
+        }else{
+            return null;
+        }
     }
 
 

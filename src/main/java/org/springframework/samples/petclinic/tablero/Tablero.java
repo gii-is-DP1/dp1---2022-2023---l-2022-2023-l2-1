@@ -21,7 +21,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "tablero")
-public class Tablero extends BaseEntity{
+public class Tablero extends BaseEntity {
 
     @Column(name = "columnas")
     @NotEmpty
@@ -31,8 +31,9 @@ public class Tablero extends BaseEntity{
     @NotEmpty
     private Integer filas;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="tablero")
-    private List<Casilla> casillas;
+    @Column(name = "num_minas")
+    @NotEmpty
+    private Integer minas;
 
     @ManyToOne
     @JoinColumn(name = "partida_id")
