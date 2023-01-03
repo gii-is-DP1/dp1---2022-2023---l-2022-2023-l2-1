@@ -68,16 +68,21 @@
                                         <c:choose>
                                             <c:when test="${partida.privada==true}">
                                                 <form:form modelAttribute="partida" action="/partidas" method="post" id="private-room-form">
-                                                    <form:input type="hidden" name="id" />
-                                                     <form:input class="form-control" name="contrasenia"/>
+                                                    <form:input type="hidden" path="id" size="10" value = ${partida.id}/>
+                                                    <div class="form has-feedback">
+                                                     <form:input class="form-control" path="contrasenia"/>
+                                                     
+                                                    </div>
                                                      <span><form:errors path="*"/></span>
                                                      <br/>
-                                             <button type="submit" class="btn btn-default">Enter Game</button>
+                                                    <button type="submit" class="btn btn-default">Enter Game</button>
                                              
-                                     </form:form>
+                                            </form:form>
                                             </c:when>
                                             <c:otherwise>
-                                                <a href="/partida/${partida.id}/join">Entrar</a>
+                                                <c:if test="${partida.idInvitado==null}">
+                                                    <a href="/partida/${partida.id}/join">Entrar</a>
+                                                 </c:if>
                                             </c:otherwise>
                                         </c:choose>                                                                   
                                 </td>

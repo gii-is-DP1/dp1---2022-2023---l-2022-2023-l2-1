@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.registeredUser.RegisteredUser;
 import org.springframework.samples.petclinic.registeredUser.RegisteredUserService;
@@ -16,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -66,7 +69,7 @@ public class PartidaControler {
     }
     
     @PostMapping(value = "/partidas")
-    public String entrarPartidaPrivada(@ModelAttribute Partida partida, Map<String, Object> model) {
+    public String entrarPartidaPrivada(@Valid Partida partida, BindingResult result, Map<String, Object> model) {
         Partida part = partidaService.getById(partida.getId());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -74,7 +77,7 @@ public class PartidaControler {
                 .findRegisteredUserByUsername(this.userService.findUser(username).orElse(null));
          if(ru==null || part.getIdInvitado()!=null || part.getContrasenia() != partida.getContrasenia()){
              return "redirect:/exception";
-         }else{
+        }else{
        part.setIdInvitado(ru.getId());
        partidaService.savePartida(part);
  
