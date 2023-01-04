@@ -50,9 +50,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/find").hasAnyAuthority("admin")
 				.antMatchers("/myProfile").hasAnyAuthority("registeredUser")
 				.antMatchers("/nuevaPartida").hasAnyAuthority("registeredUser")
+				.antMatchers("/exception").permitAll()
+				
 
 
-				.anyRequest().denyAll()
+				.anyRequest().permitAll()
 				.and()
 				.formLogin()
 				/* .loginPage("/login") */

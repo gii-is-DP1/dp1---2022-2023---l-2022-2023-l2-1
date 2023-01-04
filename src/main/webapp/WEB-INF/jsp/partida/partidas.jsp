@@ -7,7 +7,19 @@
 <%@page pageEncoding="UTF-8"%>
 
               <petclinic:layout pageName="Partidas">
-                
+                <script type="text/javascript">
+                    function checkPass(contra1, contra2, idPartida) {
+                        if (document.getElementById(contra1).value==document.getElementById(contra2).value){
+                          window.location.href= "/partida/"+document.getElementById(idPartida).value+"/join";
+                        }else{
+                            alert("Contraseña incorrecta");
+                        }
+                      }                    
+                    </script>
+                    <c:forEach items="${tipoDePartidas}" var="tipos">
+                        <c:set var="Competitivo" value="${tipos.name}"/>
+                    </c:forEach>
+            
                         <h2>Listado de Partidas Actuales</h2>
                           <table id="estadisticasTable" class="table table-striped">
                             <thead>
@@ -38,59 +50,66 @@
                     
                                     </td>
                                     <td>
-                                        <c:forEach items="${usuarios}" var="user">
-                                        <c:if test="${user.id==partida.registeredUserId}">
-                                        <c:out value="${user.user.username}"/>
-                                        </c:if>
-                                        </c:forEach>
-                                        
+                                    <c:choose>
+                                        <c:when test ="${partida.registeredUserId==null}">
+                                            Usuario Invitado
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:forEach items="${usuarios}" var="user">
+                                                 <c:if test="${user.id==partida.registeredUserId}">
+                                                 <c:out value="${user.user.username}"/>
+                                                 </c:if>
+                                            </c:forEach>
+                                        </c:otherwise>
+                                    </c:choose>
                                     </td>
                                     <td>
-                                        <c:choose>
-                                            <c:when test="${partida.idInvitado==null}">
-                                                Ninguno
-                                            </c:when>
-                                            <c:otherwise>
-                                        <c:forEach items="${usuarios}" var="user">
-                                        <c:if test="${user.id==partida.idInvitado}">
-                                        <c:out value="${user.user.username}"/>
-                                        </c:if>
-                                        </c:forEach>
+                                    <c:choose>
+                                        <c:when test="${partida.idInvitado==null}">
+                                            Ninguno
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:forEach items="${usuarios}" var="user">
+                                                <c:if test="${user.id==partida.idInvitado}">
+                                                <c:out value="${user.user.username}"/>
+                                                </c:if>
+                                            </c:forEach>
                                        </c:otherwise>
                                     </c:choose>
                                     </td>
                                     <td>
-                                        <c:if test="${partida.privada==false}">Publica</c:if>
-                                        <c:if test="${partida.privada==true}">Privada</c:if>
-                    
-                                    </td>
-                                    <td>
                                         <c:choose>
-                                            <c:when test="${partida.privada==true}">
-                                                <form:form modelAttribute="partida" action="/partidas" method="post" id="private-room-form">
-                                                    <form:input type="hidden" path="id" size="10" value = ${partida.id}/>
-                                                    <div class="form has-feedback">
-                                                     <form:input class="form-control" path="contrasenia"/>
-                                                     
-                                                    </div>
-                                                     <span><form:errors path="*"/></span>
-                                                     <br/>
-                                                    <button type="submit" class="btn btn-default">Enter Game</button>
-                                             
-                                            </form:form>
+                                            <c:when test="${partida.tipo!=Competitivo}"> 
+                                                En Solitario
                                             </c:when>
                                             <c:otherwise>
-                                                <c:if test="${partida.idInvitado==null}">
-                                                    <a href="/partida/${partida.id}/join">Entrar</a>
-                                                 </c:if>
+                                                <c:if test="${partida.privada==false}">Publica</c:if>
+                                                <c:if test="${partida.privada==true}">Privada</c:if>
                                             </c:otherwise>
-                                        </c:choose>                                                                   
+                                        </c:choose>
+                                    </td>
+                                    <td>
+                                    <c:choose>
+                                        <c:when test="${partida.privada==true}">
+                                            <c:if test="${partida.idInvitado==null}">
+                                                    <input type="text" id="contra"/>
+                                                    <input type = "hidden" id="inputcontra" value = "${partida.contrasenia}"/>
+                                                    <input type = "hidden" id = "idpart" value = "${partida.id}"/>
+                                                    <button onclick="checkPass('contra', 'inputcontra','idpart');">Entrar</button>
+                                            </c:if>                                         
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:if test="${partida.tipo==Competitivo}">
+                                            <c:if test="${partida.idInvitado==null}">
+                                                <a href="/partida/${partida.id}/join">Entrar</a>
+                                            </c:if>
+                                            </c:if>
+                                        </c:otherwise>
+                                    </c:choose>                                                                   
                                 </td>
                                 </tr>
                             </c:forEach>
                             </tbody>
                           </table>
-                        <div class="row">
-
-                        </div>
+                        
                     </petclinic:layout>

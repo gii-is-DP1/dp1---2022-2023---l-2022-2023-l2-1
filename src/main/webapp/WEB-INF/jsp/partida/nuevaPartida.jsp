@@ -10,16 +10,27 @@
 
 <petclinic:layout pageName="nuevaPartida">
     <h2> Crear nueva partida </h2>
+    <script type="text/javascript">
+        function showHide(checkbox, id) {
+          if (document.getElementById(id)) { //validates the id first
+            if (checkbox.checked)
+              document.getElementById(id).style.display = "";
+            else
+              document.getElementById(id).style.display = "none";
+          }
+        }
+        </script>
+
 
     <form:form modelAttribute="partida" method="post" action="/registeredUser/${registeredUserId}/partidas/new"
      class="form-horizontal" id="add-partida-form">
         <div class="form has-feedback">       
  
-            <petclinic:selectField name="tipo" label="Modo de juego" names="${tipoDePartidas}" size="1"/>
+            <form:hidden path = "tipo" value = "Competitivo" />
             <br />
-            <input type="checkbox" name="privada" value="${partida.privada}"/> Sala privada
+            <form:checkbox id="check" path="privada" onclick="showHide(this, 'display_me');"/>Sala privada
             <br />
-            <petclinic:inputField label="Contraseña" name="contrasenia"/>
+            <div id="display_me" style="display:none"><petclinic:inputField label="Contraseña" name="contrasenia"/></div><br/> 
             <br />
             <petclinic:selectField name="dificultad" label="Dificultad" names="${dificultades}" size="1"/>
 

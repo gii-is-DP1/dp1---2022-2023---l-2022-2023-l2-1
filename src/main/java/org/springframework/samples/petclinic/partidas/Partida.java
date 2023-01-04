@@ -45,7 +45,7 @@ public class Partida extends BaseEntity {
     @Column(name = "contrasenia", nullable = true)
     private String contrasenia;
     
-    //True si gana el jugador que creo la sala y false si pierde/gana el jugador invitado
+    //True si gana el jugador que creo la sala y false si pierde el jugador que creo o gana el jugador invitado
     @Column(name = "resultado", nullable = true)
     private Boolean resultado;
 }
