@@ -22,7 +22,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   }
 
   #num_bandera,
-  #num_mina {
+  #num_mina,
+  #temporizador {
     font-size: 25px;
     color: rgb(8, 3, 83);
   }
@@ -43,6 +44,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   #num_mina {
     float: right;
     margin-right: 10px;
+  }
+  #temporizador{
+    margin-left: 30%;
   }
 
   #tablero {
@@ -124,6 +128,17 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   #tablero div div.c8 {
     color: darkgoldenrod;
   }
+
+  .alerta-final{
+    background-color: white;
+    border: 2px solid black;
+    position: fixed;
+    top: 40%;
+    left: 39%;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+  }
 </style>
 
 <head>
@@ -135,7 +150,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
 
 <petclinic:layout pageName="tablero">
-
   <!-- Datos del tablero para el js -->
   <input type="hidden" id="numFilas" value="${tablero.filas}" />
   <input type="hidden" id="numColumnas" value="${tablero.columnas}" />
@@ -146,10 +160,22 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <div id="cabecera_tablero">
       <img id="img_bandera" src="${img_bandera}" />
       <span id="num_bandera"></span>
+      <span id="temporizador"></span>
       <img id="img_mina" src="${img_mina}" />
       <span id="num_mina"></span>
     </div>
   </div>
 
+  <div id="alert_parent">
+    <div id="alert_children">
+      <form:form modelAttribute="partida" method="post" action="" class="form-post-tablero" id="post-tablero-form">
+        <Span id="alert_mensaje"></Span>
+        <br>
+        <input type="hidden" id="minas_encontradas" value=""/>
+        <input type="hidden" id="tiempo_empleado" value=""/>
+        <input type="hidden" id="alert_boton" value="Continuar" />
+      </form:form>
+    </div>
+  </div>
   <script type="text/javascript" src="${algTablero}"></script>
 </petclinic:layout>
