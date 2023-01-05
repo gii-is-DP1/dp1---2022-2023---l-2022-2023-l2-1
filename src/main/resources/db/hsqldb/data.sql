@@ -122,6 +122,7 @@ INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_
 INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (2, 2, null, 1, 2, 1, FALSE, null,null);
 INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (3, 1, null, 1, 2, 2, FALSE, null,null);
 INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (4, 1, 500, 1, 2, 2, TRUE, '12345',TRUE);
+INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (5, 2, null, 3, 1, null, null, null,null);
 
 INSERT INTO historicos(id,user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida, tiempo_minimo, tiempo_maximo) VALUES (1,1,20,2,4,5,6,7,8,5);
 INSERT INTO historicos(id,user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida, tiempo_minimo, tiempo_maximo) VALUES (2,2,20,2,4,5,6,7,8,5);

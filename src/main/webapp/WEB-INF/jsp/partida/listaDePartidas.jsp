@@ -32,11 +32,17 @@
                     <c:out value=" ${partida.tipo}"/>
                 </td>
                 <td>
-                    <c:forEach items="${compis}" var="user">
-                    <c:if test="${user.id==partida.idInvitado}">
-                    <c:out value="${user.user.username}"/>
-                    </c:if>
-                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${partida.idInvitado==null}">
+                            Ninguno
+                        </c:when>
+                    <c:otherwise>
+                        <c:forEach items="${usuarios}" var="user">
+                          <c:if test="${user.id==partida.idInvitado}">
+                           <c:out value="${user.user.username}"/>
+                          </c:if>
+                        </c:forEach>
+                    </c:otherwise>
                                         
                 </td>
                 <td>

@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class TableroControler {
 
-    private final TableroService boardService;
+        private final TableroService tableroService;
 
     private final PartidaService partidaService;
 
@@ -30,65 +30,44 @@ public class TableroControler {
         this.partidaService = partidaService;
     }
 
-    @InitBinder
-    public void initBoardBinder(WebDataBinder dataBinder) {
-        dataBinder.setDisallowedFields("id");
-    }
-
-    // @GetMapping(value = {"/partidas/{partida_id}/{tablero_id}"})
-    public ModelAndView showTablero(@PathVariable("tablero_id") int id, @PathVariable("partida_id") int idp) {
-        ModelAndView mav = new ModelAndView("tableros/tab");
-        Partida part = this.partidaService.getById(idp);
-        Tablero tab = this.boardService.getBoardById(id);
-        mav.addObject(tab);
-        mav.addObject(part);
-        return mav;
-    }
-    // Post mapping para cuando termine la partida?
-
-    // A partir de partida se crean los tableros
-
-    public Tablero createNewBoard(Partida partida) {
-        Tablero tablero = new Tablero();
-        Dificultad dif = partida.getDificultad();
-        // Facil = 1
-        if (dif.getId() == 1) {
-            tablero.setColumnas(10);
-            tablero.setFilas(8);
-        } else if (dif.getId() == 2) {
-            tablero.setColumnas(18);
-            tablero.setFilas(14);
-        } else {
-            tablero.setColumnas(24);
-            tablero.setFilas(20);
+        @Autowired
+        public TableroControler(TableroService tableroService, PartidaService partidaService){
+            this.tableroService = tableroService;
+            this.partidaService = partidaService;
         }
 
-        boardService.saveBoard(tablero);
-
-        return tablero;
-
-    }
-
-    @ModelAttribute("dificultades")
-    public List<Dificultad> getDifs() {
-        return this.partidaService.getAllDifs();
-    }
-
-    @GetMapping(value = { "/partidas/{partida_id}/{tablero_id}" })
-    public ModelAndView tableroView(@PathVariable("tablero_id") Integer id) {
-        ModelAndView res = new ModelAndView("tablero/tablero");
-        Tablero tablero = boardService.getBoardById(id);
-        res.addObject("tablero", tablero);
-        return res;
-    }
-
+        @InitBinder
+        public void initTableroBinder(WebDataBinder dataBinder){
+                dataBinder.setDisallowedFields("id");        
+        }
+        @ModelAttribute("dificultades")
+        public List<Dificultad> getDifs() {
+            return this.partidaService.getAllDifs();
+        }
+        
     @GetMapping(value = { "/tablero/{partida_id}" })
-    public ModelAndView tableroView2(@PathVariable("partida_id") Integer id) {
+    public ModelAndView tableroView(@PathVariable("partida_id") Integer id) {
         ModelAndView res = new ModelAndView("tablero/tablero");
-        Partida partida = partidaService.getById(id);
+        //Crear un tablero.
         Tablero tablero = new Tablero();
+        //Encontrar partida por el id.
+        Partida partida = partidaService.getById(id);
+        Dificultad diff = partida.getDificultad();
+        //Asignarle dificultad
+            //facil
+        if(diff.getId().equals(1)){
+            tablero.setColumnas(10); tablero.setFilas(8);tablero.setMinas(10);tablero.setPartidaId(partida);
+            tableroService.saveBoard(tablero);
+            //medio
+        }else if(diff.getId().equals(2)){
+            tablero.setColumnas(18); tablero.setFilas(14);tablero.setMinas(40);tablero.setPartidaId(partida);
+            tableroService.saveBoard(tablero);
+            //dificil
+        }else{
+            tablero.setColumnas(24); tablero.setFilas(20);tablero.setMinas(99);tablero.setPartidaId(partida);
+            tableroService.saveBoard(tablero);
+        }
         res.addObject("tablero", tablero);
-        res.addObject("partida", partida);
         return res;
     }
 
