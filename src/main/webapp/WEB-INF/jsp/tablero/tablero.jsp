@@ -22,7 +22,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   }
 
   #num_bandera,
-  #num_mina {
+  #num_mina,
+  #temporizador {
     font-size: 25px;
     color: rgb(8, 3, 83);
   }
@@ -43,6 +44,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   #num_mina {
     float: right;
     margin-right: 10px;
+  }
+  #temporizador{
+    margin-left: 30%;
   }
 
   #tablero {
@@ -124,6 +128,17 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   #tablero div div.c8 {
     color: darkgoldenrod;
   }
+
+  .alerta-final{
+    background-color: white;
+    border: 2px solid black;
+    position: fixed;
+    top: 40%;
+    left: 39%;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+  }
 </style>
 
 <head>
@@ -131,11 +146,12 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <c:url value="/resources/images/minesweeper.png" var="img_mina" />
   <c:url value="/js/algTablero.js" var="algTablero" />
   <c:url value="/css/style.css" var="estilo" />
+  <c:set value="" var="conUsuario"/>
+  <c:set value="" var="sinUsuario"/>
   <!-- <link href="${estilo}" rel="stylecheet" type="text/css" /> -->
 </head>
 
 <petclinic:layout pageName="tablero">
-
   <!-- Datos del tablero para el js -->
   <input type="hidden" id="numFilas" value="${tablero.filas}" />
   <input type="hidden" id="numColumnas" value="${tablero.columnas}" />
@@ -146,10 +162,30 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <div id="cabecera_tablero">
       <img id="img_bandera" src="${img_bandera}" />
       <span id="num_bandera"></span>
+      <span id="temporizador"></span>
       <img id="img_mina" src="${img_mina}" />
       <span id="num_mina"></span>
     </div>
   </div>
 
+  <div id="alert_parent">
+    <div id="alert_children">
+      <Span id="alert_mensaje"></Span>
+      <br>
+      <c:choose>
+        <c:when test="${registeredUser==null}">
+          <a href="welcome.jsp"><button id="alert_boton">Continuar</button></a>
+        </c:when>
+        <c:otherwise>
+          <form:form modelAttribute="historico" method="post" action="registeredUser/${registeredUserId}/postTablero"             
+            class="form-post-tablero" id="post-tablero-form">       
+            <input type="hidden" id="minas_encontradas" value=""/>
+            <input type="hidden" id="tiempo_empleado" value=""/>
+            <input type="hidden" id="alert_boton" value="Continuar" />
+          </form:form>
+        </c:otherwise>
+      </c:choose>
+    </div>
+  </div>
   <script type="text/javascript" src="${algTablero}"></script>
 </petclinic:layout>
