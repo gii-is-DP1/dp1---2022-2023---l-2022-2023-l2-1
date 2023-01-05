@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@page pageEncoding="UTF-8"%>
 
 <petclinic:layout pageName="partidas">
     <h2>Lista de Partidas</h2>
@@ -31,15 +32,21 @@
                     <c:out value=" ${partida.tipo}"/>
                 </td>
                 <td>
-                    <c:forEach items="${compis}" var="user">
-                    <c:if test="${user.id==partida.idInvitado}">
-                    <c:out value="${user.user.username}"/>
-                    </c:if>
-                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${partida.idInvitado==null}">
+                            Ninguno
+                        </c:when>
+                    <c:otherwise>
+                        <c:forEach items="${usuarios}" var="user">
+                          <c:if test="${user.id==partida.idInvitado}">
+                           <c:out value="${user.user.username}"/>
+                          </c:if>
+                        </c:forEach>
+                    </c:otherwise>
                                         
                 </td>
                 <td>
-                    <c:out value=" ${partida.tiempoDeJuego}"/>
+                    <c:out value="${partida.tiempoDeJuego}"/>
                 </td>
                 <td> 
                     <c:if test="${partida.resultado==null}">En Curso</c:if>

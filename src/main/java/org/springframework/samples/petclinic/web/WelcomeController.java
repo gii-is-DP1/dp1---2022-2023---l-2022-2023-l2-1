@@ -21,12 +21,8 @@ public class WelcomeController {
 			David.setFirstName("David");
 			David.setLastName("Gavira");
 			persons.add(David);
-		Person Inma = new Person();
-			Inma.setFirstName("Inma");
-			Inma.setLastName("Mayo");
-			persons.add(Inma);
 		Person Juanlu = new Person();
-			Juanlu.setFirstName("Juanlu");
+			Juanlu.setFirstName("Juan Luis");
 			Juanlu.setLastName("Ruano");
 			persons.add(Juanlu);
 		Person Ale = new Person();
@@ -38,7 +34,7 @@ public class WelcomeController {
 			JuanCa.setLastName("Lopez");
 			persons.add(JuanCa);
 		model.put("persons", persons);
-		model.put("title", "ElBuscaminas");
+		model.put("title", "El Buscaminas");
 		model.put("group", "L2-1");
 	
 	    return "welcome";

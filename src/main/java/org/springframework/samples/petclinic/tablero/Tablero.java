@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.partidas.Partida;
@@ -21,18 +22,19 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "tablero")
-public class Tablero extends BaseEntity{
+public class Tablero extends BaseEntity {
 
     @Column(name = "columnas")
-    @NotEmpty
+    @NotNull
     private Integer columnas;
 
     @Column(name = "filas")
-    @NotEmpty
+    @NotNull
     private Integer filas;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="tablero")
-    private List<Casilla> casillas;
+    @Column(name = "num_minas")
+    @NotNull
+    private Integer minas;
 
     @ManyToOne
     @JoinColumn(name = "partida_id")
