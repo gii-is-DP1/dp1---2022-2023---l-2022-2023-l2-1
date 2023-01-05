@@ -17,19 +17,19 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class TableroControler {
 
-        private final TableroService boardService;
+        private final TableroService tableroService;
 
         private final PartidaService partidaService;
 
 
         @Autowired
-        public TableroControler(TableroService boardService, PartidaService partidaService){
-            this.boardService = boardService;
+        public TableroControler(TableroService tableroService, PartidaService partidaService){
+            this.tableroService = tableroService;
             this.partidaService = partidaService;
         }
 
         @InitBinder
-        public void initBoardBinder(WebDataBinder dataBinder){
+        public void initTableroBinder(WebDataBinder dataBinder){
                 dataBinder.setDisallowedFields("id");        
         }
         @ModelAttribute("dificultades")
@@ -38,9 +38,27 @@ public class TableroControler {
         }
         
     @GetMapping(value = { "/partidas/{partida_id}/{tablero_id}" })
-    public ModelAndView tableroView(@PathVariable("tablero_id") Integer id) {
+    public ModelAndView tableroView(@PathVariable("partida_id") Integer id) {
         ModelAndView res = new ModelAndView("tablero/tablero");
-        Tablero tablero = boardService.getBoardById(id);
+        //Crear un tablero.
+        Tablero tablero = new Tablero();
+        //Encontrar partida por el id.
+        Partida partida = partidaService.getById(id);
+        Dificultad diff = partida.getDificultad();
+        //Asignarle dificultad
+            //facil
+        if(diff.getId().equals(1)){
+            tablero.setColumnas(10); tablero.setFilas(8);tablero.setMinas(10);tablero.setPartidaId(partida);
+            tableroService.saveBoard(tablero);
+            //medio
+        }else if(diff.getId().equals(2)){
+            tablero.setColumnas(18); tablero.setFilas(14);tablero.setMinas(40);tablero.setPartidaId(partida);
+            tableroService.saveBoard(tablero);
+            //dificil
+        }else{
+            tablero.setColumnas(24); tablero.setFilas(20);tablero.setMinas(99);tablero.setPartidaId(partida);
+            tableroService.saveBoard(tablero);
+        }
         res.addObject("tablero", tablero);
         return res;
     }
