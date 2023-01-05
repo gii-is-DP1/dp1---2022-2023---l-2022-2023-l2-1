@@ -37,7 +37,7 @@ public class TableroControler {
             return this.partidaService.getAllDifs();
         }
         
-    @GetMapping(value = { "/partidas/{partida_id}/{tablero_id}" })
+    @GetMapping(value = { "/tablero/{partida_id}" })
     public ModelAndView tableroView(@PathVariable("partida_id") Integer id) {
         ModelAndView res = new ModelAndView("tablero/tablero");
         //Crear un tablero.
