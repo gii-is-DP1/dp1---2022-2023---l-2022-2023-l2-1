@@ -75,7 +75,7 @@ public class PartidaControler {
       partidaService.savePartida(part);
 
       //"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/join"
-      return "redirect:/partidas";
+      return "redirect:/tablero/"+part.getId();
         }
     }
     @GetMapping(value = "/partida/new")

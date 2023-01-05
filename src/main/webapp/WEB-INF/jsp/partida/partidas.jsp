@@ -8,9 +8,10 @@
 
               <petclinic:layout pageName="Partidas">
                 <script type="text/javascript">
-                    function checkPass(contra1, contra2, idPartida) {
-                        if (document.getElementById(contra1).value==document.getElementById(contra2).value){
-                          window.location.href= "/partida/"+document.getElementById(idPartida).value+"/join";
+                    function checkPass(contra2, idPartida) {
+                       
+                        if (document.getElementById(idPartida).value==contra2.toString()){
+                          window.location.href= "/partida/"+idPartida.toString()+"/join";
                         }else{
                             alert("Contraseña incorrecta");
                         }
@@ -92,10 +93,8 @@
                                     <c:choose>
                                         <c:when test="${partida.privada==true}">
                                             <c:if test="${partida.idInvitado==null}">
-                                                    <input type="text" id="contra"/>
-                                                    <input type = "hidden" id="inputcontra" value = "${partida.contrasenia}"/>
-                                                    <input type = "hidden" id = "idpart" value = "${partida.id}"/>
-                                                    <button onclick="checkPass('contra', 'inputcontra','idpart');">Entrar</button>
+                                                    <input type="text" id="${partida.id}"/>
+                                                    <button onclick="checkPass('${partida.contrasenia}','${partida.id}');">Entrar</button>
                                             </c:if>                                         
                                         </c:when>
                                         <c:otherwise>
