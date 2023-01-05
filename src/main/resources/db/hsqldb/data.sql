@@ -123,10 +123,9 @@ INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_
 INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (3, 1, null, 1, 2, 2, FALSE, null,null);
 INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (4, 1, 500, 1, 2, 2, TRUE, '12345',TRUE);
 
-INSERT INTO historicos(user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida, tiempo_minimo, tiempo_maximo) VALUES (1,20,2,4,5,6,7,8,5);
-INSERT INTO historicos(user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida, tiempo_minimo, tiempo_maximo) VALUES (2,20,2,4,5,6,7,8,5);
-INSERT INTO historicos(user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida, tiempo_minimo, tiempo_maximo) VALUES (3,20,2,4,5,6,7,8,5);
-INSERT INTO historicos(user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida, tiempo_minimo, tiempo_maximo) VALUES (4,20,2,4,5,6,7,8,5);
+INSERT INTO historicos(id,user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida, tiempo_minimo, tiempo_maximo) VALUES (1,1,20,2,4,5,6,7,8,5);
+INSERT INTO historicos(id,user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida, tiempo_minimo, tiempo_maximo) VALUES (2,2,20,2,4,5,6,7,8,5);
+INSERT INTO historicos(id,user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida, tiempo_minimo, tiempo_maximo) VALUES (3,3,20,2,4,5,6,7,8,5);
 
 INSERT INTO tablero(id,columnas,filas,num_minas,partida_id) VALUES (1, 10, 8, 10, 1);
 

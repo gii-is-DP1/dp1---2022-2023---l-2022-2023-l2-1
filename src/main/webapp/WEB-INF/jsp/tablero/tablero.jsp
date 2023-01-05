@@ -168,7 +168,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
   <div id="alert_parent">
     <div id="alert_children">
-      <form:form modelAttribute="partida" method="post" action="" class="form-post-tablero" id="post-tablero-form">
+      <form:form modelAttribute="historico" method="post" action="" class="form-post-tablero" id="post-tablero-form">
         <Span id="alert_mensaje"></Span>
         <br>
         <input type="hidden" id="minas_encontradas" value=""/>

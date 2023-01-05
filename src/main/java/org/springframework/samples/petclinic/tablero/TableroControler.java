@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.tablero;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.historico.Historico;
@@ -88,6 +89,14 @@ public class TableroControler {
         Tablero tablero = new Tablero();
         res.addObject("tablero", tablero);
         res.addObject("partida", partida);
+        return res;
+    }
+
+    @PostMapping(value = "/postTablero")
+    public String postTablero(@ModelAttribute Tablero tablero, Map<String, Object> model){
+        String res ="";
+        
+        
         return res;
     }
 }

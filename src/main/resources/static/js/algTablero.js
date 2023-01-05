@@ -1,3 +1,4 @@
+// --------------------------------------------------------
 const tablero = {
   numMinasTotales: document.getElementById("numMinas").value,
   numFilas: document.getElementById("numFilas").value,
@@ -8,7 +9,11 @@ const tablero = {
   campoMinas: [],
 };
 
+// --------------------------------------------------------
+
 window.onload = buscaminas();
+
+// --------------------------------------------------------
 
 var segundos = 0;
 var minutos = 0;
@@ -33,6 +38,8 @@ var timer = setInterval(function () {
   tablero.tiempoEmpleado = mm + ":" + ss;
   pintaTiempo();
 }, 1000);
+
+// --------------------------------------------------------
 
 function buscaminas() {
   pintaBanderas();
@@ -319,3 +326,5 @@ function mensajeFinal(text) {
   tiempoEmpleado.setAttribute("value", tablero.tiempoEmpleado);
   mensaje.innerHTML = text;
 }
+
+// --------------------------------------------------------
