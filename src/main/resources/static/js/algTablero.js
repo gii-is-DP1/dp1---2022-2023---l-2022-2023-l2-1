@@ -318,12 +318,14 @@ function mensajeFinal(text) {
   let divAlert = document.getElementById("alert_parent");
   divAlert.classList.add("alerta-final");
   let mensaje = document.getElementById("alert_mensaje");
-  let boton = document.getElementById("alert_boton");
+  let botonSinUser = document.getElementById("alert_boton");
   let minasEncontradas = document.getElementById("minas_encontradas");
   let tiempoEmpleado = document.getElementById("tiempo_empleado");
   boton.setAttribute("type", "submit");
-  minasEncontradas.setAttribute("value", tablero.numMinasEncontradas);
-  tiempoEmpleado.setAttribute("value", tablero.tiempoEmpleado);
+  if (minasEncontradas && tiempoEmpleado) {
+    minasEncontradas.setAttribute("value", tablero.numMinasEncontradas);
+    tiempoEmpleado.setAttribute("value", tablero.tiempoEmpleado);
+  }
   mensaje.innerHTML = text;
 }
 

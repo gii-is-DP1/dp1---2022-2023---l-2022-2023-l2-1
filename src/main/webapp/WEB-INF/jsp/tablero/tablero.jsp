@@ -146,6 +146,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <c:url value="/resources/images/minesweeper.png" var="img_mina" />
   <c:url value="/js/algTablero.js" var="algTablero" />
   <c:url value="/css/style.css" var="estilo" />
+  <c:set value="" var="conUsuario"/>
+  <c:set value="" var="sinUsuario"/>
   <!-- <link href="${estilo}" rel="stylecheet" type="text/css" /> -->
 </head>
 
@@ -168,13 +170,21 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
   <div id="alert_parent">
     <div id="alert_children">
-      <form:form modelAttribute="historico" method="post" action="" class="form-post-tablero" id="post-tablero-form">
-        <Span id="alert_mensaje"></Span>
-        <br>
-        <input type="hidden" id="minas_encontradas" value=""/>
-        <input type="hidden" id="tiempo_empleado" value=""/>
-        <input type="hidden" id="alert_boton" value="Continuar" />
-      </form:form>
+      <Span id="alert_mensaje"></Span>
+      <br>
+      <c:choose>
+        <c:when test="${registeredUser==null}">
+          <a href="welcome.jsp"><button id="alert_boton">Continuar</button></a>
+        </c:when>
+        <c:otherwise>
+          <form:form modelAttribute="historico" method="post" action="registeredUser/${registeredUserId}/postTablero"             
+            class="form-post-tablero" id="post-tablero-form">       
+            <input type="hidden" id="minas_encontradas" value=""/>
+            <input type="hidden" id="tiempo_empleado" value=""/>
+            <input type="hidden" id="alert_boton" value="Continuar" />
+          </form:form>
+        </c:otherwise>
+      </c:choose>
     </div>
   </div>
   <script type="text/javascript" src="${algTablero}"></script>
