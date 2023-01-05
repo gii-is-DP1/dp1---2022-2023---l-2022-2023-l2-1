@@ -130,10 +130,10 @@ INSERT INTO historicos(id,user_id,partidas_totales,partidas_ganadas,minas_encont
 
 INSERT INTO tablero(id,columnas,filas,num_minas,partida_id) VALUES (1, 10, 8, 10, 1);
 
-INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (1,1,'Tiempo minimo','Texto de ejemplo', 1);
-INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (2,1,'Tiempo minimo','Texto de ejemplo', 1);
-INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (3,1,'Tiempo minimo','Texto de ejemplo', 1);
-INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (4,2,'Partidas ganadas','Texto de ejemplo', 2);
-INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (5,2,'Partidas ganadas','Texto de ejemplo', 2);
-INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (6,3,'Minas liberadas','Texto de ejemplo', 3);
+INSERT INTO logros(id,titulo,descripcion,condicion_id) VALUES (1,'Tiempo minimo','Texto de ejemplo', 1);
+INSERT INTO logros(id,titulo,descripcion,condicion_id) VALUES (2,'Tiempo minimo','Texto de ejemplo', 1);
+INSERT INTO logros(id,titulo,descripcion,condicion_id) VALUES (3,'Tiempo minimo','Texto de ejemplo', 1);
+INSERT INTO logros(id,titulo,descripcion,condicion_id) VALUES (4,'Partidas ganadas','Texto de ejemplo', 2);
+INSERT INTO logros(id,titulo,descripcion,condicion_id) VALUES (5,'Partidas ganadas','Texto de ejemplo', 2);
+INSERT INTO logros(id,titulo,descripcion,condicion_id) VALUES (6,'Minas liberadas','Texto de ejemplo', 3);
 

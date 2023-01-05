@@ -1,12 +1,17 @@
 package org.springframework.samples.petclinic.historico;
 
+import java.util.Collection;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.samples.petclinic.logros.Logro;
 import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.registeredUser.RegisteredUser;
 
@@ -54,6 +59,10 @@ public class Historico extends BaseEntity {
     @NotNull
     @OneToOne
     @JoinColumn(name = "user_id")
-    private RegisteredUser userId;
+    private RegisteredUser user;
+
+    @OneToMany
+    @JoinColumn(name = "logro_id")
+    private Set<Logro> logros;
 
 }

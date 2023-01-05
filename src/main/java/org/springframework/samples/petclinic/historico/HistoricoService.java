@@ -1,9 +1,11 @@
 package org.springframework.samples.petclinic.historico;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.logros.Logro;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +38,11 @@ public class HistoricoService {
     @Transactional
     public Historico getHistoricoByRegisteredUserId(Integer id) {
         return historicoRepository.findHistoricoByUserId(id);
+    }
+
+    @Transactional
+    public Set<Logro> getLogrosByUserId(Integer id){
+        return historicoRepository.findLogrosByUserId(id);
     }
 
 }

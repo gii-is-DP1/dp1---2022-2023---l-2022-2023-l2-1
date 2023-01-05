@@ -21,10 +21,6 @@ public class LogroService {
         return logroRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
-    public List<Logro> getAllByRegisteredUserId(Integer id) {
-        return logroRepository.findAllByRegisteredUserId(id);
-    }
 
     @Transactional(readOnly = true)
     public List<Condicion> getAllCondiciones() {

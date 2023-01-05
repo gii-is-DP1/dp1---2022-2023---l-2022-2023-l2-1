@@ -11,8 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface LogroRepository extends CrudRepository<Logro, Integer> {
     List<Logro> findAll();
 
-    List<Logro> findAllByRegisteredUserId(Integer id);
-
     @Query("FROM Condicion condicion ORDER BY condicion.id")
     List<Condicion> findCondiciones() throws DataAccessException;
 

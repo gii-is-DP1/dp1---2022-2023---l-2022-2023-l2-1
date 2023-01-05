@@ -19,10 +19,6 @@ import lombok.Setter;
 public class Logro extends BaseEntity {
 
     @NotNull
-    @JoinColumn(name = "registered_user_id")
-    private Integer registeredUserId;
-
-    @NotNull
     @Column(name = "titulo")
     private String titulo;
 

@@ -32,14 +32,17 @@ public class HistoricoController {
     }
 
     @GetMapping(value = "/estadisticas")
-    public ModelAndView muestraHistoricoDeUsuario(@PathVariable("registeredUserId") Integer id) {
+    public ModelAndView muestraHistoricoDeUsuario(@PathVariable("registeredUserId") int id) {
         ModelAndView result = new ModelAndView("estadisticas/estadisticasDeUsuario");
-        result.addObject("historico", historicoService.getHistoricoById(id));
-        result.addObject("user", registeredService.findRegisteredUserById(id));
+        RegisteredUser user = registeredService.findRegisteredUserById(id);
+        Historico hist = historicoService.getHistoricoByRegisteredUserId(user.getId());
+        result.addObject("user", user);
+        result.addObject("historico", hist);
+
         return result;
     }
     @GetMapping(value = "/partidasJugadas")
-    public ModelAndView muestraPartidasDeUsuario(@PathVariable("registeredUserId") Integer id) {
+    public ModelAndView muestraPartidasDeUsuario(@PathVariable("registeredUserId") int id) {
         ModelAndView result = new ModelAndView("partida/listaDePartidas");
         Set<RegisteredUser> compis = partidaService.getAllById(id).stream().map(c->c.getIdInvitado()).filter(c->c!=null).map(c->registeredService.findRegisteredUserById(Integer.valueOf(c))).collect(Collectors.toSet());
 
@@ -51,7 +54,7 @@ public class HistoricoController {
 
 
     @PostMapping("/edit/{id}")
-    public ModelAndView saveHistorico(Historico historico, BindingResult br, @PathVariable("id") Integer id) {
+    public ModelAndView saveHistorico(Historico historico, BindingResult br, @PathVariable("id") int id) {
         ModelAndView result = new ModelAndView();
 
         return result;

@@ -24,7 +24,6 @@ public class LogroController {
     @GetMapping()
     public ModelAndView showEstadisticasByUserId(@PathVariable("registeredUserId") int id) {
         ModelAndView res = new ModelAndView("estadisticas/logrosDeUsuario");
-        res.addObject("logros", logroService.getAllByRegisteredUserId(id));
         res.addObject("user", registeredUserService.findRegisteredUserById(id));
         return res;
     }
