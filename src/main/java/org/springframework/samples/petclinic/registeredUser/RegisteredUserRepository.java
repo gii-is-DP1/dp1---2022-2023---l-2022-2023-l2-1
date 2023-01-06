@@ -4,6 +4,9 @@ package org.springframework.samples.petclinic.registeredUser;
 
 import java.util.Collection;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -22,6 +25,9 @@ public interface RegisteredUserRepository extends CrudRepository<RegisteredUser,
     @Query("SELECT ru FROM RegisteredUser ru WHERE ru.name LIKE :name%")
     public Collection<RegisteredUser> findByName(@Param("name") String name);
 
+    Page<RegisteredUser> findAllpageablePage(Pageable pageable);
+    
+    Iterable<RegisteredUser> findAllIterable(Sort sort);
 
 
 }
