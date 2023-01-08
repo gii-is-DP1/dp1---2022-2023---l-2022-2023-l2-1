@@ -3,7 +3,6 @@ package org.springframework.samples.petclinic.partidas;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 
@@ -97,7 +96,7 @@ public class PartidaControler {
 		RegisteredUser ru = this.registerableService
 				.findRegisteredUserByUsername(this.userService.findUser(username).orElse(null));
 
-        if(!(ru==null)){
+        if(authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("admin")||a.getAuthority().equals("registeredUser"))){
                 model.put("registeredUser", ru);
                 return "partida/elegirModo";
         }else{

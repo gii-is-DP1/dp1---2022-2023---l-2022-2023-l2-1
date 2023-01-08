@@ -7,7 +7,7 @@ prefix="petclinic" tagdir="/WEB-INF/tags" %> <%@page contentType="text/html"%>
 
 <petclinic:layout pageName="registered_users">
   <h2>
-    <th><c:out value="${registeredUser.user.username}" /></th>
+    <th><c:out value="${registeredUser.name}" /></th>
 
     <spring:url value="{registeredUserId}/edit" var="editUrl">
       <spring:param name="registeredUserId" value="${registeredUser.id}" />
