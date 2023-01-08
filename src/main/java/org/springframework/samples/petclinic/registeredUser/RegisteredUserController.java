@@ -6,7 +6,10 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.samples.petclinic.user.AuthoritiesService;
 import org.springframework.samples.petclinic.user.UserService;
 import org.springframework.security.core.Authentication;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -44,6 +48,7 @@ public class RegisteredUserController {
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
+	
 
 	@GetMapping("/myProfile")
 	public String showRegisteredUserById(RegisteredUser registeredUser, BindingResult result,
@@ -92,29 +97,64 @@ public class RegisteredUserController {
 	@GetMapping(value = "/registeredUser")
 	public String processFindForm(RegisteredUser registeredUser, BindingResult result, Map<String, Object> model) {
 
-		// allow parameterless GET request for /owners to return all records
-		if (registeredUser.getName() == null) {
-			registeredUser.setName("");
+		// allow parameterless GET request to return all records
+		if (registeredUser.getName() == "" || registeredUser.getName() == null) {
+			Pageable paginable = PageRequest.of(0, 5, Sort.by("name"));
+			Page<RegisteredUser> paginas = registeredUserService.findAllpageablePage(paginable);
+			model.put("number", paginas.getNumber());
+			model.put("totalPages", paginas.getTotalPages());
+			model.put("totalElements", paginas.getTotalElements());
+			model.put("search", registeredUser.getName());
+			model.put("data",paginas.getContent());
+			return "registeredUser/registeredUserList";
+			
 		}
 
-		// find owners by last name
+		// find RegisteredUsers by Name
 		Collection<RegisteredUser> results = this.registeredUserService
-				.findRegisteredUserByName(registeredUser.getName());
+				.findRegisteredUserByName(registeredUser.getName().trim());
 		if (results.isEmpty()) {
-			// no owners found
+			// no users found
 			result.rejectValue("name", "notFound", "not found");
 			return "registeredUser/findRegisteredUser";
 		} else if (results.size() == 1) {
-			// 1 owner found
+			// 1 result found
 			//registeredUser = results.iterator().next();
-			return "redirect:/registeredUser/" + registeredUser.getId();
+			return "redirect:/registeredUser/" + results.stream().findFirst().get().getId();
 		} else {
-			// multiple owners found
-			model.put("selections", results);
+			// multiple results found
+			Pageable paginable = PageRequest.of(0, 5, Sort.by("name"));
+			Page<RegisteredUser> paginas = registeredUserService.findByNameFromSubstring(registeredUser.getName(), paginable);
+			model.put("number", paginas.getNumber());
+			model.put("totalPages", paginas.getTotalPages());
+			model.put("totalElements", paginas.getTotalElements());
+			model.put("search", registeredUser.getName());
+			model.put("data",paginas.getContent());
 			return "registeredUser/registeredUserList";
 		}
 
 	}
+
+	@GetMapping(value= "/registeredUser/userPages/{page}")
+	public String showSearchPages(@RequestParam(name="search", required = false) String search, @PathVariable(name = "page") int pagN, Map<String, Object> model){
+		
+		Pageable paginable = PageRequest.of(pagN, 5, Sort.by("name"));
+		Page<RegisteredUser> paginas = null;
+
+		if(search==null||search==""){
+			paginas = registeredUserService.findAllpageablePage(paginable);
+		}else{
+			paginas = registeredUserService.findByNameFromSubstring(search, paginable);
+		}
+
+		model.put("number", paginas.getNumber());
+		model.put("totalPages", paginas.getTotalPages());
+		model.put("totalElements", paginas.getTotalElements());
+		model.put("search", search);
+		model.put("data",paginas.getContent());
+		return "registeredUser/registeredUserList";
+	}
+
 
 	// En la pestaña Find RegisteredUSers que funcione el add registeredUser
 	@GetMapping(value = "/registeredUser/new")
@@ -140,7 +180,7 @@ public class RegisteredUserController {
 	public String deletePlayerAdmin(@PathVariable("registeredUserId") int registeredUserId) {
 		RegisteredUser user = registeredUserService.findRegisteredUserById(registeredUserId);
 		registeredUserService.deleteUser(user);
-		;
+		
 		return "redirect:/registeredUser";
 	}
 
