@@ -50,17 +50,27 @@ public class PartidaControler {
 		return this.partidaService.getAllDifs();
 	}
 
+    //Metodo para la visualizacion de partidas como admin o las partidas actuales como usuario normal
     @GetMapping(value = "/partidas")
     public ModelAndView showAllPartidas() {
         ModelAndView res = new ModelAndView("partida/partidas");
-        res.addObject("partidas", partidaService.getAllPartidasActuales());
-        Set<RegisteredUser> usuarios = partidaService.getAllPartidasActuales().stream().filter(c->c.getRegisteredUserId()!=null).map(c->c.getRegisteredUserId()).map(c->registerableService.findRegisteredUserById(c)).collect(Collectors.toSet());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("admin"))) {
+            res.addObject("partidas", partidaService.getAllPartidasActuales());
+            Set<RegisteredUser> users = registerableService.findRegisteredUser().stream().collect(Collectors.toSet());
+            res.addObject("usuarios", users);
+            return res;
+        }else{
+
+        res.addObject("partidas", partidaService.getAllPartidasActuales().stream().filter(c->c.getTipo()==tiposDePartida().get(1)).collect(Collectors.toList()) );
+        Set<RegisteredUser> usuarios = registerableService.findRegisteredUser().stream().collect(Collectors.toSet());
 
         res.addObject("usuarios", usuarios);
         return res;
     }
+    }
     
-
+    //metodo para unirse a una partida competitiva ya existente
     @GetMapping(value= "/partida/{partidaId}/join")
     public String joinPartida(@PathVariable("partidaId") int id){
        Partida part = partidaService.getById(id);
@@ -74,10 +84,10 @@ public class PartidaControler {
       part.setIdInvitado(ru.getId());
       partidaService.savePartida(part);
 
-      //"/registeredUser/"+partida.getRegisteredUserId()+"/partidas/"+partida.getId()+"/join"
       return "redirect:/tablero/"+part.getId();
         }
     }
+    //metodo para la creacion de una partida
     @GetMapping(value = "/partida/new")
     public String nuevaPartida(Map<String, Object> model) {
         
@@ -86,7 +96,7 @@ public class PartidaControler {
 		RegisteredUser ru = this.registerableService
 				.findRegisteredUserByUsername(this.userService.findUser(username).orElse(null));
 
-        if(!(ru==null)){
+        if(authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("admin")||a.getAuthority().equals("registeredUser"))){
                 model.put("registeredUser", ru);
                 return "partida/elegirModo";
         }else{
@@ -95,6 +105,7 @@ public class PartidaControler {
         return "partida/nuevaIndividual"; 
         }
     }
+    //metodo para jugar una partida sin estar registrado
     @GetMapping(value = "/partida/noUser/{dificultad}")
     public String noUserNewPartida(@PathVariable("dificultad") String difi,Map<String, Object> model){
         Dificultad dificultad = null;
@@ -115,7 +126,7 @@ public class PartidaControler {
     }
 
 
-
+    //metodo para jugar una partida individual
     @GetMapping(value = "/registeredUser/{registeredUserId}/partidas/nuevaIndividual")
     public String userNewPartida(@PathVariable("registeredUserId") int id, Map<String, Object> model){
         Partida partida = new Partida();
@@ -124,7 +135,7 @@ public class PartidaControler {
         model.put("registeredUser", ru);
         return "partida/nuevaIndividual";
     }
-
+    //post mapping del anterior
     @PostMapping(value = "/registeredUser/{registeredUserId}/partidas/nuevaIndividual")
     public String userPostPartida(@ModelAttribute Partida partida, Map<String, Object> model){
         partidaService.savePartida(partida);
@@ -138,13 +149,14 @@ public class PartidaControler {
             return "redirect:/tablero/"+partida.getId();
         }
 
-
+    //metodo para jugar una partida competitivo
     @GetMapping(value = "/registeredUser/{registeredUserId}/partidas/new")
     public String newPartida(@PathVariable("registeredUserId") int id,Map<String, Object> model){
         Partida partida = new Partida();
         model.put("partida", partida);
         return "partida/nuevaPartida";
     }
+    //post mapping del anterior
     @PostMapping(value = "/registeredUser/{registeredUserId}/partidas/new" )
     public String postPartida(@ModelAttribute Partida partida, Map<String, Object> model){
         partidaService.savePartida(partida);
@@ -156,11 +168,6 @@ public class PartidaControler {
         }
         partidaService.savePartida(partida);
 
-        /*if(partida.getTipo().getId() == 1){
-            String res =  "redirect:/partidas/"+partida.getId()+"/"+partida.getDificultad().getId();
-            return res;
-        }else{
-            return null*/
             return "redirect:/tablero/"+partida.getId();
         }
     }
