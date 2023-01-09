@@ -6,16 +6,43 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->
 
 <style>
+  #tablero {
+    border: 2px solid black;
+    border-radius: 10px;
+    max-width: fit-content;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    margin: auto;
+    background-color: rgb(255, 149, 61);
+  }
+  
   #cabecera_tablero {
     padding: 10px;
+    min-width: 400px;
+    min-height: 50px;
     width: 99%;
     margin: auto;
     height: 50px;
-    background-color: rgb(255, 208, 122);
     margin-bottom: 10px;
+    display: flex;
+    align-content: center;
+  }
+  #tablero div div {
+    border-style: outset;
+    width: 35px;
+    height: 35px;
+    margin: 2px;
+    background-color: rgb(180, 180, 180);
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
   }
 
-  #img_bandera,
+  #img_bandera{
+    font-size: 25px;
+  }
+
   #img_mina {
     width: 30px;
     height: 30px;
@@ -28,48 +55,18 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     color: rgb(8, 3, 83);
   }
 
-  #img_bandera {
-    float: left;
-  }
-
-  #num_bandera {
-    float: left;
+  #num_bandera{
     margin-left: 10px;
   }
-
-  #img_mina {
-    float: right;
-  }
-
   #num_mina {
-    float: right;
     margin-right: 10px;
   }
   #temporizador{
-    margin-left: 30%;
+    margin: auto;
   }
 
-  #tablero {
-    border: 2px solid black;
-    max-width: fit-content;
-    padding-left: 10px;
-    padding-bottom: 10px;
-    padding-right: 10px;
-    margin: auto;
-    background-color: rgb(255, 208, 122);
-  }
   #fila {
     display: flex;
-  }
-  #tablero div div {
-    border: 2px solid black;
-    width: 40px;
-    height: 40px;
-    margin: 2px;
-    background-color: rgb(130, 130, 228);
-    font-size: 20px;
-    text-align: center;
-    line-height: 45px;
   }
   h1 {
     text-align: center;
@@ -80,24 +77,28 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   .icon-bandera:before {
     content: "\2691";
     color: rgb(187, 0, 0);
-    font-size: 30px;
+    font-size: 25px;
   }
 
   .icon-mina:before {
-    content: "\2699";
-    color: black;
-    font-size: 30px;
+    content: "\1F4A3";
+    font-size: 25px;
+  }
+
+  .icon-escudo:before{
+    content: "\1F6E1";
+    font-size: 25px;
   }
 
   .bandera-erronea:before {
     content: "\2612";
     color: red;
-    font-size: 40px;
+    font-size: 25px;
   }
   .bandera-correcta:before {
     content: "\2611";
     color: green;
-    font-size: 40px;
+    font-size: 25px;
   }
 
   #tablero div div.destapada {
@@ -105,7 +106,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   }
 
   #tablero div div.c1 {
-    color: aqua;
+    color: darkcyan;
   }
   #tablero div div.c2 {
     color: blue;
@@ -131,13 +132,16 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
   .alerta-final{
     background-color: white;
-    border: 2px solid black;
-    position: fixed;
-    top: 40%;
-    left: 39%;
-    padding: 10px;
+    border: 10px solid red;
+    border-style: outset;transform: translate(calc(50vw - 50%));
+    border-radius: 10px;
+    padding: 20px;
     font-size: 20px;
     text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(calc(50vw - 50%), calc(50vh - 50%));
   }
 </style>
 
@@ -160,31 +164,26 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
   <div id="tablero">
     <div id="cabecera_tablero">
-      <img id="img_bandera" src="${img_bandera}" />
+      <span id="img_bandera">&#9971;</span>
       <span id="num_bandera"></span>
       <span id="temporizador"></span>
-      <img id="img_mina" src="${img_mina}" />
       <span id="num_mina"></span>
+      <img id="img_mina" src="${img_mina}" />
     </div>
   </div>
 
   <div id="alert_parent">
     <div id="alert_children">
+      <Span id="alert_mensaje_general"></Span>
+      <br>
       <Span id="alert_mensaje"></Span>
       <br>
-      <c:choose>
-        <c:when test="${registeredUser==null}">
-          <a href="welcome.jsp"><button id="alert_boton">Continuar</button></a>
-        </c:when>
-        <c:otherwise>
-          <form:form modelAttribute="historico" method="post" action="registeredUser/${registeredUserId}/postTablero"             
-            class="form-post-tablero" id="post-tablero-form">       
-            <input type="hidden" id="minas_encontradas" value=""/>
-            <input type="hidden" id="tiempo_empleado" value=""/>
-            <input type="hidden" id="alert_boton" value="Continuar" />
-          </form:form>
-        </c:otherwise>
-      </c:choose>
+          <input type="hidden" id="alert_boton" onclick="enlacePostTablero();"value="Continuar"/>
+          <script type="text/javascript">
+            function enlacePostTablero(){
+              window.location.href="/postTablero/"+tablero.numMinasEncontradas+"/"+tablero.tiempoEmpleado+"/"+tablero.esVictoria;
+            }
+            </script>
     </div>
   </div>
   <script type="text/javascript" src="${algTablero}"></script>

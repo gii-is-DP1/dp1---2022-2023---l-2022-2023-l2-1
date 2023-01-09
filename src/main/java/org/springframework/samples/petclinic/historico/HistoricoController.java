@@ -34,7 +34,7 @@ public class HistoricoController {
     @GetMapping(value = "/estadisticas")
     public ModelAndView muestraHistoricoDeUsuario(@PathVariable("registeredUserId") Integer id) {
         ModelAndView result = new ModelAndView("estadisticas/estadisticasDeUsuario");
-        result.addObject("historico", historicoService.getHistoricoById(id));
+        result.addObject("historico", historicoService.getHistoricoByRegisteredUserId(id));
         result.addObject("user", registeredService.findRegisteredUserById(id));
         return result;
     }

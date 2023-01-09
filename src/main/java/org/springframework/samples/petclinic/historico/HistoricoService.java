@@ -23,19 +23,13 @@ public class HistoricoService {
     }
 
     @Transactional(readOnly = true)
-    public Historico getHistoricoById(Integer id) throws DataAccessException {
-        return historicoRepository.findHistoricoByUserId(id);
+    public Historico getHistoricoByRegisteredUserId(Integer id) throws DataAccessException {
+        return historicoRepository.findHistoricoByRegisteredUserId(id);
     }
 
     @Transactional
     public void saveHistorico(Historico hist) throws DataAccessException {
         historicoRepository.save(hist);
-    }
-    
-
-    @Transactional
-    public Historico getHistoricoByRegisteredUserId(Integer id) {
-        return historicoRepository.findHistoricoByUserId(id);
     }
 
 }
