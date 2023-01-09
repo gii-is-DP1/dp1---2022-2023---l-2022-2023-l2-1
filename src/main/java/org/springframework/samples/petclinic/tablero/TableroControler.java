@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.tablero;
 
+import java.lang.ProcessBuilder.Redirect;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 
@@ -78,27 +80,67 @@ public class TableroControler {
             tableroService.saveBoard(tablero);
             // medio
         } else if (diff.getId().equals(2)) {
-            tablero.setColumnas(18);
-            tablero.setFilas(14);
+            tablero.setColumnas(21);// 18
+            tablero.setFilas(12);// 14
             tablero.setMinas(40);
             tablero.setPartidaId(partida);
             tableroService.saveBoard(tablero);
             // dificil
         } else {
-            tablero.setColumnas(24);
-            tablero.setFilas(20);
+            tablero.setColumnas(30);// 24
+            tablero.setFilas(16);// 20
             tablero.setMinas(99);
             tablero.setPartidaId(partida);
             tableroService.saveBoard(tablero);
         }
+        res.addObject("registeredUser", ru);
         res.addObject("tablero", tablero);
         return res;
     }
 
-    @PostMapping(value = "/registeredUser/{registeredUserId}/postTablero")
-    public String postTablero(@ModelAttribute Historico historico, Map<String, Object> model) {
-        String res = "";
+    @GetMapping(value = "/postTablero/{minasEncontradas}/{tiempoEmpleado}/{esVictoria}")
+    public String postTablero(@PathVariable("minasEncontradas") Integer minasEncontradas,
+            @PathVariable("tiempoEmpleado") String tiempoEmpleado, @PathVariable("esVictoria") String esVictoria) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        RegisteredUser ru = this.registeredUserService
+                .findRegisteredUserByUsername(this.userService.findUser(username).orElse(null));
+        if (ru != null) {
+            Historico nuevoHistorico = historicoService.getHistoricoByRegisteredUserId(ru.getId());
+            if (esVictoria.equals("true")) {
+                nuevoHistorico.setPartidasGanadas(nuevoHistorico.getPartidasGanadas() + 1);
+            }
+            nuevoHistorico.setPartidasTotales(nuevoHistorico.getPartidasTotales() + 1);
+            nuevoHistorico.setMinasEncontradas(nuevoHistorico.getMinasEncontradas() + minasEncontradas);
+            LocalTime nuevoTiempo = LocalTime.parse(tiempoEmpleado);
+            nuevoHistorico.setTiempoTotalJuego(nuevoHistorico.getTiempoTotalJuego().plusMinutes(nuevoTiempo.getHour())
+                    .plusSeconds(nuevoTiempo.getMinute()));
+            nuevoHistorico.setTiempoMedioPartida(calculaTiempoMedioPartida(nuevoHistorico.getTiempoTotalJuego(),
+                    nuevoHistorico.getPartidasTotales()));
+            nuevoHistorico.setPuntuacion(nuevoHistorico.getPuntuacion()
+                    + calculaPuntuacion(nuevoHistorico.getMinasEncontradas(), nuevoTiempo, esVictoria));
+            historicoService.saveHistorico(nuevoHistorico);
+        }
+        return "redirect:/partida/new";
+    }
 
-        return res;
+    public LocalTime calculaTiempoMedioPartida(LocalTime tiempoTotal, Integer nPartidas) {
+        Integer segundos = tiempoTotal.getHour() * 60 * 60 + tiempoTotal.getMinute() * 60 + tiempoTotal.getSecond();
+        Integer c = segundos / nPartidas;
+
+        Integer hh = c / 60 / 60;
+        Integer mm = (c / 60) % 60;
+        Integer ss = c % 60;
+        String res = String.format("%02d:%02d:%02d", hh, mm, ss);
+        return LocalTime.parse(res);
+    }
+
+    public Integer calculaPuntuacion(Integer minasEncontradas, LocalTime tiempoPartida, String esVictoria) {
+        Double segundos = tiempoPartida.getMinute() * 60. + tiempoPartida.getSecond();
+        Double res = (minasEncontradas / segundos) * 1000;
+        if (esVictoria.equals("true")) {
+            res *= 2;
+        }
+        return res.intValue();
     }
 }
