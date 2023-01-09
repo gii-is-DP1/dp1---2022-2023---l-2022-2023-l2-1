@@ -178,10 +178,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       <br>
       <Span id="alert_mensaje"></Span>
       <br>
-          <!-- <input type="text" id="minas_encontradas_final" value=""/>
-          <input type="text" id="tiempo_empleado_final" value=""/> -->
-          <!-- <input type="hidden" id="alert_boton" value="Continuar" /> -->
-          <button onclick="enlacePostTablero();">Continuar</button>
+          <input type="hidden" id="alert_boton" onclick="enlacePostTablero();"value="Continuar"/>
           <script type="text/javascript">
             function enlacePostTablero(){
               window.location.href="/postTablero/"+tablero.numMinasEncontradas+"/"+tablero.tiempoEmpleado+"/"+tablero.esVictoria;
