@@ -1,14 +1,19 @@
 package org.springframework.samples.petclinic.historico;
 
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.samples.petclinic.model.BaseEntity;
-
+import org.springframework.samples.petclinic.registeredUser.RegisteredUser;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,11 +25,9 @@ import lombok.Setter;
 public class Historico extends BaseEntity {
 
     @NotNull
-    @JoinColumn(name = "user_id")
-    private Integer userId;
-    @NotNull
     @Column(name = "partidas_totales")
     private Integer partidasTotales;
+
     @NotNull
     @Column(name = "partidas_ganadas")
     private Integer partidasGanadas;
@@ -39,18 +42,16 @@ public class Historico extends BaseEntity {
 
     @NotNull
     @Column(name = "tiempo_total_juego")
-    private Double tiempoTotalJuego;
+    @DateTimeFormat(pattern = "hh:mm:ss", iso = ISO.TIME)
+    private LocalTime tiempoTotalJuego;
 
     @NotNull
     @Column(name = "tiempo_medio_partida")
-    private Double tiempoMedioPartida;
+    @DateTimeFormat(pattern = "hh:mm:ss", iso = ISO.TIME)
+    private LocalTime tiempoMedioPartida;
 
     @NotNull
-    @Column(name = "tiempo_minimo")
-    private Double tiempoMinimo;
-
-    @NotNull
-    @Column(name = "tiempo_maximo")
-    private Double tiempoMaximo;
+    @JoinColumn(name = "registered_user_id")
+    private Integer registeredUserId;
 
 }

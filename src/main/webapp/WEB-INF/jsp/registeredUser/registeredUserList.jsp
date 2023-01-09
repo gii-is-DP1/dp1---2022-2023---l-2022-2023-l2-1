@@ -6,20 +6,20 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="registered_users">
-    <h2>Date Registered Users</h2>
+    <h2>Usuarios Registrados</h2>
 
     <table id="registeredUsersTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">Name</th>
-            <th style="width: 150px;">Username</th>
+            <th style="width: 150px;">Nombre</th>
+            <th style="width: 150px;">Usuario</th>
             <th style="width: 150px;">Email</th>
             <th></th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${selections}" var="registeredUser">
+        <c:forEach items="${data}" var="registeredUser">
             <tr>
                 <td>
                     <c:out value="${registeredUser.name}"/>
@@ -55,4 +55,18 @@
         </c:forEach>
         </tbody>
     </table>
+  
+    <c:if test="${totalPages > 1}">
+            <ul class="pagination">
+                <c:forEach begin="0" end="${totalPages-1}" var="page">
+                    <li class="page-item">
+                        <c:url value = "/registeredUser/userPages/${page}" var = "pagiURL">
+                        <c:param name = "search" value = "${search}"/>
+                        </c:url>
+                        <a href="${pagiURL}" class="page-link">${page}</a>
+                    </li>
+                </c:forEach>
+            </ul>
+    </c:if>
+
 </petclinic:layout>

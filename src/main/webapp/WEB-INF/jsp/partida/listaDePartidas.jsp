@@ -37,13 +37,13 @@
                             Ninguno
                         </c:when>
                     <c:otherwise>
-                        <c:forEach items="${usuarios}" var="user">
+                        <c:forEach items="${compis}" var="user">
                           <c:if test="${user.id==partida.idInvitado}">
                            <c:out value="${user.user.username}"/>
                           </c:if>
                         </c:forEach>
                     </c:otherwise>
-                                        
+                    </c:choose>                  
                 </td>
                 <td>
                     <c:out value="${partida.tiempoDeJuego}"/>

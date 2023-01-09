@@ -38,12 +38,6 @@ tagdir="/WEB-INF/tags" %>
           <c:out value="${historico.tiempoMedioPartida}" />
         </th>
       </tr>
-      <tr>
-        <th>Tiempo minimo: <c:out value="${historico.tiempoMinimo}" /></th>
-      </tr>
-      <tr>
-        <th>Tiempo maximo: <c:out value="${historico.tiempoMaximo}" /></th>
-      </tr>
     </tbody>
   </table>
 </petclinic:layout>
