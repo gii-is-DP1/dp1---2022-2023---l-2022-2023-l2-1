@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.historico;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.samples.petclinic.logros.Logro;
 import org.springframework.stereotype.Repository;
@@ -14,4 +15,5 @@ public interface HistoricoRepository extends CrudRepository<Historico, Integer> 
 
     Historico findHistoricoByUserId(Integer id);
     Set<Logro> findLogrosByUserId(Integer id);
+
 }

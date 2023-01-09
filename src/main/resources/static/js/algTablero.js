@@ -7,6 +7,8 @@ const tablero = {
   tiempoEmpleado: "00:00",
   numBanderas: 0,
   campoMinas: [],
+  primeraVida: true,
+  esVictoria: "false",
 };
 
 // --------------------------------------------------------
@@ -117,6 +119,7 @@ function accionMarcar(evento) {
     }
   }
   pintaBanderas();
+  finDePartida("");
 }
 
 function accionDestapar(evento) {
@@ -145,6 +148,9 @@ function destaparCasilla(fila, columna) {
         casilla.innerHTML = tablero.campoMinas[fila][columna];
         casilla.classList.add("c" + tablero.campoMinas[fila][columna]);
         if (tablero.campoMinas[fila][columna] != "mina") {
+          if (tablero.primeraVida == true) {
+            tablero.primeraVida = false;
+          }
           if (tablero.campoMinas[fila][columna] == 0) {
             destaparCasilla(fila - 1, columna - 1);
             destaparCasilla(fila - 1, columna);
@@ -159,9 +165,13 @@ function destaparCasilla(fila, columna) {
           finDePartida("");
         } else if (tablero.campoMinas[fila][columna] == "mina") {
           casilla.innerHTML = "";
-          casilla.classList.add("icon-mina");
-          casilla.classList.add("sinmarcar");
-          finDePartida("error");
+          if (tablero.primeraVida == true) {
+            tablero.primeraVida = false;
+            casilla.classList.add("icon-escudo");
+          } else {
+            casilla.classList.add("icon-mina");
+            finDePartida("error");
+          }
         }
       }
     }
@@ -253,19 +263,19 @@ function todasDestapadas() {
 }
 
 function finDePartida(msg) {
-  let s = "Fin de partida: ";
   if (msg == "error") {
     resolverTablero();
-    mensajeFinal(s + "Mala suerte!!!");
+    mensajeFinal("Has pisado una mina!!!");
   } else {
     if (todasDestapadas()) {
       let estado = resolverTablero();
       if (estado == "banderas_erroneas") {
-        mensajeFinal(s + "Hay banderas incorrectas");
+        mensajeFinal("Hay banderas incorrectas");
       } else if (estado == "minas_sin_destapar") {
-        mensajeFinal(s + "Hay minas sin destapar");
+        mensajeFinal("Hay minas sin destapar");
       } else if (estado == "todas_banderas_correctas") {
-        mensajeFinal(s + "Enhorabuena!!!");
+        tablero.esVictoria = "true";
+        mensajeFinal("Enhorabuena!!!");
       }
     }
   }
@@ -295,6 +305,10 @@ function resolverTablero() {
         bandera_erronea++;
       }
     } else if (!casillas[i].classList.contains("destapada")) {
+      if (tablero.campoMinas[fila][columna] > 0) {
+        casillas[i].innerHTML = tablero.campoMinas[fila][columna];
+        casillas[i].classList.add("c" + tablero.campoMinas[fila][columna]);
+      }
       casillas[i].classList.add("destapada");
       if (tablero.campoMinas[fila][columna] == "mina") {
         casillas[i].classList.add("icon-mina");
@@ -302,6 +316,7 @@ function resolverTablero() {
       }
     }
   }
+
   if (bandera_erronea > 0) {
     return "banderas_erroneas";
   } else if (mina_sin_destapar > 0) {
@@ -315,18 +330,24 @@ function resolverTablero() {
 
 function mensajeFinal(text) {
   clearInterval(timer);
+
   let divAlert = document.getElementById("alert_parent");
   divAlert.classList.add("alerta-final");
+  let mensajeGeneral = document.getElementById("alert_mensaje_general");
   let mensaje = document.getElementById("alert_mensaje");
-  let botonSinUser = document.getElementById("alert_boton");
-  let minasEncontradas = document.getElementById("minas_encontradas");
-  let tiempoEmpleado = document.getElementById("tiempo_empleado");
-  boton.setAttribute("type", "submit");
-  if (minasEncontradas && tiempoEmpleado) {
-    minasEncontradas.setAttribute("value", tablero.numMinasEncontradas);
-    tiempoEmpleado.setAttribute("value", tablero.tiempoEmpleado);
+  let boton = document.getElementById("alert_boton");
+
+  if (boton) {
+    boton.setAttribute("type", "submit");
   }
-  mensaje.innerHTML = text;
+
+  if (mensajeGeneral) {
+    mensajeGeneral.innerHTML = "Fin de partida!!!";
+  }
+
+  if (mensaje) {
+    mensaje.innerHTML = text;
+  }
 }
 
 // --------------------------------------------------------

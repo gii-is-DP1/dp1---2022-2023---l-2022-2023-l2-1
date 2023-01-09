@@ -5,6 +5,9 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.samples.petclinic.user.AuthoritiesService;
 import org.springframework.samples.petclinic.user.User;
 import org.springframework.samples.petclinic.user.UserService;
@@ -69,6 +72,18 @@ public class RegisteredUserService {
     public void deleteUser(RegisteredUser user) throws DataAccessException {
         registeredUserRepository.delete(user);
     }
+	@Transactional
+	Page<RegisteredUser> findAllpageablePage(Pageable pageable){
+		return registeredUserRepository.findAll(pageable);
+	}
+    @Transactional
+    Iterable<RegisteredUser> findAllIterable(Sort sort){
+		return registeredUserRepository.findAll(sort);
+	}
+	@Transactional
+	Page<RegisteredUser> findByNameFromSubstring(String name, Pageable pageable){
+		return registeredUserRepository.findByNameContaining(name, pageable);
+	}
 
 
 }
