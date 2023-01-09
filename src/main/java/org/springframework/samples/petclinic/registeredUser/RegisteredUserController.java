@@ -44,6 +44,7 @@ public class RegisteredUserController {
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
+	
 
 	@GetMapping("/myProfile")
 	public String showRegisteredUserById(RegisteredUser registeredUser, BindingResult result,
