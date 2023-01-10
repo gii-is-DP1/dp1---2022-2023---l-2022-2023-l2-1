@@ -51,8 +51,6 @@ public class RegisteredUserService {
 	public Collection<RegisteredUser> findRegisteredUserByName(String name) throws DataAccessException {
 		return registeredUserRepository.findByName(name);
 	}
-
-
     @Transactional
 	public void saveRegisteredUser(RegisteredUser registeredUser) throws DataAccessException {
 		//creating registeredUser

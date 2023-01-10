@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.envers.Audited;
 import org.springframework.core.style.ToStringCreator;
 import org.springframework.samples.petclinic.model.NamedEntity;
 import org.springframework.samples.petclinic.user.User;
@@ -19,6 +20,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Audited
 @Table(name = "registered_users")
 public class RegisteredUser extends NamedEntity implements Comparable<RegisteredUser> {
 
@@ -30,7 +32,7 @@ public class RegisteredUser extends NamedEntity implements Comparable<Registered
 	@NotNull
 	@Email
     String email;
-
+	
     @OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "username", referencedColumnName = "username")
 	private User user;

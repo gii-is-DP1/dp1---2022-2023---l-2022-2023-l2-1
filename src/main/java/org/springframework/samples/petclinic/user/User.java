@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +21,7 @@ import lombok.Setter;
 @NoArgsConstructor	
 @Getter
 @Setter
+@Audited
 @Entity
 @Table(name = "users")
 public class User{
@@ -27,6 +32,7 @@ public class User{
 
 	boolean enabled;
 	
+	@NotAudited
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private Set<Authorities> authorities;
 }

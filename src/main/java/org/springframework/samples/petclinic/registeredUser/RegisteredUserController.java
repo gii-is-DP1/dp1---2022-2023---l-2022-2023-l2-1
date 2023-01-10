@@ -109,7 +109,6 @@ public class RegisteredUserController {
 			return "registeredUser/registeredUserList";
 			
 		}
-
 		// find RegisteredUsers by Name
 		Collection<RegisteredUser> results = this.registeredUserService
 				.findRegisteredUserByName(registeredUser.getName().trim());
