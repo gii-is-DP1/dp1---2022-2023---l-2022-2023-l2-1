@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.envers.Audited;
 import org.springframework.core.style.ToStringCreator;
-import org.springframework.samples.petclinic.model.NamedEntity;
+import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.user.User;
 
 import lombok.Getter;
@@ -22,7 +22,10 @@ import lombok.Setter;
 @Setter
 @Audited
 @Table(name = "registered_users")
-public class RegisteredUser extends NamedEntity implements Comparable<RegisteredUser> {
+public class RegisteredUser extends BaseEntity implements Comparable<RegisteredUser> {
+
+	@Column(name = "name")
+	String name;
 
     @Column(name = "description")
     //@Size(min = 0,max = 250)

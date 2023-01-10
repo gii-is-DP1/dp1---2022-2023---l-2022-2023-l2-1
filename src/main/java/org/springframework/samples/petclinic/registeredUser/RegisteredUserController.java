@@ -1,10 +1,18 @@
 package org.springframework.samples.petclinic.registeredUser;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
+import org.hibernate.envers.query.AuditQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -49,7 +57,6 @@ public class RegisteredUserController {
 		dataBinder.setDisallowedFields("id");
 	}
 	
-
 	@GetMapping("/myProfile")
 	public String showRegisteredUserById(RegisteredUser registeredUser, BindingResult result,
 			Map<String, Object> model) {
@@ -181,6 +188,18 @@ public class RegisteredUserController {
 		registeredUserService.deleteUser(user);
 		
 		return "redirect:/registeredUser";
+	}
+	@GetMapping(value = "/registeredUser/auditoria")
+	public String auditoriaUsuarios(Map<String, Object> model) {
+
+		Collection<RegisteredUser> usuarios = null;
+		if(registeredUserService.findRegisteredUser().stream().anyMatch(c->c.getUser().getLastModifiedDate()!=null)){
+			 usuarios =  registeredUserService.findRegisteredUser().stream().filter(c->c.getUser().getLastModifiedDate()!=null).collect(Collectors.toSet());
+		}
+
+		model.put("registeredUsers", usuarios);
+		
+		return "registeredUser/listaAuditoria";
 	}
 
 

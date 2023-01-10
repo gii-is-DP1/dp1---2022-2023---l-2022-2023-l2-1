@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.registeredUser;
 
 
+import java.time.LocalTime;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.samples.petclinic.historico.Historico;
+import org.springframework.samples.petclinic.historico.HistoricoService;
 import org.springframework.samples.petclinic.user.AuthoritiesService;
 import org.springframework.samples.petclinic.user.User;
 import org.springframework.samples.petclinic.user.UserService;
@@ -22,6 +25,10 @@ public class RegisteredUserService {
 	
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private HistoricoService historicoService;
+	
 	
 	@Autowired
 	private AuthoritiesService authoritiesService;
@@ -59,6 +66,16 @@ public class RegisteredUserService {
 		userService.saveUser(registeredUser.getUser());
 		//creating authorities
 		authoritiesService.saveAuthorities(registeredUser.getUser().getUsername(), "registeredUser");
+		//crea el historico
+		Historico hist = new Historico();
+		hist.setRegisteredUserId(registeredUser.getId());
+		hist.setMinasEncontradas(0);
+		hist.setPartidasGanadas(0);
+		hist.setPartidasTotales(0);
+		hist.setPuntuacion(0);
+		hist.setTiempoMedioPartida(LocalTime.of(0, 0, 0));
+		hist.setTiempoTotalJuego(LocalTime.of(0, 0, 0));
+		historicoService.saveHistorico(hist);
 	}	
     
 	@Transactional
