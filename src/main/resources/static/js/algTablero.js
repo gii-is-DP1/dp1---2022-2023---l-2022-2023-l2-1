@@ -1,16 +1,52 @@
+// --------------------------------------------------------
 const tablero = {
   numMinasTotales: document.getElementById("numMinas").value,
   numFilas: document.getElementById("numFilas").value,
   numColumnas: document.getElementById("numColumnas").value,
   numMinasEncontradas: 0,
+  tiempoEmpleado: "00:00",
   numBanderas: 0,
   campoMinas: [],
+  primeraVida: true,
+  esVictoria: "false",
 };
+
+// --------------------------------------------------------
 
 window.onload = buscaminas();
 
+// --------------------------------------------------------
+
+var segundos = 0;
+var minutos = 0;
+var timer = setInterval(function () {
+  segundos++;
+  if (segundos == 60) {
+    segundos = 0;
+    minutos++;
+  }
+  let ss = "";
+  let mm = "";
+  if (segundos < 10) {
+    ss = "0" + segundos;
+  } else {
+    ss = segundos;
+  }
+  if (minutos < 10) {
+    mm = "0" + minutos;
+  } else {
+    mm = minutos;
+  }
+  tablero.tiempoEmpleado = mm + ":" + ss;
+  pintaTiempo();
+}, 1000);
+
+// --------------------------------------------------------
+
 function buscaminas() {
-  pintaCabecera();
+  pintaBanderas();
+  pintaMinas();
+  pintaTiempo();
   pintaTablero();
   creaCampoMinasVacio();
   esparcirMinas();
@@ -19,9 +55,19 @@ function buscaminas() {
 
 // --------------------------------------------------------
 
-function pintaCabecera() {
-  num_bandera.innerHTML = tablero.numBanderas;
-  num_mina.innerHTML = tablero.numMinasTotales - tablero.numMinasEncontradas;
+function pintaBanderas() {
+  let numBanderas = document.getElementById("num_bandera");
+  numBanderas.innerHTML = tablero.numBanderas;
+}
+
+function pintaMinas() {
+  let numMinas = document.getElementById("num_mina");
+  numMinas.innerHTML = tablero.numMinasTotales;
+}
+
+function pintaTiempo() {
+  let temp = document.getElementById("temporizador");
+  temp.innerHTML = tablero.tiempoEmpleado;
 }
 
 function pintaTablero() {
@@ -72,7 +118,8 @@ function accionMarcar(evento) {
       }
     }
   }
-  pintaCabecera();
+  pintaBanderas();
+  finDePartida("");
 }
 
 function accionDestapar(evento) {
@@ -82,7 +129,6 @@ function accionDestapar(evento) {
     let columna = parseInt(casilla.dataset.columna, 10);
     destaparCasilla(fila, columna);
   }
-  pintaCabecera();
 }
 
 function destaparCasilla(fila, columna) {
@@ -102,6 +148,9 @@ function destaparCasilla(fila, columna) {
         casilla.innerHTML = tablero.campoMinas[fila][columna];
         casilla.classList.add("c" + tablero.campoMinas[fila][columna]);
         if (tablero.campoMinas[fila][columna] != "mina") {
+          if (tablero.primeraVida == true) {
+            tablero.primeraVida = false;
+          }
           if (tablero.campoMinas[fila][columna] == 0) {
             destaparCasilla(fila - 1, columna - 1);
             destaparCasilla(fila - 1, columna);
@@ -116,9 +165,13 @@ function destaparCasilla(fila, columna) {
           finDePartida("");
         } else if (tablero.campoMinas[fila][columna] == "mina") {
           casilla.innerHTML = "";
-          casilla.classList.add("icon-mina");
-          casilla.classList.add("sinmarcar");
-          finDePartida("error");
+          if (tablero.primeraVida == true) {
+            tablero.primeraVida = false;
+            casilla.classList.add("icon-escudo");
+          } else {
+            casilla.classList.add("icon-mina");
+            finDePartida("error");
+          }
         }
       }
     }
@@ -210,19 +263,19 @@ function todasDestapadas() {
 }
 
 function finDePartida(msg) {
-  let s = "Fin de partida: ";
   if (msg == "error") {
     resolverTablero();
-    alert(s + "Mala suerte!!!");
+    mensajeFinal("Has pisado una mina!!!");
   } else {
     if (todasDestapadas()) {
       let estado = resolverTablero();
       if (estado == "banderas_erroneas") {
-        alert(s + "Hay banderas incorrectas");
+        mensajeFinal("Hay banderas incorrectas");
       } else if (estado == "minas_sin_destapar") {
-        alert(s + "Hay minas sin destapar");
+        mensajeFinal("Hay minas sin destapar");
       } else if (estado == "todas_banderas_correctas") {
-        alert(s + "Enhorabuena!!!");
+        tablero.esVictoria = "true";
+        mensajeFinal("Enhorabuena!!!");
       }
     }
   }
@@ -245,12 +298,17 @@ function resolverTablero() {
       casillas[i].classList.add("destapada");
       if (tablero.campoMinas[fila][columna] == "mina") {
         casillas[i].classList.add("bandera-correcta");
+        tablero.numMinasEncontradas++;
         bandera_correcta++;
       } else {
         casillas[i].classList.add("bandera-erronea");
         bandera_erronea++;
       }
     } else if (!casillas[i].classList.contains("destapada")) {
+      if (tablero.campoMinas[fila][columna] > 0) {
+        casillas[i].innerHTML = tablero.campoMinas[fila][columna];
+        casillas[i].classList.add("c" + tablero.campoMinas[fila][columna]);
+      }
       casillas[i].classList.add("destapada");
       if (tablero.campoMinas[fila][columna] == "mina") {
         casillas[i].classList.add("icon-mina");
@@ -258,6 +316,7 @@ function resolverTablero() {
       }
     }
   }
+
   if (bandera_erronea > 0) {
     return "banderas_erroneas";
   } else if (mina_sin_destapar > 0) {
@@ -266,3 +325,29 @@ function resolverTablero() {
     return "todas_banderas_correctas";
   }
 }
+
+// --------------------------------------------------------
+
+function mensajeFinal(text) {
+  clearInterval(timer);
+
+  let divAlert = document.getElementById("alert_parent");
+  divAlert.classList.add("alerta-final");
+  let mensajeGeneral = document.getElementById("alert_mensaje_general");
+  let mensaje = document.getElementById("alert_mensaje");
+  let boton = document.getElementById("alert_boton");
+
+  if (boton) {
+    boton.setAttribute("type", "submit");
+  }
+
+  if (mensajeGeneral) {
+    mensajeGeneral.innerHTML = "Fin de partida!!!";
+  }
+
+  if (mensaje) {
+    mensaje.innerHTML = text;
+  }
+}
+
+// --------------------------------------------------------
