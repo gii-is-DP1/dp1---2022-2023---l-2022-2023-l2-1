@@ -50,6 +50,14 @@
 				</petclinic:menuItem>
 				</sec:authorize>
 
+				<sec:authorize url="/logros">
+				<petclinic:menuItem active="${name eq 'admin'}" url="/logros"
+					title="Logros">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					<span>Logros</span>
+				</petclinic:menuItem>
+				</sec:authorize>
+
 				<petclinic:menuItem active="${name eq 'Partidas'}" url="/partidas"
 					title="Partidas">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>

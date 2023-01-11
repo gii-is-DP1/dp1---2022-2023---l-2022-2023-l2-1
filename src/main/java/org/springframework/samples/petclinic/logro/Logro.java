@@ -1,12 +1,14 @@
-package org.springframework.samples.petclinic.logros;
+package org.springframework.samples.petclinic.logro;
+
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.samples.petclinic.historico.Historico;
 import org.springframework.samples.petclinic.model.BaseEntity;
 
 import lombok.Getter;
@@ -19,10 +21,6 @@ import lombok.Setter;
 public class Logro extends BaseEntity {
 
     @NotNull
-    @JoinColumn(name = "registered_user_id")
-    private Integer registeredUserId;
-
-    @NotNull
     @Column(name = "titulo")
     private String titulo;
 
@@ -31,7 +29,10 @@ public class Logro extends BaseEntity {
     private String descripcion;
 
     @NotNull
-    @OneToOne
-    @JoinColumn(name = "condicion_id")
-    private Condicion condicionId;
+    @Column(name = "condicion")
+    private String condicion;
+
+    @ManyToMany(mappedBy = "logros")
+    private Set<Historico> historicos;
+
 }
