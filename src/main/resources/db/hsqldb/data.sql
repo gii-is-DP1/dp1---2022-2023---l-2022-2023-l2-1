@@ -145,11 +145,11 @@ INSERT INTO condiciones VALUES (2, 'Partidas ganadas');
 INSERT INTO condiciones VALUES (3, 'Minas liberadas');
 
 
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (1, 1, null, 1, 2, 2, FALSE, null,null);
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (2, 2, null, 1, 2, 1, FALSE, null,null);
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (3, 1, null, 1, 2, 2, FALSE, null,null);
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (4, 1, '15:30:00', 1, 2, 2, TRUE, '12345',TRUE);
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (5, 2, null, 3, 1, null, null, null,null);
+INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (1, 1, null,null, 1, 2, 2, FALSE, null,null);
+INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (2, 2, null,null, 1, 2, 1, FALSE, null,null);
+INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (3, 1, null,null, 1, 2, 2, FALSE, null,null);
+INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (4, 1, '15:30:00','5:10:00', 1, 2, 2, TRUE, '12345',TRUE);
+INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (5, 2, null,null, 3, 1, null, null, null,null);
 
 INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (1,1,0,0,0,0,'00:00:00','00:00:00');
 INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (2,2,20,2,4,5,'00:30:10','00:01:05');

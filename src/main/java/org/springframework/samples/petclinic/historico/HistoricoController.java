@@ -41,10 +41,11 @@ public class HistoricoController {
     @GetMapping(value = "/partidasJugadas")
     public ModelAndView muestraPartidasDeUsuario(@PathVariable("registeredUserId") Integer id) {
         ModelAndView result = new ModelAndView("partida/listaDePartidas");
-        Set<RegisteredUser> compis = partidaService.getAllById(id).stream().filter(c->c.getIdInvitado()!=null).map(c->registeredService.findRegisteredUserById(Integer.valueOf(c.getIdInvitado()))).collect(Collectors.toSet());
-
+        Set<RegisteredUser> compis = partidaService.getAllCreatedById(id).stream().filter(c->c.getIdInvitado()!=null).map(c->registeredService.findRegisteredUserById(Integer.valueOf(c.getIdInvitado()))).collect(Collectors.toSet());
+        RegisteredUser usuario = registeredService.findRegisteredUserById(id);
         result.addObject("partidas", partidaService.getAllById(id));
         result.addObject("compis", compis);
+        result.addObject("registeredUser", usuario);
 
         return result;
     }

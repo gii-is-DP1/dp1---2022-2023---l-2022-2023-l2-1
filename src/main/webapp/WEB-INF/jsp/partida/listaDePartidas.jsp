@@ -14,7 +14,7 @@
          <th>Id</th>
          <th>Dificultad</th>
          <th>Modo de Juego</th>
-         <th>Jugador Invitado</th>
+         <th>Oponente</th>
          <th>Tiempo de juego</th>
          <th>Resultado</th>
         </tr>
@@ -33,8 +33,15 @@
                 </td>
                 <td>
                     <c:choose>
-                        <c:when test="${partida.idInvitado==null}">
-                            Ninguno
+                        <c:when test="${partida.idInvitado==null || partida.idInvitado==registeredUser.id}">
+                            <c:if test="${partida.idInvitado==registeredUser.id}">
+                                <c:forEach items="${compis}" var="user">
+                                <c:if test="${user.id==partida.registeredUserId}">
+                                 <c:out value="${user.user.username}"/>
+                                </c:if>
+                              </c:forEach>
+                            </c:if>
+                            <c:if test="${partida.idInvitado==null}">Ninguno</c:if>
                         </c:when>
                     <c:otherwise>
                         <c:forEach items="${compis}" var="user">
@@ -46,12 +53,21 @@
                     </c:choose>                  
                 </td>
                 <td>
-                    <c:out value="${partida.tiempoDeJuego}"/>
+                    <c:if test="${partida.tiempoDeJuego==null}">En Curso</c:if>
+                    <c:if test="${partida.registeredUserId==registeredUser.id}"><c:out value="${partida.tiempoDeJuego}"/></c:if>
+                    <c:if test="${partida.idInvitado==registeredUser.id}"><c:out value="${partida.tiempoDeJuegoInvitado}"/></c:if>
                 </td>
                 <td> 
-                    <c:if test="${partida.resultado==null}">En Curso</c:if>
+                <c:choose>
+                    <c:when test="${partida.tiempoDeJuego!=null}">
+                    <c:if test="${partida.resultado==null}">Empate</c:if>
                     <c:if test="${partida.resultado==true}">Victoria</c:if>
-                    <c:if test="${partida.resultado==false}">Derrota</c:if>
+                    <c:if test="${partida.resultado==false}">Derrota</c:if> 
+                    </c:when>
+                    <c:otherwise>
+                        En curso
+                    </c:otherwise>
+                </c:choose>
                 </td>
             </tr>
         </c:forEach>
