@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.logro;
 
 import java.text.ParseException;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 

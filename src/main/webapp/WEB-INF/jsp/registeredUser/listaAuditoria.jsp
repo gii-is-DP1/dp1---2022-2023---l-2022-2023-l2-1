@@ -24,10 +24,9 @@ prefix="petclinic" tagdir="/WEB-INF/tags" %> <%@page contentType="text/html"%>
         <thead>
             <tr>
                 <th>Operacion</th>
+                <th>Usuario modificado</th>
                 <th>Fecha de la operación</th>
                 <th>Modificador</th>                
-                <th>Fecha de creación</th>
-                <th>Usuario creador</th>
             </tr>
         </thead>
         <tbody>
@@ -38,10 +37,9 @@ prefix="petclinic" tagdir="/WEB-INF/tags" %> <%@page contentType="text/html"%>
                 <tr>
                 <td>
                 <c:choose>
-                    <c:when test="checkCreat('${registeredUser.user.lastModifiedDate}','${registeredUser.user.createdDate}');">
+                    <c:when test="${registeredUser.user.lastModifiedDate!=null && registeredUser.user.createdDate!=null}">
                     Creación
-
-                </c:when>
+                    </c:when>
                 <c:otherwise>
                     Modificación
                 </c:otherwise>
@@ -49,22 +47,18 @@ prefix="petclinic" tagdir="/WEB-INF/tags" %> <%@page contentType="text/html"%>
                 </td>
                 <td>
                   
+                    <c:out value="${registeredUser.user.username}"/>
+                    
+                </td>
+                <td>
+                  
                     <c:out value="${registeredUser.user.lastModifiedDate}"/>
                     
                 </td>
                 <td>
+                    <c:if test="${registeredUser.user.modifier=='anonymousUser'}"><c:out value="${registeredUser.user.username}"/></c:if>
+                    <c:if test="${registeredUser.user.modifier!='anonymousUser'}"><c:out value="${registeredUser.user.modifier}"/></c:if>
                     
-                    <c:out value="${registeredUser.user.modifier}"/>
-                    
-                </td>
-                <td>
-                    <c:if test="${registeredUser.user.createdDate==null}"><c:out value="Sin Datos"/></c:if>
-                    <c:if test="${registeredUser.user.createdDate!=null}"><c:out value="${registeredUser.user.createdDate}"/></c:if>
-                    
-                </td>
-                <td>
-                    <c:if test="${registeredUser.user.createdDate==null}"><c:out value="Sin Datos"/></c:if>
-                    <c:if test="${registeredUser.user.createdDate!=null}"><c:out value="${registeredUser.user.creator}"/></c:if>
                 </td>
                 </tr>
                 </c:forEach>
@@ -76,14 +70,6 @@ prefix="petclinic" tagdir="/WEB-INF/tags" %> <%@page contentType="text/html"%>
                 </td>
                 <td>
                     <c:out value="Sin Datos"/>
-                </td>
-                <td>
-                    <c:out value="Sin Datos"/>
-
-                </td>
-                <td>
-                    <c:out value="Sin Datos"/>
-
                 </td>
                 <td>
                     <c:out value="Sin Datos"/>
