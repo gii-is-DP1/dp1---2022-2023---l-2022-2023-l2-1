@@ -1,5 +1,6 @@
 // --------------------------------------------------------
 const tablero = {
+  partidaId: document.getElementById("partidaId").value,
   numMinasTotales: document.getElementById("numMinas").value,
   numFilas: document.getElementById("numFilas").value,
   numColumnas: document.getElementById("numColumnas").value,
