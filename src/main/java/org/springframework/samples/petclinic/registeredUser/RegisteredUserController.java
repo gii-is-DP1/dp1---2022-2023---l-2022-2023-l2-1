@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.registeredUser;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -49,7 +50,6 @@ public class RegisteredUserController {
 		dataBinder.setDisallowedFields("id");
 	}
 	
-
 	@GetMapping("/myProfile")
 	public String showRegisteredUserById(RegisteredUser registeredUser, BindingResult result,
 			Map<String, Object> model) {
@@ -109,7 +109,6 @@ public class RegisteredUserController {
 			return "registeredUser/registeredUserList";
 			
 		}
-
 		// find RegisteredUsers by Name
 		Collection<RegisteredUser> results = this.registeredUserService
 				.findRegisteredUserByName(registeredUser.getName().trim());
@@ -182,6 +181,18 @@ public class RegisteredUserController {
 		registeredUserService.deleteUser(user);
 		
 		return "redirect:/registeredUser";
+	}
+	@GetMapping(value = "/registeredUser/auditoria")
+	public String auditoriaUsuarios(Map<String, Object> model) {
+
+		Collection<RegisteredUser> usuarios = null;
+		if(registeredUserService.findRegisteredUser().stream().anyMatch(c->c.getUser().getLastModifiedDate()!=null)){
+			 usuarios =  registeredUserService.findRegisteredUser().stream().filter(c->c.getUser().getLastModifiedDate()!=null).collect(Collectors.toSet());
+		}
+
+		model.put("registeredUsers", usuarios);
+		
+		return "registeredUser/listaAuditoria";
 	}
 
 
