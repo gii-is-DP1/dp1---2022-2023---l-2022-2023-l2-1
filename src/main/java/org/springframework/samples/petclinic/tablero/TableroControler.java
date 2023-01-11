@@ -1,9 +1,7 @@
 package org.springframework.samples.petclinic.tablero;
 
-import java.lang.ProcessBuilder.Redirect;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.historico.Historico;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -76,40 +73,44 @@ public class TableroControler {
             tablero.setColumnas(10);
             tablero.setFilas(8);
             tablero.setMinas(10);
-            tablero.setPartidaId(partida);
-            tableroService.saveBoard(tablero);
             // medio
         } else if (diff.getId().equals(2)) {
             tablero.setColumnas(21);// 18
             tablero.setFilas(12);// 14
             tablero.setMinas(40);
-            tablero.setPartidaId(partida);
-            tableroService.saveBoard(tablero);
             // dificil
         } else {
             tablero.setColumnas(30);// 24
             tablero.setFilas(16);// 20
             tablero.setMinas(99);
-            tablero.setPartidaId(partida);
-            tableroService.saveBoard(tablero);
         }
+        tablero.setPartida(partida);
+        tableroService.saveBoard(tablero);
         res.addObject("registeredUser", ru);
         res.addObject("tablero", tablero);
         return res;
     }
 
-    @GetMapping(value = "/postTablero/{minasEncontradas}/{tiempoEmpleado}/{esVictoria}")
+    @GetMapping(value = "/postTablero/{minasEncontradas}/{tiempoEmpleado}/{esVictoria}/{partidaId}")
     public String postTablero(@PathVariable("minasEncontradas") Integer minasEncontradas,
-            @PathVariable("tiempoEmpleado") String tiempoEmpleado, @PathVariable("esVictoria") String esVictoria) {
+            @PathVariable("tiempoEmpleado") String tiempoEmpleado, @PathVariable("esVictoria") String esVictoria,
+            @PathVariable("partidaId") Integer partidaId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         RegisteredUser ru = this.registeredUserService
                 .findRegisteredUserByUsername(this.userService.findUser(username).orElse(null));
         if (ru != null) {
             Historico nuevoHistorico = historicoService.getHistoricoByRegisteredUserId(ru.getId());
+            Partida partida = partidaService.getById(partidaId);
             if (esVictoria.equals("true")) {
                 nuevoHistorico.setPartidasGanadas(nuevoHistorico.getPartidasGanadas() + 1);
+                if(partida.getRegisteredUserId()==ru.getId()){
+                    partida.setResultado(true);
+                }
+            }else{
+                partida.setResultado(false);
             }
+            partida.setTiempoDeJuego(LocalTime.parse(tiempoEmpleado));
             nuevoHistorico.setPartidasTotales(nuevoHistorico.getPartidasTotales() + 1);
             nuevoHistorico.setMinasEncontradas(nuevoHistorico.getMinasEncontradas() + minasEncontradas);
             LocalTime nuevoTiempo = LocalTime.parse(tiempoEmpleado);

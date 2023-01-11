@@ -1,13 +1,10 @@
 package org.springframework.samples.petclinic.tablero;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.samples.petclinic.model.BaseEntity;
@@ -35,6 +32,6 @@ public class Tablero extends BaseEntity {
     private Integer minas;
 
     @ManyToOne
-    @JoinColumn(name = "partida_id")
-    private Partida partidaId;
+    @JoinColumn(name = "partida")
+    private Partida partida;
 }
