@@ -59,7 +59,8 @@ public class LogroController {
     }
 
     @PostMapping("/logros/{logroId}/edit")
-    public String editaLogro(@ModelAttribute Logro l) {
+    public String editaLogro(@ModelAttribute Logro l,@PathVariable("logroId") Integer id) {
+        l.setId(id);    
         logroService.save(l);
         return "redirect:/logros";
     }
