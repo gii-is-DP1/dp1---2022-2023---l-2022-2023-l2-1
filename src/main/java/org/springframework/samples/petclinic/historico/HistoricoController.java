@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.security.auth.message.config.AuthConfig;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.registeredUser.RegisteredUser;
@@ -67,42 +66,5 @@ public class HistoricoController {
         return result;
     }
 
-    @GetMapping("/registeredUser/{registeredUserId}/myLogros")
-    public ModelAndView showEstadisticasByUserId(@PathVariable("registeredUserId") int id) {
-        ModelAndView res = new ModelAndView("estadisticas/logrosDeUsuario");
-        Set<Logro> logros =  historicoService.getHistoricoByRegisteredUserId(id).getLogros();
-        res.addObject("user", registeredService.findRegisteredUserById(id));
-        res.addObject("logros",logros);
-        return res;
-    }
-
-    @GetMapping("/logros")
-    public ModelAndView showAllLogros() {
-        ModelAndView res = new ModelAndView("estadisticas/listaLogros");
-        Set<Logro> logros =  historicoService.findAllLogros();
-        res.addObject("logros",logros);
-        return res;
-    }
-
-    @GetMapping("/logros/{logroId}/delete")
-    public String eliminaLogro(@PathVariable("logroId") Integer id) {
-        historicoService.deleteLogroById(id);
-        return "redirect:/logros";
-    }
-
-    @GetMapping("/logros/{logroId}/edit")
-    public String editaLogro(@PathVariable("logroId") Integer id, Model model) {
-        Logro l = historicoService.getLogroById(id);
-        model.addAttribute(l);
-        return "estadisticas/logroUpdate";
-    }
-
-    @PostMapping("/logros/{logroId}/edit")
-    public String editaLogro(@Valid Logro logro, BindingResult result,
-    @PathVariable("logroId") int logroId) {
-        logro.setId(logroId);
-		this.historicoService.save(logro);
-		return "redirect:/logros";
-    }
 
 }

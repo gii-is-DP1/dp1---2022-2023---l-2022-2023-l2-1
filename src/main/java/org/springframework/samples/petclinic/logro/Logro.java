@@ -1,4 +1,4 @@
-package org.springframework.samples.petclinic.historico;
+package org.springframework.samples.petclinic.logro;
 
 import java.util.Set;
 
@@ -8,6 +8,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.samples.petclinic.historico.Historico;
 import org.springframework.samples.petclinic.model.BaseEntity;
 
 import lombok.Getter;

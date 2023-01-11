@@ -20,7 +20,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.ManyToAny;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
-
+import org.springframework.samples.petclinic.logro.Logro;
 import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.registeredUser.RegisteredUser;
 

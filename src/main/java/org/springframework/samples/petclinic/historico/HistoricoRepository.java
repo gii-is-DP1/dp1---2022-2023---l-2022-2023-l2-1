@@ -17,19 +17,5 @@ public interface HistoricoRepository extends CrudRepository<Historico, Integer> 
     List<Historico> findAll();
     Historico findHistoricoByRegisteredUserId(Integer id);
 
-    @Query("SELECT l FROM Logro l")
-    Set<Logro> findAllLogros();
-    
-    @Modifying
-    @Transactional
-    @Query("DELETE Logro l WHERE l.id = :id")
-    void deleteLogroById(int id);
-
-    @Transactional
-    @Query("SELECT l FROM Logro l WHERE l.id = :id")
-    Logro findLogroById(int id);
-    
-    @Modifying
-    @Query(value = "INSERT INTO Logro (id,titulo,descripcion,condicion) VALUES (l.id,l.titulo,l.descripcion,l.condicion)", nativeQuery = true)
-    void saveLogro(Logro l);
 }
+

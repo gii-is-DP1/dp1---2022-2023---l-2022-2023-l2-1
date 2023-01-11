@@ -9,7 +9,7 @@
 <%@page pageEncoding="UTF-8"%>
 
 <petclinic:layout pageName="Editar Logro">
-    <form:form modelAttribute="logro" method="post" action="/logros/${logroId}/edit">
+    <form:form modelAttribute="logro" method="post" action="/logros/new">
         <div class="mb-3">
             <petclinic:inputField label="Título" name="titulo"/>
             <br>
@@ -17,6 +17,6 @@
             <br>
             <petclinic:inputField label="Condición" name="condicion"/>
         <br>
-        <button type="submit" class="btn btn-primary">Editar Logro</button>
+        <button type="submit" class="btn btn-primary">Crear Logro</button>
     </form:form>
 </petclinic:layout>

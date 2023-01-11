@@ -32,23 +32,4 @@ public class HistoricoService {
     public void saveHistorico(Historico hist) throws DataAccessException {
         historicoRepository.save(hist);
     }
-
-    @Transactional
-    public void save(Logro l) {
-        historicoRepository.saveLogro(l);
-    }
-
-    public Set<Logro> findAllLogros() {
-        return historicoRepository.findAllLogros();
-    }
-
-    public void deleteLogroById(int id) {
-        historicoRepository.deleteLogroById(id);
-    }
-
-    public Logro getLogroById(Integer id){
-        return historicoRepository.findLogroById(id);
-    }
-  
-
 }
