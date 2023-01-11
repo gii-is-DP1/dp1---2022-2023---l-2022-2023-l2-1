@@ -96,7 +96,7 @@ public class PartidaControler {
 		RegisteredUser ru = this.registerableService
 				.findRegisteredUserByUsername(this.userService.findUser(username).orElse(null));
 
-        if(authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("admin")||a.getAuthority().equals("registeredUser"))){
+        if(authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("registeredUser"))){
                 model.put("registeredUser", ru);
                 return "partida/elegirModo";
         }else{
