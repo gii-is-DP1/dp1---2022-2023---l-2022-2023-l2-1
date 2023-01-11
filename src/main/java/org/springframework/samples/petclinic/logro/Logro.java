@@ -2,9 +2,12 @@ package org.springframework.samples.petclinic.logro;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -28,9 +31,14 @@ public class Logro extends BaseEntity {
     @Column(name = "descripcion")
     private String descripcion;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "condicion")
     @NotNull
-    @Column(name = "condicion")
-    private String condicion;
+    private Condicion condicion;
+
+    @NotNull
+    @Column(name = "valor")    // comparador
+    Integer valor;
 
     @ManyToMany(mappedBy = "logros")
     private Set<Historico> historicos;
