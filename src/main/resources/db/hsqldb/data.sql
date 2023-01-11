@@ -151,13 +151,32 @@ INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,m
 INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (2,2,20,2,4,5,'00:30:10','00:01:05');
 INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (3,3,15,2,4,5,'00:22:33','00:01:48');
 
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (1,'Minas mayor que','Minas', '>');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (2,'Minas menor que','Minas', '<');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (3,'Minas igual que','Minas', '=');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (4,'Partidas Ganadas mayor que','Partidas Ganadas', '>');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (5,'Partidas Ganadas menor que','Partidas Ganadas', '<');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (6,'Partidas Ganadas igual que','Partidas Ganadas', '=');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (7,'Partidas Totales mayor que','Partidas Totales', '>');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (8,'Partidas Totales menor que','Partidas Totales', '<');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (9,'Partidas Totales igual que','Partidas Totales', '=');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (10,'Puntuacion mayor que','Puntuacion', '>');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (11,'Puntuacion menor que','Puntuacion', '<');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (12,'Puntuacion igual que','Puntuacion', '=');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (13,'Tiempo Medio mayor que','Tiempo Medio', '>');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (14,'Tiempo Medio menor que','Tiempo Medio', '<');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (15,'Tiempo Medio igual que','Tiempo Medio', '=');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (16,'Tiempo Total mayor que','Tiempo Total', '>');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (17,'Tiempo Total menor que','Tiempo Total', '<');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (18,'Tiempo Total igual que','Tiempo Total', '=');
 
-INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (1,'Prueba', 'Prueba', 'Prueba');
-INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (2,'Prueba', 'Prueba', 'Prueba');
-INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (3,'Prueba', 'Prueba', 'Prueba');
-INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (4,'Prueba', 'Prueba', 'Prueba');
+
+-- INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (1,'Prueba', 'Prueba', 'Prueba');
+-- INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (2,'Prueba', 'Prueba', 'Prueba');
+-- INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (3,'Prueba', 'Prueba', 'Prueba');
+-- INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (4,'Prueba', 'Prueba', 'Prueba');
 
 
-INSERT INTO logros_id VALUES (1,1);
-INSERT INTO logros_id VALUES (2,2);
-INSERT INTO logros_id VALUES (1,3);
+-- INSERT INTO logros_id VALUES (1,1);
+-- INSERT INTO logros_id VALUES (2,2);
+-- INSERT INTO logros_id VALUES (1,3);
