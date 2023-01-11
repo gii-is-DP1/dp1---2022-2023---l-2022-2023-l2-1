@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.historico;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -31,5 +32,4 @@ public class HistoricoService {
     public void saveHistorico(Historico hist) throws DataAccessException {
         historicoRepository.save(hist);
     }
-
 }
