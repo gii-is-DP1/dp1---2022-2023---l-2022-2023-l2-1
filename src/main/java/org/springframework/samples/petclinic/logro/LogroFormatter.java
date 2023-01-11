@@ -30,7 +30,7 @@ public class LogroFormatter implements Formatter<Logro>{
 				return dif;
 			}
 		}
-		throw new ParseException("type not found: " + text, 0);
+		throw new ParseException("logro not found: " + text, 0);
     }
     
 }

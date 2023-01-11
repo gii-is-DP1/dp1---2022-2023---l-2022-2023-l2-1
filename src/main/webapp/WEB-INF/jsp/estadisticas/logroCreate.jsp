@@ -15,8 +15,13 @@
             <br>
             <petclinic:inputField label="Descripción  " name="descripcion"/>
             <br>
-            <petclinic:inputField label="Condición" name="condicion"/>
+            <div>
+                <petclinic:selectField label="Condición" size="1" name="condicion" names ="${condiciones}"/>
+                <petclinic:inputField label="Atributo" name="valor"/>
+            </div>
+            <br>
         <br>
-        <button type="submit" class="btn btn-primary">Crear Logro</button>
+        </div>
+            <button type="submit" class="btn btn-primary">Crear Logro</button>
     </form:form>
 </petclinic:layout>

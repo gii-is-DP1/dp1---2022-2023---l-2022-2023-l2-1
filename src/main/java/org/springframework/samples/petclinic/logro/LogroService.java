@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.logro;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -37,6 +38,10 @@ public class LogroService {
     @Modifying  
     public void save(Logro log) throws DataAccessException{
         logroRepository.save(log);
+    }
+
+    public List<Condicion> getAllCondiciones(){
+        return logroRepository.findAllCondiciones();
     }
 
 

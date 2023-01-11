@@ -1,9 +1,11 @@
 package org.springframework.samples.petclinic.logro;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.historico.Historico;
 import org.springframework.samples.petclinic.historico.HistoricoService;
 import org.springframework.samples.petclinic.registeredUser.RegisteredUserService;
 import org.springframework.stereotype.Controller;
@@ -59,7 +61,8 @@ public class LogroController {
     }
 
     @PostMapping("/logros/{logroId}/edit")
-    public String editaLogro(@ModelAttribute Logro l) {
+    public String editaLogro(@ModelAttribute Logro l, @PathVariable("logroId") Integer id) {
+        l.setId(id);
         logroService.save(l);
         return "redirect:/logros";
     }
@@ -67,7 +70,9 @@ public class LogroController {
     @GetMapping("/logros/new")
     public String creaLogReadOnlyProperty(Model model) {
         Logro logro = new Logro();
+        List<Condicion> condiciones = logroService.getAllCondiciones();
         model.addAttribute("logro", logro);
+        model.addAttribute("condiciones", condiciones);
         return "estadisticas/logroCreate";
     }
 
@@ -75,6 +80,73 @@ public class LogroController {
     public String creaLogro(@ModelAttribute Logro l) {
         logroService.save(l);
         return "redirect:/logros";
+    }
+
+    public static boolean check(Logro l, Historico h) {
+        Condicion condicion = l.getCondicion();
+        Integer valor = l.getValor();
+
+        if (condicion.getComparador().equals(">")) {
+
+            if(condicion.getPredicado().equals("Minas")){
+                return h.getMinasEncontradas()>valor; 
+            }
+            else if(condicion.getPredicado().equals("Puntuacion")){
+                return h.getPuntuacion()>valor; 
+            }
+            else if(condicion.getPredicado().equals("Partidas Totales")){
+                return h.getPartidasTotales()>valor; 
+            }
+            else if(condicion.getPredicado().equals("Partidas Ganadas")){
+                return h.getPartidasGanadas()>valor; 
+            }
+            else if(condicion.getPredicado().equals("Tiempo Total")){
+                return h.getTiempoTotalJuego().getMinute() >valor; 
+            }
+            else if(condicion.getPredicado().equals("Tiempo Medio")){
+                return h.getTiempoMedioPartida().getMinute() >valor; 
+            }
+
+        } else if (condicion.getComparador().equals("<")) {
+            if(condicion.getPredicado().equals("Minas")){
+                return h.getMinasEncontradas()<valor; 
+            }
+            else if(condicion.getPredicado().equals("Puntuacion")){
+                return h.getPuntuacion()<valor; 
+            }
+            else if(condicion.getPredicado().equals("Partidas Totales")){
+                return h.getPartidasTotales()<valor; 
+            }
+            else if(condicion.getPredicado().equals("Partidas Ganadas")){
+                return h.getPartidasGanadas()<valor; 
+            }
+            else if(condicion.getPredicado().equals("Tiempo Total")){
+                return h.getTiempoTotalJuego().getMinute() <valor; 
+            }
+            else if(condicion.getPredicado().equals("Tiempo Medio")){
+                return h.getTiempoMedioPartida().getMinute() <valor; 
+            }
+        } else {
+            if(condicion.getPredicado().equals("Minas")){
+                return h.getMinasEncontradas()==valor; 
+            }
+            else if(condicion.getPredicado().equals("Puntuacion")){
+                return h.getPuntuacion()==valor; 
+            }
+            else if(condicion.getPredicado().equals("Partidas Totales")){
+                return h.getPartidasTotales()==valor; 
+            }
+            else if(condicion.getPredicado().equals("Partidas Ganadas")){
+                return h.getPartidasGanadas()==valor; 
+            }
+            else if(condicion.getPredicado().equals("Tiempo Total")){
+                return h.getTiempoTotalJuego().getMinute() ==valor; 
+            }
+            else if(condicion.getPredicado().equals("Tiempo Medio")){
+                return h.getTiempoMedioPartida().getMinute() ==valor; 
+            }
+        }
+        return false;
     }
 
 }

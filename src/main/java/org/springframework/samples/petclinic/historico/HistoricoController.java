@@ -1,15 +1,12 @@
 package org.springframework.samples.petclinic.historico;
 
 
-
 import java.util.Set;
 import java.util.stream.Collectors;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.registeredUser.RegisteredUser;
 import org.springframework.samples.petclinic.registeredUser.RegisteredUserService;
-
 import org.springframework.samples.petclinic.partidas.PartidaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
