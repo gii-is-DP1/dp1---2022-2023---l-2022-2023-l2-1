@@ -4,18 +4,20 @@ package org.springframework.samples.petclinic.historico;
 import java.util.Set;
 import java.time.LocalTime;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-import org.springframework.samples.petclinic.logros.Logro;
-
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.ManyToAny;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -57,14 +59,14 @@ public class Historico extends BaseEntity {
     @DateTimeFormat(pattern = "hh:mm:ss", iso = ISO.TIME)
     private LocalTime tiempoMedioPartida;
 
-    @NotNull
-
-
-    @OneToMany
-    @JoinColumn(name = "logro_id")
+    
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "logros_id",
+        joinColumns = @JoinColumn(name = "historico_id"), 
+        inverseJoinColumns = @JoinColumn(name = "logro_id")
+    )
     private Set<Logro> logros;
 
     @JoinColumn(name = "registered_user_id")
     private Integer registeredUserId;
-
 }

@@ -5,7 +5,6 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.petclinic.logros.Logro;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,8 +34,21 @@ public class HistoricoService {
     }
 
     @Transactional
-    public Set<Logro> getLogrosByUserId(Integer id){
-        return historicoRepository.findLogrosByUserId(id);
+    public void save(Logro l) {
+        historicoRepository.saveLogro(l);
     }
+
+    public Set<Logro> findAllLogros() {
+        return historicoRepository.findAllLogros();
+    }
+
+    public void deleteLogroById(int id) {
+        historicoRepository.deleteLogroById(id);
+    }
+
+    public Logro getLogroById(Integer id){
+        return historicoRepository.findLogroById(id);
+    }
+  
 
 }
