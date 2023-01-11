@@ -188,7 +188,8 @@ public class RegisteredUserController {
 		Collection<RegisteredUser> usuarios = null;
 		if(registeredUserService.findRegisteredUser().stream().anyMatch(c->c.getUser().getLastModifiedDate()!=null)){
 			 usuarios =  registeredUserService.findRegisteredUser().stream().filter(c->c.getUser().getLastModifiedDate()!=null).collect(Collectors.toSet());
-		}
+			}
+
 
 		model.put("registeredUsers", usuarios);
 		

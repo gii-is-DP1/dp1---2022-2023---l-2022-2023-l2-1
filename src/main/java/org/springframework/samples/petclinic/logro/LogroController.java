@@ -56,7 +56,9 @@ public class LogroController {
     @GetMapping("/logros/{logroId}/edit")
     public String editaLogro(@PathVariable("logroId") Integer id, Model model) {
         Optional<Logro> logro = logroService.getLogroById(id);
+        List<Condicion> condiciones = logroService.getAllCondiciones();
         model.addAttribute("logro", logro);
+        model.addAttribute("condiciones", condiciones);
         return "estadisticas/logroUpdate";
     }
 
@@ -106,7 +108,7 @@ public class LogroController {
             else if(condicion.getPredicado().equals("Tiempo Medio")){
                 return h.getTiempoMedioPartida().getMinute() >valor; 
             }
-
+            
         } else if (condicion.getComparador().equals("<")) {
             if(condicion.getPredicado().equals("Minas")){
                 return h.getMinasEncontradas()<valor; 
