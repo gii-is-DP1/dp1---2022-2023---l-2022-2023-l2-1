@@ -29,6 +29,7 @@ public class LogroService {
     public void deleteLogroById(Integer id) {
         logroRepository.deleteLogroById(id);
     }
+
     @Transactional(readOnly= true)
     public Optional<Logro> getLogroById(Integer id) {
         return logroRepository.findById(id);

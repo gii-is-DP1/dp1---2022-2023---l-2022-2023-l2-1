@@ -1,7 +1,5 @@
 package org.springframework.samples.petclinic.partidas;
 
-
-import java.time.LocalTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,7 +25,6 @@ class PartidasServiceTests {
      
 		assertThat(partida.getRegisteredUserId()).isEqualTo(1);
 		
-
 	}
     
 
