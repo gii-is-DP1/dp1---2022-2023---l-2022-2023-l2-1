@@ -180,3 +180,6 @@ INSERT INTO condicion(id,name,predicado,comparador) VALUES (18,'Tiempo Total igu
 -- INSERT INTO logros_id VALUES (1,1);
 -- INSERT INTO logros_id VALUES (2,2);
 -- INSERT INTO logros_id VALUES (1,3);
+
+
+INSERT INTO tablero(id,columnas,filas,num_minas,partida) VALUES (1,10,8,10,1);

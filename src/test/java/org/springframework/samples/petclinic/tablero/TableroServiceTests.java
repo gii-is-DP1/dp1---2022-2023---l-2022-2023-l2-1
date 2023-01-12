@@ -51,7 +51,7 @@ public class TableroServiceTests {
 	@Test
 	@Transactional
 	void shouldUpdateTablero() {
-		Tablero tablero = this.tableroService.getBoardById(2);
+		Tablero tablero = this.tableroService.getBoardById(1);
 		Integer oldNumMinas = tablero.getMinas();
 		Integer newNumMinas = 12;
 
@@ -59,7 +59,7 @@ public class TableroServiceTests {
 		this.tableroService.saveBoard(tablero);
 
 		// retrieving new name from database
-		tablero = this.tableroService.getBoardById(2);
+		tablero = this.tableroService.getBoardById(1);
 		assertThat(tablero.getMinas()).isEqualTo(newNumMinas);
 	}
 }
