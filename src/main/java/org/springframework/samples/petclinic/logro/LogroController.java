@@ -55,7 +55,7 @@ public class LogroController {
 
     @GetMapping("/logros/{logroId}/edit")
     public String editaLogro(@PathVariable("logroId") Integer id, Model model) {
-        Optional<Logro> logro = logroService.getLogroById(id);
+        Logro logro = logroService.getLogroById(id);
         List<Condicion> condiciones = logroService.getAllCondiciones();
         model.addAttribute("logro", logro);
         model.addAttribute("condiciones", condiciones);

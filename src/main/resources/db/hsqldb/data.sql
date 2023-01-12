@@ -170,7 +170,7 @@ INSERT INTO condicion(id,name,predicado,comparador) VALUES (16,'Tiempo Total may
 INSERT INTO condicion(id,name,predicado,comparador) VALUES (17,'Tiempo Total menor que','Tiempo Total', '<');
 INSERT INTO condicion(id,name,predicado,comparador) VALUES (18,'Tiempo Total igual que','Tiempo Total', '=');
 
-INSERT INTO logros(id,titulo,descripcion,condicion, valor, historicos) VALUES (1,'Prueba', 'Prueba', 'Prueba',1,null);
+-- INSERT INTO logros(id,titulo,descripcion,condicion, valor, logros) VALUES (1,'Prueba', 'Prueba', 'Prueba',1,null);
 -- INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (2,'Prueba', 'Prueba', 'Prueba');
 -- INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (3,'Prueba', 'Prueba', 'Prueba');
 -- INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (4,'Prueba', 'Prueba', 'Prueba');

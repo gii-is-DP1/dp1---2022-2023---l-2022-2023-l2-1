@@ -31,8 +31,9 @@ public class LogroService {
     }
 
     @Transactional(readOnly= true)
-    public Optional<Logro> getLogroById(Integer id) {
-        return logroRepository.findById(id);
+    public Logro getLogroById(Integer id) {
+        Optional<Logro> logro = logroRepository.findById(id);
+        return logro.get();
     }
 
     @Transactional(rollbackFor = SQLException.class)
