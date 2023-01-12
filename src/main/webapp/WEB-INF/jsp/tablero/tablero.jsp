@@ -160,6 +160,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <input type="hidden" id="numFilas" value="${tablero.filas}" />
   <input type="hidden" id="numColumnas" value="${tablero.columnas}" />
   <input type="hidden" id="numMinas" value="${tablero.minas}" />
+  <input type="hidden" id="partidaId" value="${tablero.partida.id}" />
   <!--  -->
 
   <div id="tablero">
@@ -181,7 +182,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           <input type="hidden" id="alert_boton" onclick="enlacePostTablero();"value="Continuar"/>
           <script type="text/javascript">
             function enlacePostTablero(){
-              window.location.href="/postTablero/"+tablero.numMinasEncontradas+"/"+tablero.tiempoEmpleado+"/"+tablero.esVictoria;
+              window.location.href="/postTablero/"+tablero.numMinasEncontradas+"/"+tablero.tiempoEmpleado+"/"+tablero.esVictoria+"/"+tablero.partidaId;
             }
             </script>
     </div>

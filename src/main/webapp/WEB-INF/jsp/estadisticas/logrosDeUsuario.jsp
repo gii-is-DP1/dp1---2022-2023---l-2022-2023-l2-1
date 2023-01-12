@@ -15,7 +15,6 @@ prefix="petclinic" tagdir="/WEB-INF/tags" %> <%@page contentType="text/html"%>
           <th>
             <td>Titulo: <c:out value="${logro.titulo}" /></td>
             <td>Descripcion: <c:out value="${logro.descripcion}" /></td>
-            <td>Condicion: <c:out value="${logro.condicionId}" /></td>
           </th>
         </tr>
       </c:forEach>

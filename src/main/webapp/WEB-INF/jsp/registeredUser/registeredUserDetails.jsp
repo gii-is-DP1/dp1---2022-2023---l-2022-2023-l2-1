@@ -23,7 +23,7 @@ prefix="petclinic" tagdir="/WEB-INF/tags" %> <%@page contentType="text/html"%>
         <a
           class="btn btn-default"
           type="submit"
-          href="/registeredUser/${registeredUser.id}/logros"
+          href="/registeredUser/${registeredUser.id}/myLogros"
           >Logros
         </a>
       </td>

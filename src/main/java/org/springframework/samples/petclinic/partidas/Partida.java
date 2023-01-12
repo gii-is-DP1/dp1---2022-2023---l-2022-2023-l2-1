@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.partidas;
 
+import java.time.LocalTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -23,10 +25,10 @@ public class Partida extends BaseEntity {
 
     
     @Column(name = "tiempo_de_juego")
-    /*Si tiempo_de_juego == null; la partida sigue en curso.
-    Cuando finalice:
-    Hora final - Hora inicio */
-    private Integer tiempoDeJuego;
+    private LocalTime tiempoDeJuego;
+
+    @Column(name = "tiempo_de_juego_invitado")
+    private LocalTime tiempoDeJuegoInvitado;
 
     @OneToOne
     @JoinColumn(name = "dificultad_id")

@@ -140,27 +140,43 @@ INSERT INTO dificultad VALUES (3, 'Dificil');
 INSERT INTO tipos VALUES (1, 'Individual');
 INSERT INTO tipos VALUES (2, 'Competitivo');
 
-INSERT INTO condiciones VALUES (1, 'Tiempo minimo medio');
-INSERT INTO condiciones VALUES (2, 'Partidas ganadas');
-INSERT INTO condiciones VALUES (3, 'Minas liberadas');
 
-
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (1, 1, null, 1, 2, 2, FALSE, null,null);
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (2, 2, null, 1, 2, 1, FALSE, null,null);
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (3, 1, null, 1, 2, 2, FALSE, null,null);
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (4, 1, 500, 1, 2, 2, TRUE, '12345',TRUE);
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (5, 2, null, 3, 1, null, null, null,null);
+INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (1, 1, null,null, 1, 2, 2, FALSE, null,null);
+INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (2, 2, null,null, 1, 2, 1, FALSE, null,null);
+INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (3, 1, null,null, 1, 2, 2, FALSE, null,null);
+INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (4, 1, '15:30:00','5:10:00', 1, 2, 2, TRUE, '12345',TRUE);
+INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado) VALUES (5, 2, null,null, 3, 1, null, null, null,null);
 
 INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (1,1,0,0,0,0,'00:00:00','00:00:00');
 INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (2,2,20,2,4,5,'00:30:10','00:01:05');
 INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (3,3,15,2,4,5,'00:22:33','00:01:48');
 
-INSERT INTO tablero(id,columnas,filas,num_minas,partida_id) VALUES (1, 10, 8, 10, 1);
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (1,'Minas mayor que','Minas', '>');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (2,'Minas menor que','Minas', '<');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (3,'Minas igual que','Minas', '=');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (4,'Partidas Ganadas mayor que','Partidas Ganadas', '>');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (5,'Partidas Ganadas menor que','Partidas Ganadas', '<');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (6,'Partidas Ganadas igual que','Partidas Ganadas', '=');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (7,'Partidas Totales mayor que','Partidas Totales', '>');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (8,'Partidas Totales menor que','Partidas Totales', '<');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (9,'Partidas Totales igual que','Partidas Totales', '=');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (10,'Puntuacion mayor que','Puntuacion', '>');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (11,'Puntuacion menor que','Puntuacion', '<');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (12,'Puntuacion igual que','Puntuacion', '=');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (13,'Tiempo Medio mayor que','Tiempo Medio', '>');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (14,'Tiempo Medio menor que','Tiempo Medio', '<');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (15,'Tiempo Medio igual que','Tiempo Medio', '=');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (16,'Tiempo Total mayor que','Tiempo Total', '>');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (17,'Tiempo Total menor que','Tiempo Total', '<');
+INSERT INTO condicion(id,name,predicado,comparador) VALUES (18,'Tiempo Total igual que','Tiempo Total', '=');
 
-INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (1,1,'Tiempo minimo','Texto de ejemplo', 1);
-INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (2,1,'Tiempo minimo','Texto de ejemplo', 1);
-INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (3,1,'Tiempo minimo','Texto de ejemplo', 1);
-INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (4,2,'Partidas ganadas','Texto de ejemplo', 2);
-INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (5,2,'Partidas ganadas','Texto de ejemplo', 2);
-INSERT INTO logros(id,registered_user_id,titulo,descripcion,condicion_id) VALUES (6,3,'Minas liberadas','Texto de ejemplo', 3);
 
+-- INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (1,'Prueba', 'Prueba', 'Prueba');
+-- INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (2,'Prueba', 'Prueba', 'Prueba');
+-- INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (3,'Prueba', 'Prueba', 'Prueba');
+-- INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (4,'Prueba', 'Prueba', 'Prueba');
+
+
+-- INSERT INTO logros_id VALUES (1,1);
+-- INSERT INTO logros_id VALUES (2,2);
+-- INSERT INTO logros_id VALUES (1,3);
