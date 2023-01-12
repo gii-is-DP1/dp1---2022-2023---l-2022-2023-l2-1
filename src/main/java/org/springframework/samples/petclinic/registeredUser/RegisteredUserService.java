@@ -80,7 +80,7 @@ public class RegisteredUserService {
     
 	@Transactional
 	public void removeUser(Integer id){
-		this.registeredUserRepository.deleteById(id);;
+		this.registeredUserRepository.deleteById(id);
 	}
 
 	@Transactional

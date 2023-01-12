@@ -2,7 +2,6 @@ package org.springframework.samples.petclinic.logro;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +29,8 @@ public class LogroService {
         logroRepository.deleteLogroById(id);
     }
     @Transactional(readOnly= true)
-    public Optional<Logro> getLogroById(Integer id) {
-        return logroRepository.findById(id);
+    public Logro getLogroById(Integer id) {
+        return logroRepository.findById(id).get();
     }
 
     @Transactional(rollbackFor = SQLException.class)

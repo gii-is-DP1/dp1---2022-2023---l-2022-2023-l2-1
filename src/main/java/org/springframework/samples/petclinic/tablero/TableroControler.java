@@ -115,9 +115,9 @@ public class TableroControler {
             }else{
                 partida.setTiempoDeJuegoInvitado(LocalTime.parse(tiempoEmpleado));
             }
-            if(partida.getTipo().getName()=="Individual"){
+            if(partida.getTipo().getName().equals("Individual")){
                 partida.setResultado(resultado);
-                if(resultado) nuevoHistorico.setPartidasGanadas(nuevoHistorico.getPartidasGanadas() + 1);
+                if(resultado){ nuevoHistorico.setPartidasGanadas(nuevoHistorico.getPartidasGanadas() + 1);}
             }else{
                 if(partida.getTiempoDeJuego() != null && partida.getTiempoDeJuegoInvitado() != null){
                         if(partida.getResultado() == resultado && resultado == true){
