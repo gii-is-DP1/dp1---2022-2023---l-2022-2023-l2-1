@@ -30,4 +30,7 @@ public class HistoricoService {
     public void saveHistorico(Historico hist) throws DataAccessException {
         historicoRepository.save(hist);
     }
+    public void delete(Historico hist) throws DataAccessException{
+        historicoRepository.delete(hist);
+    }
 }

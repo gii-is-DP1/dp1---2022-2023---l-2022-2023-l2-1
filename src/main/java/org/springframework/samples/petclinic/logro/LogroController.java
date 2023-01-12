@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.logro;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +54,7 @@ public class LogroController {
 
     @GetMapping("/logros/{logroId}/edit")
     public String editaLogro(@PathVariable("logroId") Integer id, Model model) {
-        Optional<Logro> logro = logroService.getLogroById(id);
+        Logro logro = logroService.getLogroById(id);
         List<Condicion> condiciones = logroService.getAllCondiciones();
         model.addAttribute("logro", logro);
         model.addAttribute("condiciones", condiciones);
