@@ -2,7 +2,6 @@ package org.springframework.samples.petclinic.tablero;
 
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,10 +120,14 @@ public class TableroControler {
                 if(resultado) nuevoHistorico.setPartidasGanadas(nuevoHistorico.getPartidasGanadas() + 1);
             }else{
                 if(partida.getTiempoDeJuego() != null && partida.getTiempoDeJuegoInvitado() != null){
-                        if(partida.getResultado() == resultado == true){
+                        if(partida.getResultado() == resultado && resultado == true){
                             partida.setResultado(partida.getTiempoDeJuego().isBefore(partida.getTiempoDeJuegoInvitado()));
-                        }else if(partida.getResultado() ==resultado ==false){
-                            partida.setResultado(null);
+                        }else if(partida.getResultado() ==resultado && resultado ==false){
+                            if(ru.getId()==partida.getRegisteredUserId()){
+                                partida.setResultado(minasEncontradas>partida.getMinasDeJugador());
+                            }else{
+                                partida.setResultado(!(minasEncontradas>partida.getMinasDeJugador()));
+                            }
                         }else{
                             if(ru.getId()==partida.getRegisteredUserId()){
                                 partida.setResultado(resultado);
@@ -142,6 +145,8 @@ public class TableroControler {
                     }      
                 }else{
                     partida.setResultado(resultado);
+                    partida.setMinasDeJugador(minasEncontradas);
+                   
                 }
             }            
             nuevoHistorico.setPartidasTotales(nuevoHistorico.getPartidasTotales() + 1);
