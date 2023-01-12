@@ -46,8 +46,13 @@ public class PartidaControler {
     }
 
     @ModelAttribute("dificultades")
-    public List<Dificultad> dificultades() {
-        return this.partidaService.getAllDifs();
+  	public List<Dificultad> dificultades() {
+		return this.partidaService.getAllDifs();
+	}
+    public RegisteredUser getUsuarioActual(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+        return this.registerableService.findRegisteredUserByUsername(this.userService.findUser(username).orElse(null));
     }
 
     // Metodo para la visualizacion de partidas como admin o las partidas actuales
@@ -73,15 +78,12 @@ public class PartidaControler {
         }
     }
 
-    // metodo para unirse a una partida competitiva ya existente
-    @GetMapping(value = "/partida/{partidaId}/join")
-    public String joinPartida(@PathVariable("partidaId") int id) {
-        Partida part = partidaService.getById(id);
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        RegisteredUser ru = this.registerableService
-                .findRegisteredUserByUsername(this.userService.findUser(username).orElse(null));
-        if (ru == null || part.getIdInvitado() != null) {
+    //metodo para unirse a una partida competitiva ya existente
+    @GetMapping(value= "/partida/{partidaId}/join")
+    public String joinPartida(@PathVariable("partidaId") int id){
+       Partida part = partidaService.getById(id);    
+       RegisteredUser ru = getUsuarioActual();
+        if(ru==null || part.getIdInvitado()!=null || part.getRegisteredUserId()==ru.getId()){
             return "redirect:/exception";
         } else {
             part.setIdInvitado(ru.getId());
@@ -96,17 +98,14 @@ public class PartidaControler {
     public String nuevaPartida(Map<String, Object> model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        RegisteredUser ru = this.registerableService
-                .findRegisteredUserByUsername(this.userService.findUser(username).orElse(null));
-
-        if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("registeredUser"))) {
-            model.put("registeredUser", ru);
-            return "partida/elegirModo";
-        } else {
-            Partida partida = new Partida();
-            model.put("partida", partida);
-            return "partida/nuevaIndividual";
+		    RegisteredUser ru = getUsuarioActual();
+        if(authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("registeredUser"))){
+                model.put("registeredUser", ru);
+                return "partida/elegirModo";
+        }else{
+        Partida partida = new Partida();
+        model.put("partida", partida);
+        return "partida/nuevaIndividual"; 
         }
     }
 

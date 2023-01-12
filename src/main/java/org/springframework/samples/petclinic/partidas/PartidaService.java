@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.partidas;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,9 +25,21 @@ public class PartidaService {
     }
     
     @Transactional
-    public List<Partida> getAllById(Integer id) throws DataAccessException{
+    public List<Partida> getAllCreatedById(Integer id) throws DataAccessException{
         return partidaRepository.findAllByRegisteredUserId(id);
     }
+    @Transactional
+    public List<Partida> getAllJoinedById(Integer id) throws DataAccessException{
+        return partidaRepository.findAllByidInvitado(id);
+    }
+    @Transactional
+    public List<Partida> getAllById(Integer id) throws DataAccessException{
+        List<Partida> res = new ArrayList<>();
+        res.addAll(partidaRepository.findAllByRegisteredUserId(id));
+        res.addAll(partidaRepository.findAllByidInvitado(id));
+        return res;
+    }
+
     @Transactional
     public Partida getById(Integer id) throws DataAccessException{
         return partidaRepository.findPartidaById(id);

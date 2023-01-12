@@ -3,10 +3,14 @@ package org.springframework.samples.petclinic.tablero;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.historico.Historico;
 import org.springframework.samples.petclinic.historico.HistoricoService;
+import org.springframework.samples.petclinic.logro.Logro;
+import org.springframework.samples.petclinic.logro.LogroController;
+import org.springframework.samples.petclinic.logro.LogroService;
 import org.springframework.samples.petclinic.partidas.Dificultad;
 import org.springframework.samples.petclinic.partidas.Partida;
 import org.springframework.samples.petclinic.partidas.PartidaService;
@@ -36,14 +40,17 @@ public class TableroControler {
 
     private final PartidaService partidaService;
 
+    private final LogroService logroService;
+
     @Autowired
     public TableroControler(TableroService tableroService, PartidaService partidaService,
-            HistoricoService historicoService, UserService userService, RegisteredUserService registeredUserService) {
+            HistoricoService historicoService, UserService userService, RegisteredUserService registeredUserService,LogroService logroService) {
         this.tableroService = tableroService;
         this.partidaService = partidaService;
         this.historicoService = historicoService;
         this.userService = userService;
         this.registeredUserService = registeredUserService;
+        this.logroService = logroService;
     }
 
     @InitBinder
@@ -121,6 +128,14 @@ public class TableroControler {
                     nuevoHistorico.getPartidasTotales()));
             nuevoHistorico.setPuntuacion(nuevoHistorico.getPuntuacion()
                     + calculaPuntuacion(nuevoHistorico.getMinasEncontradas(), nuevoTiempo, esVictoria));
+            historicoService.saveHistorico(nuevoHistorico);
+
+            Set<Logro> logros =  logroService.findAllLogros();
+            for(Logro l : logros){
+                if(LogroController.check(l,nuevoHistorico)){
+                    nuevoHistorico.getLogros().add(l);
+                }
+            }
             historicoService.saveHistorico(nuevoHistorico);
         }
         return "redirect:/partida/new";
