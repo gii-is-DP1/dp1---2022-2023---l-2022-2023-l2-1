@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.partidas;
 
 import java.time.LocalTime;
-import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +9,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.samples.petclinic.model.BaseEntity;
-import org.springframework.samples.petclinic.registeredUser.RegisteredUser;
 
 import lombok.Getter;
 import lombok.Setter;
