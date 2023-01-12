@@ -1,6 +1,6 @@
 package org.springframework.samples.petclinic.partidas;
 
-import java.security.Provider.Service;
+
 import java.time.LocalTime;
 import java.util.List;
 
@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 class PartidasServiceTests {
@@ -32,12 +33,9 @@ class PartidasServiceTests {
 
 	@Test
 	@Transactional
-	public void shouldInsertTablero() {
+	public void shouldInsertpartida() {
 		List<Partida> partidas = this.partidaService.getAll();
 		int found = partidas.size();
-		//INSERT INTO partida(id, registered_user_id, tiempo_de_juego, dificultad_id, 
-		//    tipo_de_partida_id  ,id_invitado  ,privada  ,contrasenia  ,resultado)
-		/// VALUES (5, 2, null, 3, 1, null, null, null,null);
 
 		Partida partida = new Partida();
 
@@ -58,4 +56,22 @@ class PartidasServiceTests {
 		partidas = this.partidaService.getAll();
 		assertThat(partidas.size()).isEqualTo(found + 1);
 	}
+
+	@Test
+	@Transactional
+	void shouldUpdatePartida() {
+		Partida partida = this.partidaService.getById(1);
+		Dificultad oldDif=partida.getDificultad();
+
+		Dificultad newDif=partidaService.getAllDifs().get(1);
+		partida.setDificultad(newDif);
+
+		this.partidaService.savePartida(partida);
+
+		// retrieving new name from database
+		partida = this.partidaService.getById(1);
+		assertThat(partida.getDificultad()).isEqualTo(newDif);
+	}
+
+
 }
