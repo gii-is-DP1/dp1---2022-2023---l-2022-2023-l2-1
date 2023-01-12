@@ -102,6 +102,7 @@ public class TableroControler {
     public String postTablero(@PathVariable("minasEncontradas") Integer minasEncontradas,
             @PathVariable("tiempoEmpleado") String tiempoEmpleado, @PathVariable("esVictoria") String esVictoria,
             @PathVariable("partidaId") Integer partidaId) {
+        Boolean resultado = Boolean.valueOf(esVictoria);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         RegisteredUser ru = this.registeredUserService
@@ -109,15 +110,39 @@ public class TableroControler {
         if (ru != null) {
             Historico nuevoHistorico = historicoService.getHistoricoByRegisteredUserId(ru.getId());
             Partida partida = partidaService.getById(partidaId);
-            if (esVictoria.equals("true")) {
-                nuevoHistorico.setPartidasGanadas(nuevoHistorico.getPartidasGanadas() + 1);
-                if(partida.getRegisteredUserId()==ru.getId()){
-                    partida.setResultado(true);
-                }
+            if(ru.getId()==partida.getRegisteredUserId()){
+                partida.setTiempoDeJuego(LocalTime.parse(tiempoEmpleado));
             }else{
-                partida.setResultado(false);
+                partida.setTiempoDeJuegoInvitado(LocalTime.parse(tiempoEmpleado));
             }
-            partida.setTiempoDeJuego(LocalTime.parse(tiempoEmpleado));
+            if(partida.getTipo().getName()=="Individual"){
+                partida.setResultado(resultado);
+                if(resultado) nuevoHistorico.setPartidasGanadas(nuevoHistorico.getPartidasGanadas() + 1);
+            }else{
+                if(partida.getTiempoDeJuego() != null && partida.getTiempoDeJuegoInvitado() != null){
+                        if(partida.getResultado() == resultado == true){
+                            partida.setResultado(partida.getTiempoDeJuego().isBefore(partida.getTiempoDeJuegoInvitado()));
+                        }else if(partida.getResultado() ==resultado ==false){
+                            partida.setResultado(null);
+                        }else{
+                            if(ru.getId()==partida.getRegisteredUserId()){
+                                partida.setResultado(resultado);
+                            }else{
+                                partida.setResultado(!resultado);
+                            }
+                        }
+                    if(partida.getResultado()){
+                    Historico aux = historicoService.getHistoricoByRegisteredUserId(partida.getRegisteredUserId());
+                    aux.setPartidasGanadas(aux.getPartidasGanadas()+1);
+                    }else{ 
+                    Historico aux = historicoService.getHistoricoByRegisteredUserId(partida.getIdInvitado());
+                    aux.setPartidasGanadas(aux.getPartidasGanadas()+1);
+
+                    }      
+                }else{
+                    partida.setResultado(resultado);
+                }
+            }            
             nuevoHistorico.setPartidasTotales(nuevoHistorico.getPartidasTotales() + 1);
             nuevoHistorico.setMinasEncontradas(nuevoHistorico.getMinasEncontradas() + minasEncontradas);
             LocalTime nuevoTiempo = LocalTime.parse(tiempoEmpleado);

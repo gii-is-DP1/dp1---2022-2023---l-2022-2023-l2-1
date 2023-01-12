@@ -61,8 +61,16 @@
                 <c:choose>
                     <c:when test="${partida.tiempoDeJuego!=null}">
                     <c:if test="${partida.resultado==null}">Empate</c:if>
-                    <c:if test="${partida.resultado==true}">Victoria</c:if>
-                    <c:if test="${partida.resultado==false}">Derrota</c:if> 
+                    <c:choose>
+                        <c:when test="${partida.registeredUserId==registeredUser.id}">
+                            <c:if test="${partida.resultado==true}">Victoria</c:if>
+                            <c:if test="${partida.resultado==false}">Derrota</c:if> 
+                        </c:when>
+                        <c:otherwise>
+                            <c:if test="${partida.resultado==false}">Victoria</c:if>
+                            <c:if test="${partida.resultado==true}">Derrota</c:if> 
+                        </c:otherwise>
+                    </c:choose>
                     </c:when>
                     <c:otherwise>
                         En curso
