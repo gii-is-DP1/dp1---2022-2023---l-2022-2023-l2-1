@@ -150,8 +150,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <c:url value="/resources/images/minesweeper.png" var="img_mina" />
   <c:url value="/js/algTablero.js" var="algTablero" />
   <c:url value="/css/style.css" var="estilo" />
-  <c:set value="" var="conUsuario"/>
-  <c:set value="" var="sinUsuario"/>
   <!-- <link href="${estilo}" rel="stylecheet" type="text/css" /> -->
 </head>
 
@@ -161,7 +159,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <input type="hidden" id="numColumnas" value="${tablero.columnas}" />
   <input type="hidden" id="numMinas" value="${tablero.minas}" />
   <input type="hidden" id="partidaId" value="${tablero.partida.id}" />
-  <!--  -->
 
   <div id="tablero">
     <div id="cabecera_tablero">
@@ -180,12 +177,16 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       <Span id="alert_mensaje"></Span>
       <br>
           <input type="hidden" id="alert_boton" onclick="enlacePostTablero();"value="Continuar"/>
-          <script type="text/javascript">
+         
+         <script type="text/javascript">
+
             function enlacePostTablero(){
               window.location.href="/postTablero/"+tablero.numMinasEncontradas+"/"+tablero.tiempoEmpleado+"/"+tablero.esVictoria+"/"+tablero.partidaId;
             }
-            </script>
+          
+          </script>
     </div>
   </div>
+
   <script type="text/javascript" src="${algTablero}"></script>
 </petclinic:layout>

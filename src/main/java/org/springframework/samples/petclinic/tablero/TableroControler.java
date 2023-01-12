@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.tablero;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,11 +65,11 @@ public class TableroControler {
 
     @GetMapping(value = { "/tablero/{partida_id}" })
     public ModelAndView tableroView(@PathVariable("partida_id") Integer id) {
+        ModelAndView res = new ModelAndView("tablero/tablero");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         RegisteredUser ru = this.registeredUserService
                 .findRegisteredUserByUsername(this.userService.findUser(username).orElse(null));
-        ModelAndView res = new ModelAndView("tablero/tablero");
         // Crear un tablero.
         Tablero tablero = new Tablero();
         // Encontrar partida por el id.
@@ -111,10 +112,10 @@ public class TableroControler {
             Partida partida = partidaService.getById(partidaId);
             if (esVictoria.equals("true")) {
                 nuevoHistorico.setPartidasGanadas(nuevoHistorico.getPartidasGanadas() + 1);
-                if(partida.getRegisteredUserId()==ru.getId()){
+                if (partida.getRegisteredUserId() == ru.getId()) {
                     partida.setResultado(true);
                 }
-            }else{
+            } else {
                 partida.setResultado(false);
             }
             partida.setTiempoDeJuego(LocalTime.parse(tiempoEmpleado));
