@@ -44,6 +44,9 @@ public class PartidaService {
     public Partida getById(Integer id) throws DataAccessException{
         return partidaRepository.findPartidaById(id);
     }
+
+    
+
     @Transactional
     public Partida savePartida(Partida partida) throws DataAccessException{
         return partidaRepository.save(partida);

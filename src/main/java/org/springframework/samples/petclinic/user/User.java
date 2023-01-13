@@ -33,7 +33,9 @@ import lombok.Setter;
 public class User{
 	@Id
 	String username;
+
 	
+//	@Size(min = 6, max = 18)
 	String password;
 
 	boolean enabled;

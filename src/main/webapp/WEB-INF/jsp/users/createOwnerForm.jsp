@@ -12,10 +12,19 @@
     </h2>
     <form:form modelAttribute="registeredUser" class="form-horizontal" id="add-registeredUser-form">
         <div class="form-group has-feedback">
+           
             <petclinic:inputField label="Name" name="name"/>
             <petclinic:inputField label="Username" name="user.username"/>
             <petclinic:inputField label="Email" name="email"/>
-            <petclinic:inputField label="Password" name="user.password"/>
+            <div class="col-sm-12 input-group">
+                <label class="col-sm-2 control-label" for="Password">Password</label>
+            
+                <input  id="Password" class="col-sm-10 form-control-lg" type="password" minlength="6" maxlength="18"
+                required name="user.password"
+                placeholder="Minimo un num, una letra minus y otra mayus. Debe ser entre 6-18 Caracteres" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,18}$"/>
+                
+            </div>
+            
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

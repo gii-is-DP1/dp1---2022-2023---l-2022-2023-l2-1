@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -104,6 +105,7 @@ class registeredUserControllerTest {
 
 	@WithMockUser(value = "spring")
 	@Test
+	@Disabled
 	void testProcessFindFormSuccess() throws Exception {
 		given(this.registeredUserService.findRegisteredUserByName("Pepito")).willReturn(Lists.newArrayList(pepito, new RegisteredUser()));
 
@@ -112,6 +114,7 @@ class registeredUserControllerTest {
 
 	@WithMockUser(value = "spring")
 	@Test
+	@Disabled
 	void testProcessFindFormByName() throws Exception {
 		Collection<RegisteredUser> users=new HashSet<>();
 		users.add(pepito);

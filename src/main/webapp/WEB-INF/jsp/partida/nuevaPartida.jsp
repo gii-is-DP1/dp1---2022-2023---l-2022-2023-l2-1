@@ -21,7 +21,6 @@
         }
         </script>
 
-
     <form:form modelAttribute="partida" method="post" action="/registeredUser/${registeredUserId}/partidas/new"
      class="form-horizontal" id="add-partida-form">
         <div class="form has-feedback">       
