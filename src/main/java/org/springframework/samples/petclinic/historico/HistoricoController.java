@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.historico;
 
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class HistoricoController {
@@ -57,12 +59,13 @@ public class HistoricoController {
         return result;
     }
     @GetMapping(value = "/registeredUser/{registeredUserId}/ranking")
-    public ModelAndView muestraRankingDeUsuarios(@PathVariable("registeredUserId") int id) {
+    public ModelAndView muestraRankingDeUsuarios() {
         ModelAndView result = new ModelAndView("estadisticas/ranking");
-        List<RegisteredUser> users = registeredService.findRegisteredUser().stream().collect(Collectors.toList());
-        
-        result.addObject("historico", historicoService.getHistoricoByRegisteredUserId(id));
-        result.addObject("user", registeredService.findRegisteredUserById(id));
+        Collection<RegisteredUser> users = registeredService.findRegisteredUser();
+        List<Historico> ranking = historicoService.findAll();
+        ranking = ranking.stream().sorted(Comparator.reverseOrder()).limit(10).collect(Collectors.toList());
+        result.addObject("historicos", ranking);
+        result.addObject("users", users);
         return result;
     }
 

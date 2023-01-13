@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -27,7 +26,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "historicos")
-public class Historico extends BaseEntity implements Comparable{
+public class Historico extends BaseEntity implements Comparable<Historico>{
 
     @NotNull
     @Column(name = "partidas_totales")
@@ -66,5 +65,10 @@ public class Historico extends BaseEntity implements Comparable{
     @JoinColumn(name = "registered_user_id")
     private Integer registeredUserId;
 
-    
+    @Override
+    public int compareTo(Historico o) {
+        Integer a= this.getPuntuacion();
+        Integer b= o.getPuntuacion();
+        return a.compareTo(b);
+    }
 }

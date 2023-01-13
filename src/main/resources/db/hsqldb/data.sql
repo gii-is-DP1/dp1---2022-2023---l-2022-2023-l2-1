@@ -141,9 +141,16 @@ INSERT INTO tipos VALUES (1, 'Individual');
 INSERT INTO tipos VALUES (2, 'Competitivo');
 
 
-INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (1,1,0,0,0,0,'00:00:00','00:00:00');
-INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (2,2,20,2,4,5,'00:30:10','00:01:05');
-INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (3,3,15,2,4,5,'00:22:33','00:01:48');
+INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (1,1,0,0,0,234,'00:00:00','00:00:00');
+INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (2,2,5,2,4,64,'00:30:10','00:06:25');
+INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (3,3,15,2,4,778,'00:22:33','00:01:48');
+INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (4,4,0,0,0,65,'00:00:00','00:00:00');
+INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (5,5,0,0,0,7,'00:00:00','00:00:00');
+INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (6,6,0,0,0,237,'00:00:00','00:00:00');
+INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (7,7,0,0,0,677,'00:00:00','00:00:00');
+INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (8,8,0,0,0,46,'00:00:00','00:00:00');
+INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (9,9,0,0,0,99,'00:00:00','00:00:00');
+
 
 INSERT INTO condicion(id,name,predicado,comparador) VALUES (1,'Minas mayor que','Minas', '>');
 INSERT INTO condicion(id,name,predicado,comparador) VALUES (2,'Minas menor que','Minas', '<');
