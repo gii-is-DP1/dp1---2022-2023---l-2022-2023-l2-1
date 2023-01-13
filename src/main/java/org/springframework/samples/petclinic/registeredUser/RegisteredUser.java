@@ -9,7 +9,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.envers.Audited;
 import org.springframework.core.style.ToStringCreator;
 import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.user.User;
@@ -20,7 +19,6 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Audited
 @Table(name = "registered_users")
 public class RegisteredUser extends BaseEntity implements Comparable<RegisteredUser> {
 
