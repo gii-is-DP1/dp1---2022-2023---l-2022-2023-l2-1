@@ -25,7 +25,7 @@ tagdir="/WEB-INF/tags" %>
       </tr>
       <tr>
         <th>Puntuacion: <c:out value="${historico.puntuacion}" /></th>
-      </tr>
+      </tr>      
       <tr>
         <th>
           Tiempo Total de Juego:
@@ -37,6 +37,9 @@ tagdir="/WEB-INF/tags" %>
           Tiempo medio de partida:
           <c:out value="${historico.tiempoMedioPartida}" />
         </th>
+        <tr>
+          <th><a href="/registeredUser/{registeredUserId}/ranking">Ver Ranking de usuarios</a></th>
+        </tr>
       </tr>
     </tbody>
   </table>

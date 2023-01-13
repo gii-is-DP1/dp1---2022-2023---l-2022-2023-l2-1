@@ -16,6 +16,8 @@ import org.assertj.core.util.Lists;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -105,7 +107,7 @@ class registeredUserControllerTest {
 	@Test
 	@Disabled
 	void testProcessFindFormSuccess() throws Exception {
-		given(this.registeredUserService.findRegisteredUserByName("")).willReturn(Lists.newArrayList(pepito, new RegisteredUser()));
+		given(this.registeredUserService.findRegisteredUserByName("Pepito")).willReturn(Lists.newArrayList(pepito, new RegisteredUser()));
 
 		mockMvc.perform(get("/registeredUser")).andExpect(status().isOk()).andExpect(view().name("registeredUser/registeredUserList"));
 	}
@@ -114,7 +116,7 @@ class registeredUserControllerTest {
 	@Test
 	@Disabled
 	void testProcessFindFormByName() throws Exception {
-		Collection<RegisteredUser> users=new ArrayList();
+		Collection<RegisteredUser> users=new HashSet<>();
 		users.add(pepito);
 		
 		when(this.registeredUserService.findRegisteredUserByName("pepito")).thenReturn(users);
