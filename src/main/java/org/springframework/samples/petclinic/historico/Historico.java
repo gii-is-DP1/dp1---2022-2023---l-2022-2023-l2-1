@@ -27,7 +27,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "historicos")
-public class Historico extends BaseEntity {
+public class Historico extends BaseEntity implements Comparable<Historico>{
 
     @NotNull
     @Column(name = "partidas_totales")
@@ -65,4 +65,11 @@ public class Historico extends BaseEntity {
 
     @JoinColumn(name = "registered_user_id")
     private Integer registeredUserId;
+
+    @Override
+    public int compareTo(Historico o) {
+        Integer a= this.getPuntuacion();
+        Integer b= o.getPuntuacion();
+        return a.compareTo(b);
+    }
 }
