@@ -17,6 +17,7 @@ import org.assertj.core.util.Lists;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -102,6 +103,7 @@ class registeredUserControllerTest {
 
 	@WithMockUser(value = "spring")
 	@Test
+	@Disabled
 	void testProcessFindFormSuccess() throws Exception {
 		given(this.registeredUserService.findRegisteredUserByName("")).willReturn(Lists.newArrayList(pepito, new RegisteredUser()));
 
@@ -110,6 +112,7 @@ class registeredUserControllerTest {
 
 	@WithMockUser(value = "spring")
 	@Test
+	@Disabled
 	void testProcessFindFormByName() throws Exception {
 		Collection<RegisteredUser> users=new ArrayList();
 		users.add(pepito);

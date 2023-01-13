@@ -36,6 +36,7 @@ public class HistoricoController {
         result.addObject("user", registeredService.findRegisteredUserById(id));
         return result;
     }
+    
     @GetMapping(value = "/registeredUser/{registeredUserId}/partidasJugadas")
     public ModelAndView muestraPartidasDeUsuario(@PathVariable("registeredUserId") int id) {
         ModelAndView result = new ModelAndView("partida/listaDePartidas");
