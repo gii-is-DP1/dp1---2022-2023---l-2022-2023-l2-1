@@ -1,7 +1,8 @@
 package org.springframework.samples.petclinic.historico;
 
 
-import java.util.Set;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class HistoricoController {
     @GetMapping(value = "/registeredUser/{registeredUserId}/partidasJugadas")
     public ModelAndView muestraPartidasDeUsuario(@PathVariable("registeredUserId") int id) {
         ModelAndView result = new ModelAndView("partida/listaDePartidas");
-        Set<RegisteredUser> compis = partidaService.getAllCreatedById(id).stream().filter(c->c.getIdInvitado()!=null).map(c->registeredService.findRegisteredUserById(Integer.valueOf(c.getIdInvitado()))).collect(Collectors.toSet());
+        Collection<RegisteredUser> compis = registeredService.findRegisteredUser();
         RegisteredUser usuario = registeredService.findRegisteredUserById(id);
         result.addObject("partidas", partidaService.getAllById(id));
         result.addObject("compis", compis);
@@ -53,6 +54,15 @@ public class HistoricoController {
     public ModelAndView saveHistorico(Historico historico, BindingResult br, @PathVariable("id") int id) {
         ModelAndView result = new ModelAndView();
 
+        return result;
+    }
+    @GetMapping(value = "/registeredUser/{registeredUserId}/ranking")
+    public ModelAndView muestraRankingDeUsuarios(@PathVariable("registeredUserId") int id) {
+        ModelAndView result = new ModelAndView("estadisticas/ranking");
+        List<RegisteredUser> users = registeredService.findRegisteredUser().stream().collect(Collectors.toList());
+        
+        result.addObject("historico", historicoService.getHistoricoByRegisteredUserId(id));
+        result.addObject("user", registeredService.findRegisteredUserById(id));
         return result;
     }
 

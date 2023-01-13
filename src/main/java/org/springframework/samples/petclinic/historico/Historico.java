@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -27,7 +27,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "historicos")
-public class Historico extends BaseEntity {
+public class Historico extends BaseEntity implements Comparable{
 
     @NotNull
     @Column(name = "partidas_totales")
@@ -65,4 +65,6 @@ public class Historico extends BaseEntity {
 
     @JoinColumn(name = "registered_user_id")
     private Integer registeredUserId;
+
+    
 }

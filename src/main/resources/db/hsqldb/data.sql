@@ -141,12 +141,6 @@ INSERT INTO tipos VALUES (1, 'Individual');
 INSERT INTO tipos VALUES (2, 'Competitivo');
 
 
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado,minas_de_jugador) VALUES (1, 1, null,null, 1, 2, 2, FALSE, null,null,null);
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado,minas_de_jugador) VALUES (2, 2, null,null, 1, 2, 1, FALSE, null,null,null);
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado,minas_de_jugador) VALUES (3, 1, null,null, 1, 2, 2, FALSE, null,null,null);
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado,minas_de_jugador) VALUES (4, 1, '15:30:00','5:10:00', 1, 2, 2, TRUE, '12345',TRUE,null);
-INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado,minas_de_jugador) VALUES (5, 2, null,null, 3, 1, null, null, null,null,null);
-
 INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (1,1,0,0,0,0,'00:00:00','00:00:00');
 INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (2,2,20,2,4,5,'00:30:10','00:01:05');
 INSERT INTO historicos(id,registered_user_id,partidas_totales,partidas_ganadas,minas_encontradas,puntuacion,tiempo_total_juego,tiempo_medio_partida) VALUES (3,3,15,2,4,5,'00:22:33','00:01:48');
@@ -175,6 +169,12 @@ INSERT INTO condicion(id,name,predicado,comparador) VALUES (18,'Tiempo Total igu
 -- INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (2,'Prueba', 'Prueba', 'Prueba');
 -- INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (3,'Prueba', 'Prueba', 'Prueba');
 -- INSERT INTO logros(id,titulo,descripcion,condicion) VALUES (4,'Prueba', 'Prueba', 'Prueba');
+
+--INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado,minas_de_jugador) VALUES (1, 1, null,null, 1, 2, 2, FALSE, null,null,null);
+--INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado,minas_de_jugador) VALUES (2, 2, null,null, 1, 2, 1, FALSE, null,null,null);
+--INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado,minas_de_jugador) VALUES (3, 1, null,null, 1, 2, 2, FALSE, null,null,null);
+---INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado,minas_de_jugador) VALUES (4, 2, '15:30:00','5:10:00', 1, 2, 2, TRUE, '12345',TRUE,null);
+--INSERT INTO partida(id,registered_user_id,tiempo_de_juego,tiempo_de_juego_invitado,dificultad_id,tipo_de_partida_id,id_invitado,privada,contrasenia,resultado,minas_de_jugador) VALUES (5, 2, null,null, 3, 1, null, null, null,null,null);
 
 
 -- INSERT INTO logros_id VALUES (1,1);
