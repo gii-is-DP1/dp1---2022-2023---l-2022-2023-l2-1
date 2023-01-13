@@ -22,7 +22,7 @@ public class TableroService {
             return boardRepo.findById(id).get();
         }
         @Transactional(readOnly = true)
-        public List<Tablero> getAllBoards(Integer id) throws DataAccessException {
+        public List<Tablero> getAllBoards() throws DataAccessException {  
             return boardRepo.findAll();
         }
         @Transactional
