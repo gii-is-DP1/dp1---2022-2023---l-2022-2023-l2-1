@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-public class LogroServiceTests {
+public class logroServiceTests {
     @Autowired
     protected LogroService logroService;
 

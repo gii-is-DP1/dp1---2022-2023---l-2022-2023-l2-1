@@ -53,7 +53,6 @@ public class RegisteredUserService {
 	public Collection<RegisteredUser> findRegisteredUser() throws DataAccessException {
 		return registeredUserRepository.findAll();
 	}
-
 	@Transactional(readOnly = true)
 	public Collection<RegisteredUser> findRegisteredUserByName(String name) throws DataAccessException {
 		return registeredUserRepository.findByName(name);
@@ -77,12 +76,10 @@ public class RegisteredUserService {
 		hist.setTiempoTotalJuego(LocalTime.of(0, 0, 0));
 		historicoService.saveHistorico(hist);
 	}	
-    
 	@Transactional
 	public void removeUser(Integer id){
 		this.registeredUserRepository.deleteById(id);
 	}
-
 	@Transactional
     public void deleteUser(RegisteredUser user) throws DataAccessException {
         registeredUserRepository.delete(user);

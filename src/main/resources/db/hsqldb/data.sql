@@ -189,4 +189,3 @@ INSERT INTO logros(id,titulo,descripcion,condicion, valor) VALUES (1,'Prueba', '
 -- INSERT INTO logros_id VALUES (1,3);
 
 
-INSERT INTO tablero(id,columnas,filas,num_minas,partida) VALUES (1,10,8,10,1);

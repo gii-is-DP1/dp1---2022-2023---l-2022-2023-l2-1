@@ -10,8 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.envers.Audited;
-import org.hibernate.envers.NotAudited;
+
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -28,7 +27,6 @@ import lombok.Setter;
 @NoArgsConstructor	
 @Getter
 @Setter
-@Audited
 @Entity
 @Table(name = "users")
 @EntityListeners(AuditingEntityListener.class)
@@ -51,8 +49,6 @@ public class User{
 	@LastModifiedDate 
 	private LocalDateTime lastModifiedDate; 
 	
-	
-	@NotAudited
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private Set<Authorities> authorities;
 }
